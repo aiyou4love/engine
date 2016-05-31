@@ -30,7 +30,7 @@ namespace cc {
 		{
 			lua_tinker::class_def<C>(mLuaState, nName, nMethod);
 		}
-				
+		
 		LuaThreadPtr createLuaThread();
 		void runClose();
 		
