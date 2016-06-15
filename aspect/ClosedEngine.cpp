@@ -2,17 +2,6 @@
 
 namespace std {
 	
-	void CloseEngine::runDoing(int32_t nId, PlayerPtr& nPlayer, ValuePtr& nValue)
-	{
-		auto it = mDoingMgrs.find(nId);
-		if ( it == mDoingMgrs.end() ) {
-			LOGERROR("[%s]%d", __METHOD__, nId);
-			return;
-		}
-		DoingMgrPtr& doingMgr_ = it->second;
-		doingMgr_->runDoing(nPlayer, nValue);
-	}
-	
 	void CloseEngine::runPreinit()
 	{
 		LifeCycle& lifeCycle_ = LifeCycle::instance();
@@ -30,11 +19,6 @@ namespace std {
 		return "closeEngine";
 	}
 	
-	const char * CloseEngine::streamUrl()
-	{
-		return "arc://closeEngine.xml";
-	}
-	
 	CloseEngine& CloseEngine::instance()
 	{
 		return mCloseEngine;
@@ -42,14 +26,12 @@ namespace std {
 	
 	CloseEngine::CloseEngine()
 	{
-		mDoingMgrs.clear();
+		mCloseds.clear();
 	}
 	
 	CloseEngine::~CloseEngine()
 	{
-		mDoingMgrs.clear();
+		mCloseds.clear();
 	}
-	
-	CloseEngine CloseEngine::mCloseEngine;
-	
+		
 }

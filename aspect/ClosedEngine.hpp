@@ -5,7 +5,17 @@ namespace std {
 	class CloseEngine : noncopyable
 	{
 	public:
-		void runDoing(int32_t nId, PlayerPtr& nPlayer, ValuePtr& nValue);
+		template <class P>
+		void runDoing(int32_t nId, P& nP, ValuePtr& nValue)
+		{
+			map<int32_t, ClosedPtr>::iterator it = mCloseds.find(nId);
+			if ( it == mCloseds.end() ) {
+				LOGERROR("[%s]%d", __METHOD__, nId);
+				return;
+			}
+			ClosedPtr& closed_ = it->second;
+			closed_->runDoing(nP, nValue);
+		}
 		
 		template<class __t>
 		void headSerialize(__t& nSerialize)
@@ -13,19 +23,15 @@ namespace std {
 			nSerialize.runMapStreamPtrs<int32_t, ClosedPtr>(mCloseds, "closeds", "closed");
 		}
 		const char * streamName();
-		const char * streamUrl();
 		
 		void runPreinit();
-		void runConfig();
-		
-		static CloseEngine& instance();
+		void runTable();
 		
 		CloseEngine();
 		~CloseEngine();
 		
 	private:
 		map<int32_t, ClosedPtr> mCloseds;
-		static CloseEngine mCloseEngine;
 	};
 	
 }
