@@ -14,7 +14,7 @@ namespace cc {
 		}
 		int32_t getAspectId();
 		int32_t getDoingId();
-		int32_t getKey();
+		int8_t getKey();
 		bool isDefault();
 		
 		Doing();
@@ -23,7 +23,7 @@ namespace cc {
 	private:
 		int32_t mAspectId;
 		int32_t mDoingId;
-		int32_t mId;
+		int8_t mId;
 	};
 	typedef shared_ptr<Doing> DoingPtr;
 	

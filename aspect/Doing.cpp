@@ -17,7 +17,7 @@ namespace cc {
 		return mDoingId;
 	}
 	
-	int32_t Doing::getKey()
+	int8_t Doing::getKey()
 	{
 		return mId;
 	}

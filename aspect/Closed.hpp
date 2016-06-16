@@ -10,11 +10,17 @@ namespace cc {
 		{
 			int16_t result_ = 2;
 			A& aspect_ = A::instance();
+			nP->startCondition();
 			map<int32_t, DoingPtr>::iterator it = mConditions.begin();
 			for ( ; it != mDoings.end(); ++it ) {
 				DoingPtr& doing_ = it->second;
 				EdoingState value_ = aspect_.runCondition(mId, doing_, nP, nValue);
 				if (EdoingState::mError == value_) {
+					if (result_ > 2) {
+						nP->endCondition();
+					} else {
+						nP->endCondition();
+					}
 					result_ = 0;
 					break;
 				} else if (EdoingState::mTrue == value_) {
@@ -26,6 +32,12 @@ namespace cc {
 					result_ = 1;
 					break;
 				}
+			}
+			if ( (1 == result_) || (0 == result_) ) {
+				nP->clearCondition();
+			} else if (2 == result_) {
+			} else {
+				
 			}
 			return result_;
 		}
@@ -44,8 +56,8 @@ namespace cc {
 		template<class __t>
 		void serialize(__t * nSerialize, int8_t nCount)
 		{
-			nSerialize->runMapStreamPtrsCount<int32_t, DoingPtr>(mConditions, "conditions", "condition", 5);
-			nSerialize->runMapStreamPtrsCount<int32_t, DoingPtr>(mDoings, "doings", "doing", 5);
+			nSerialize->runMapStreamPtrsCount<int8_t, DoingPtr>(mConditions, "conditions", "condition", 5);
+			nSerialize->runMapStreamPtrsCount<int8_t, DoingPtr>(mDoings, "doings", "doing", 5);
 			nSerialize->runNumber(mId, "id");
 		}
 		int32_t getKey();
@@ -54,8 +66,8 @@ namespace cc {
 		~Closed();
 		
 	private:
-		map<int32_t, DoingPtr> mConditions;
-		map<int32_t, DoingPtr> mDoings;
+		map<int8_t, DoingPtr> mConditions;
+		map<int8_t, DoingPtr> mDoings;
 		int32_t mId;
 	};
 	typedef shared_ptr<Closed> ClosedPtr;
