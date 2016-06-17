@@ -1,11 +1,11 @@
 #pragma once
 
-namespace cc {
+namespace std {
 	
 	class Closed : noncopyable
 	{
 	public:
-		int16_t runCondition(EntityPtr& nEntity, ValuePtr& nValue);
+		void runCondition(EntityPtr& nEntity, ValuePtr& nValue);
 		void runDoing(EntityPtr& nEntity, ValuePtr& nValue);
 		
 		template<class __t>

@@ -2,7 +2,7 @@
 
 namespace std {
 	
-	class DoingEngine : noncopyable
+	class CloseEngine : noncopyable
 	{
 	public:
 		void runDoing(int32_t nId, PlayerPtr& nPlayer, ValuePtr& nValue);
@@ -10,7 +10,7 @@ namespace std {
 		template<class __t>
 		void headSerialize(__t& nSerialize)
 		{
-			nSerialize.runMapStreamPtrs<int32_t, DoingMgrPtr>(mDoingMgrs, "doingMgrs", "doingMgr");
+			nSerialize.runMapStreamPtrs<int32_t, ClosedPtr>(mCloseds, "closeds", "closed");
 		}
 		const char * streamName();
 		const char * streamUrl();
@@ -18,14 +18,14 @@ namespace std {
 		void runPreinit();
 		void runConfig();
 		
-		static DoingEngine& instance();
+		static CloseEngine& instance();
 		
-		DoingEngine();
-		~DoingEngine();
+		CloseEngine();
+		~CloseEngine();
 		
 	private:
-		map<int32_t, DoingMgrPtr> mDoingMgrs;
-		static DoingEngine mDoingEngine;
+		map<int32_t, ClosedPtr> mCloseds;
+		static CloseEngine mCloseEngine;
 	};
 	
 }
