@@ -5,8 +5,29 @@ namespace cc {
 	class Closed : noncopyable
 	{
 	public:
-		int16_t runCondition(EntityPtr& nEntity, ValuePtr& nValue);
-		void runDoing(EntityPtr& nEntity, ValuePtr& nValue);
+		template <class P, class A>
+		int16_t runCondition(P& nP, ValuePtr& nValue)
+		{
+			int16_t result_ = 0;
+			A& aspect_ = A::instance();
+			map<int32_t, DoingPtr>::iterator it = mConditions.begin();
+			for ( ; it != mDoings.end(); ++it ) {
+				DoingPtr& doing_ = it->second;
+				result_ += aspect_.runCondition(mId, doing_, nP, nValue);
+			}
+			return result_;
+		}
+		
+		template <class P, class A>
+		void runDoing(P& nP, ValuePtr& nValue)
+		{
+			A& aspect_ = A::instance();
+			map<int32_t, DoingPtr>::iterator it = mDoings.begin();
+			for ( ; it != mDoings.end(); ++it ) {
+				DoingPtr& doing_ = it->second;
+				aspect_.runDoing(doing_, nP, nValue);
+			}
+		}
 		
 		template<class __t>
 		void serialize(__t * nSerialize, int8_t nCount)
