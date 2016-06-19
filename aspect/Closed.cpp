@@ -1,7 +1,7 @@
 #include "../../Include.hpp"
 
 namespace cc {
-		
+	
 	int32_t Closed::getKey()
 	{
 		return mId;

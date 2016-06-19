@@ -8,12 +8,24 @@ namespace cc {
 		template <class P, class A>
 		int16_t runCondition(P& nP, ValuePtr& nValue)
 		{
-			int16_t result_ = 0;
+			int16_t result_ = 2;
 			A& aspect_ = A::instance();
 			map<int32_t, DoingPtr>::iterator it = mConditions.begin();
 			for ( ; it != mDoings.end(); ++it ) {
 				DoingPtr& doing_ = it->second;
-				result_ += aspect_.runCondition(mId, doing_, nP, nValue);
+				EdoingState value_ = aspect_.runCondition(mId, doing_, nP, nValue);
+				if (EdoingState::mError == value_) {
+					result_ = 0;
+					break;
+				} else if (EdoingState::mTrue == value_) {
+					continue;
+				} else if (EdoingState::mWaite == value_) {
+					result_++;
+					continue;
+				} else if (EdoingState::mFalse == value_) {
+					result_ = 1;
+					break;
+				}
 			}
 			return result_;
 		}
@@ -25,7 +37,7 @@ namespace cc {
 			map<int32_t, DoingPtr>::iterator it = mDoings.begin();
 			for ( ; it != mDoings.end(); ++it ) {
 				DoingPtr& doing_ = it->second;
-				aspect_.runDoing(doing_, nP, nValue);
+				aspect_.runDoing(mId, doing_, nP, nValue);
 			}
 		}
 		

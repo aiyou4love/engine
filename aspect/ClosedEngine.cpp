@@ -8,7 +8,7 @@ namespace std {
 		lifeCycle_.m_tRunConfig.connect(bind(&CloseEngine::runConfig, this));
 	}
 	
-	void CloseEngine::runConfig()
+	void CloseEngine::runTable()
 	{
 		UrlMgr& urlMgr_ = UrlMgr::instance();
 		urlMgr_.runClass<CloseEngine *>(this);
@@ -33,5 +33,5 @@ namespace std {
 	{
 		mCloseds.clear();
 	}
-		
+	
 }
