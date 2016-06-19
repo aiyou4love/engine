@@ -2,15 +2,17 @@
 
 namespace cc {
 	
-	bool ConditionEngine::runCondition(int32_t nId, EntityPtr& nEntity, ValuePtr& nValue, AspectEngine * nAspectEngine)
+	void ConditionEngine::runDoing(int32_t nId, EntityPtr& nEntity, ValuePtr& nValue, AspectEngine * nAspectEngine)
 	{
 		map<int32_t, ClosedPtr>::iterator it = mCloseds.find(nId);
 		if ( it == mCloseds.end() ) {
 			LOGERROR("[%s]%d", __METHOD__, nId);
-			return false;
+			return;
 		}
 		ClosedPtr& closed_ = it->second;
-		return closed_->runCondition(nEntity, nValue, nAspectEngine);
+		if ( closed_->runCondition(nEntity, nValue, nAspectEngine) ) {
+			closed_->runDoing(nEntity, nValue, nAspectEngine);
+		}
 	}
 	
 	void ConditionEngine::runPreinit()

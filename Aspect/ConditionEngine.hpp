@@ -5,7 +5,8 @@ namespace cc {
 	class ConditionEngine : noncopyable
 	{
 	public:
-		bool runCondition(int32_t nId, EntityPtr& nEntity, ValuePtr& nValue, AspectEngine * nAspectEngine);
+		void runDoing(int32_t nId, EntityPtr& nEntity, ValuePtr& nValue, AspectEngine * nAspectEngine);
+		void run
 		
 	public:
 		template<class __t>
