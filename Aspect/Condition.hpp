@@ -2,10 +2,10 @@
 
 namespace cc {
 	
-	class Closed : noncopyable
+	class Condition : noncopyable
 	{
 	public:
-		void runDoing(EntityPtr& nEntity, ValuePtr& nValue, AspectEngine * nAspectEngine);
+		bool runCondition(EntityPtr& nEntity, ValuePtr& nValue, AspectEngine * nAspectEngine);
 		
 		template<class T>
 		void serialize(T * nSerialize, int8_t nCount)
@@ -16,14 +16,14 @@ namespace cc {
 		}
 		int32_t getKey();
 		
-		Closed();
-		~Closed();
+		Condition();
+		~Condition();
 		
 	private:
 		map<int8_t, DoingPtr> mDoings;
-		
+		int32_t mDoingId;
 		int32_t mId;
 	};
-	typedef boost::shared_ptr<Closed> ClosedPtr;
+	typedef boost::shared_ptr<Condition> ConditionPtr;
 	
 }

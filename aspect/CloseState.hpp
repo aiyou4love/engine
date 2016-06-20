@@ -17,6 +17,6 @@ namespace cc {
 		
 		int32_t mCloseId;
 	};
-	typedef shared_ptr<CloseState> CloseStatePtr;
+	typedef boost::shared_ptr<CloseState> CloseStatePtr;
 	
 }

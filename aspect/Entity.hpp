@@ -18,6 +18,6 @@ namespace cc {
 		int32_t mConditionId;
 		bool mIncrease;
 	};
-	typedef shared_ptr<Entity> EntityPtr;
+	typedef boost::shared_ptr<Entity> EntityPtr;
 	
 }
