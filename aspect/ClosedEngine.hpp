@@ -5,33 +5,32 @@ namespace cc {
 	class CloseEngine : noncopyable
 	{
 	public:
-		template <class P>
-		void runDoing(int32_t nId, P& nP, ValuePtr& nValue)
-		{
-			map<int32_t, ClosedPtr>::iterator it = mCloseds.find(nId);
-			if ( it == mCloseds.end() ) {
-				LOGERROR("[%s]%d", __METHOD__, nId);
-				return;
-			}
-			ClosedPtr& closed_ = it->second;
-			closed_->runDoing(nP, nValue);
-		}
+		void runDoing(int32_t nId, EntityPtr& nEntity, ValuePtr& nValue, AspectEngine * nAspectEngine);
 		
+	private:
+		bool runCondition(int32_t nId, EntityPtr& nEntity, ValuePtr& nValue, AspectEngine * nAspectEngine);
+		
+	public:
 		template<class __t>
 		void headSerialize(__t& nSerialize)
 		{
 			nSerialize.runMapStreamPtrs<int32_t, ClosedPtr>(mCloseds, "closeds", "closed");
 		}
 		const char * streamName();
+		const char * streamUrl();
+		
+		CloseEngine& instance();
 		
 		void runPreinit();
-		void runTable();
+		void runLoad();
 		
 		CloseEngine();
 		~CloseEngine();
 		
 	private:
 		map<int32_t, ClosedPtr> mCloseds;
+		
+		static CloseEngine mCloseEngine;
 	};
 	
 }

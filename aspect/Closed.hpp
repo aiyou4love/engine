@@ -5,56 +5,11 @@ namespace cc {
 	class Closed : noncopyable
 	{
 	public:
-		template <class P, class A>
-		int16_t runCondition(P& nP, ValuePtr& nValue)
-		{
-			int16_t result_ = 2;
-			A& aspect_ = A::instance();
-			nP->startCondition();
-			map<int32_t, DoingPtr>::iterator it = mConditions.begin();
-			for ( ; it != mDoings.end(); ++it ) {
-				DoingPtr& doing_ = it->second;
-				EdoingState value_ = aspect_.runCondition(mId, doing_, nP, nValue);
-				if (EdoingState::mError == value_) {
-					if (result_ > 2) {
-						nP->endCondition();
-					} else {
-						nP->endCondition();
-					}
-					result_ = 0;
-					break;
-				} else if (EdoingState::mTrue == value_) {
-					continue;
-				} else if (EdoingState::mWaite == value_) {
-					result_++;
-					continue;
-				} else if (EdoingState::mFalse == value_) {
-					result_ = 1;
-					break;
-				}
-			}
-			if ( (1 == result_) || (0 == result_) ) {
-				nP->clearCondition();
-			} else if (2 == result_) {
-			} else {
-				
-			}
-			return result_;
-		}
+		bool runCondition(EntityPtr& nEntity, ValuePtr& nValue, AspectEngine * nAspectEngine);
+		void runDoing(EntityPtr& nEntity, ValuePtr& nValue, AspectEngine * nAspectEngine);
 		
-		template <class P, class A>
-		void runDoing(P& nP, ValuePtr& nValue)
-		{
-			A& aspect_ = A::instance();
-			map<int32_t, DoingPtr>::iterator it = mDoings.begin();
-			for ( ; it != mDoings.end(); ++it ) {
-				DoingPtr& doing_ = it->second;
-				aspect_.runDoing(mId, doing_, nP, nValue);
-			}
-		}
-		
-		template<class __t>
-		void serialize(__t * nSerialize, int8_t nCount)
+		template<class T>
+		void serialize(T * nSerialize, int8_t nCount)
 		{
 			nSerialize->runMapStreamPtrsCount<int8_t, DoingPtr>(mConditions, "conditions", "condition", 5);
 			nSerialize->runMapStreamPtrsCount<int8_t, DoingPtr>(mDoings, "doings", "doing", 5);

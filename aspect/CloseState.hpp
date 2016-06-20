@@ -5,13 +5,14 @@ namespace cc {
 	class CloseState : noncopyable
 	{
 	public:	
-		CloseState();
+		void pushDoingState(int8_t nDoingId, EdoingState nDoingState);
+		
+		CloseState(int32_t nCloseId);
 		~CloseState();
 		
 	private:
 		map<int8_t, EdoingState> mDoingState;
 		
-		ValuePtr mResult;
 		ValuePtr mValue;
 		
 		int32_t mCloseId;

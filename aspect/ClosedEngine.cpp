@@ -1,6 +1,30 @@
 #include "../../Include.hpp"
 
-namespace std {
+namespace cc {
+	
+	void CloseEngine::runDoing(int32_t nId, EntityPtr& nEntity, ValuePtr& nValue, AspectEngine * nAspectEngine)
+	{
+		map<int32_t, ClosedPtr>::iterator it = mCloseds.find(nId);
+		if ( it == mCloseds.end() ) {
+			LOGERROR("[%s]%d", __METHOD__, nId);
+			return;
+		}
+		ClosedPtr& closed_ = it->second;
+		if ( closed_->runCondition(nEntity, nValue, nAspectEngine) ) {
+			closed_->runDoing(nEntity, nValue, nAspectEngine);
+		}
+	}
+	
+	bool CloseEngine::runCondition(int32_t nId, EntityPtr& nEntity, ValuePtr& nValue, AspectEngine * nAspectEngine)
+	{
+		map<int32_t, ClosedPtr>::iterator it = mCloseds.find(nId);
+		if ( it == mCloseds.end() ) {
+			LOGERROR("[%s]%d", __METHOD__, nId);
+			return false;
+		}
+		ClosedPtr& closed_ = it->second;
+		return closed_->runCondition(nEntity, nValue, nAspectEngine);
+	}
 	
 	void CloseEngine::runPreinit()
 	{
@@ -8,7 +32,7 @@ namespace std {
 		lifeCycle_.m_tRunConfig.connect(bind(&CloseEngine::runConfig, this));
 	}
 	
-	void CloseEngine::runTable()
+	void CloseEngine::runLoad()
 	{
 		UrlMgr& urlMgr_ = UrlMgr::instance();
 		urlMgr_.runClass<CloseEngine *>(this);
@@ -17,6 +41,11 @@ namespace std {
 	const char * CloseEngine::streamName()
 	{
 		return "closeEngine";
+	}
+	
+	const char * CloseEngine::streamUrl()
+	{
+		return "arc://autoupEngine.json";
 	}
 	
 	CloseEngine& CloseEngine::instance()
@@ -33,5 +62,7 @@ namespace std {
 	{
 		mCloseds.clear();
 	}
+	
+	CloseEngine CloseEngine::mCloseEngine;
 	
 }

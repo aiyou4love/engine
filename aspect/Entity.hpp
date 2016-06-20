@@ -5,9 +5,9 @@ namespace cc {
 	class Entity : noncopyable
 	{
 	public:
-		void startCondition();
-		void clearCondition();
-		void endCondition();
+		void pushDoingState(int8_t nDoingId, EdoingState nDoingState);
+		
+		void startCondition(int32_t nCloseId);
 		
 		Entity();
 		~Entity();
@@ -16,6 +16,7 @@ namespace cc {
 		map<int32_t, CloseStatePtr> mCloseStates;
 		
 		int32_t mConditionId;
+		bool mIncrease;
 	};
 	typedef shared_ptr<Entity> EntityPtr;
 	

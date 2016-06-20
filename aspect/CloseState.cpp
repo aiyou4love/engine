@@ -2,23 +2,20 @@
 
 namespace cc {
 	
-	int32_t Closed::getKey()
+	void CloseState::pushDoingState(int8_t nDoingId, EdoingState nDoingState)
 	{
-		return mId;
+		mDoingState[nDoingId] = nDoingState;
 	}
 	
-	Closed::Closed()
+	CloseState::CloseState(int32_t nCloseId)
+		: mCloseId (nCloseId)
 	{
-		mConditions.clear();
-		mDoings.clear();
-		mId = 0;
 	}
 	
-	Closed::~Closed()
+	CloseState::~CloseState()
 	{
-		mConditions.clear();
-		mDoings.clear();
-		mId = 0;
+		mDoingState.clear();
+		mCloseId = 0;
 	}
 	
 }

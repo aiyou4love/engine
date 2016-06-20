@@ -1,44 +1,51 @@
 #include "../../Include.hpp"
 
-namespace std {
+namespace cc {
 	
-	bool ServiceMgr::runDoing(DoingPtr& nDoing, PlayerPtr& nPlayer, ValuePtr& nValue)
+	EdoingState AspectEngine::runCondition(int32_t nCloseId, DoingPtr& nDoing, EntityPtr& nEntity, ValuePtr& nValue)
 	{
-		int32_t serviceId_ = nDoing->getServiceId();
+		int32_t aspectId_ = nDoing->getAspectId();
 		int32_t doingId_ = nDoing->getDoingId();
-		auto it = mServices.find(serviceId_);
-		if ( it == mServices.end() ) {
-			LOGERROR("[%s]%d", __METHOD__, serviceId_);
+		map<int32_t, IAspect *>::iterator it = mAspects.find(aspectId_);
+		if ( it == mAspects.end() ) {
+			LOGERROR("[%s]%d", __METHOD__, aspectId_);
 			return false;
 		}
-		IService * service_ = mServices[serviceId_];
-		return service_->runDoing(doingId_, nPlayer, nValue);
+		IAspect * aspect_ = mAspects[aspectId_];
+		return aspect_->runCondition(nCloseId, doingId_, nEntity, nValue);
 	}
 	
-	void ServiceMgr::runRegister(int32_t nId, IService * nService)
+	void AspectEngine::runDoing(int32_t nCloseId, DoingPtr& nDoing, EntityPtr& nEntity, ValuePtr& nValue)
 	{
-		auto it = mServices.find(nId);
-		if ( it != mServices.end() ) {
+		int32_t aspectId_ = nDoing->getAspectId();
+		int32_t doingId_ = nDoing->getDoingId();
+		map<int32_t, IAspect *>::iterator it = mAspects.find(aspectId_);
+		if ( it == mAspects.end() ) {
+			LOGERROR("[%s]%d", __METHOD__, aspectId_);
+			return false;
+		}
+		IAspect * aspect_ = mAspects[aspectId_];
+		aspect_->runDoing(nCloseId, doingId_, nEntity, nValue);
+	}
+	
+	void AspectEngine::runRegister(int32_t nId, IAspect * nAspect)
+	{
+		map<int32_t, IAspect *>::iterator it = mAspects.find(nId);
+		if ( it != mAspects.end() ) {
 			LOGERROR("[%s]%d", __METHOD__, nId);
 			return;
 		}
-		mServices[nId] = nService;
+		mAspects[nId] = nAspect;
 	}
 	
-	ServiceMgr& ServiceMgr::instance()
+	AspectEngine::AspectEngine()
 	{
-		return mServiceMgr;
+		mAspects.clear();
 	}
 	
-	ServiceMgr::ServiceMgr()
+	AspectEngine::~AspectEngine()
 	{
-		mServices.clear();
+		mAspects.clear();
 	}
-	
-	ServiceMgr::~ServiceMgr()
-	{
-		mServices.clear();
-	}
-	ServiceMgr ServiceMgr::mServiceMgr;
 	
 }

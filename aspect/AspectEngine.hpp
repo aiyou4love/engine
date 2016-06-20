@@ -1,20 +1,20 @@
 #pragma once
 
-namespace std {
+namespace cc {
 	
-	class ServiceMgr : noncopyable
+	class AspectEngine : noncopyable
 	{
 	public:
-		bool runDoing(DoingPtr& nDoing, PlayerPtr& nPlayer, ValuePtr& nValue);
-		void runRegister(int32_t nId, IService * nService);
-		static ServiceMgr& instance();
+		EdoingState runCondition(int32_t nCloseId, DoingPtr& nDoing, EntityPtr& nEntity, ValuePtr& nValue);
+		void runDoing(int32_t nCloseId, DoingPtr& nDoing, EntityPtr& nEntity, ValuePtr& nValue);
 		
-		ServiceMgr();
-		~ServiceMgr();
+		void runRegister(int32_t nId, IAspect * nAspect);
+		
+		AspectEngine();
+		~AspectEngine();
 		
 	private:
-		map<int32_t, IService *> mServices;
-		static ServiceMgr mServiceMgr;
+		map<int32_t, IAspect *> mAspects;
 	};
 	
 }
