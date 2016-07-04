@@ -19,7 +19,6 @@ namespace cc {
 		int32_t mIfSelectId;
 		int32_t mSelectId;
 		ValuePtr mValue;
-		
 	};
 	typedef boost::shared_ptr<ConditionState> ConditionStatePtr;
 	
