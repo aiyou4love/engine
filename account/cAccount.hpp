@@ -14,6 +14,26 @@ namespace cc {
 			nSerialize.runNumber(mAccountName, "accountName");
 			nSerialize.runNumber(mAccountPassword, "accountPassword");
 			nSerialize.runNumber(mAccountType, "accountType");
+			nSerialize.runNumber(mAccountId, "accountId");
+			nSerialize.runNumber(mServerId, "serverId");
+			nSerialize.runNumber(mAccountType, "accountType");
+			nSerialize.runNumber(mAccountType, "accountType");
+			nSerialize.runNumber(mAccountType, "accountType");
+			nSerialize.runNumber(mAccountType, "accountType");
+			nSerialize.runNumber(mAccountType, "accountType");
+			nSerialize.runNumber(mAccountType, "accountType");
+			nSerialize.runNumber(mAccountType, "accountType");
+			nSerialize.runNumber(mAccountType, "accountType");
+			
+			
+		int64_t mAccountId;
+		int32_t mServerId;
+        int32_t mPlayerId;
+        int16_t mPlayerType;
+        string mPlayerName;
+        int16_t mPlayerRace;
+		int16_t mPlayerStep;
+        int32_t mPlayerLevel;
 		}
 		const char * streamName();
 		const char * streamUrl();
@@ -25,7 +45,6 @@ namespace cc {
 		string mAccountName;
 		string mAccountPassword;
 		int16_t mAccountType;
-		bool mIsLoad;
 	};
 	typedef boost::shared_ptr<cAccount> cAccountPtr;
 	
