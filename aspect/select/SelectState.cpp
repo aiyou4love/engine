@@ -1,4 +1,4 @@
-#include "../../Include.hpp"
+#include "../../Engine.hpp"
 
 namespace cc {
 	
@@ -7,15 +7,28 @@ namespace cc {
 		mDoingState[nDoingId] = nDoingState;
 	}
 	
-	SelectState::SelectState(int32_t nCloseId)
-		: mCloseId (nCloseId)
+	void SelectState::setIfSelect(int32_t nIfSelectId)
 	{
+		mIfSelectId = nIfSelectId;
+	}
+	
+	void SelectState::setSelect(int32_t nSelectId)
+	{
+		mSelectId = nSelectId;
+	}
+	
+	SelectState::SelectState(int32_t nIfSelectId)
+		: mIfSelectId (nIfSelectId)
+		, mSelectId (0)
+	{
+		mDoingState.clear();
 	}
 	
 	SelectState::~SelectState()
 	{
 		mDoingState.clear();
-		mCloseId = 0;
+		mIfSelectId = 0;
+		mSelectId = 0;
 	}
 	
 }

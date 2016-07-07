@@ -5,7 +5,7 @@ namespace cc {
 	class Condition : noncopyable
 	{
 	public:
-		int8_t runCondition(EntityPtr& nEntity, ValuePtr& nValue, AspectEngine * nAspectEngine);
+		int8_t runCondition(EntityPtr& nEntity, ValuePtr& nValue);
 		
 		template<class T>
 		void serialize(T * nSerialize, int8_t nCount)
@@ -13,7 +13,6 @@ namespace cc {
 			nSerialize->runMapStreamPtrsCount<int8_t, DoingPtr>(mDoings, "doings", "doing", 10);
 			
 			nSerialize->runNumber(mConditionId, "conditionId");
-			nSerialize->runNumber(mRewardId, "rewardId");
 		}
 		int32_t getKey();
 		

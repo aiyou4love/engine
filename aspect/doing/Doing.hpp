@@ -14,7 +14,9 @@ namespace cc {
 		}
 		int32_t getAspectId();
 		int32_t getDoingId();
+		
 		int8_t getKey();
+		
 		bool isDefault();
 		
 		Doing();

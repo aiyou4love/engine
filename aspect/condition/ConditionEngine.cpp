@@ -16,7 +16,7 @@ namespace cc {
 	void ConditionEngine::runPreinit()
 	{
 		LifeCycle& lifeCycle_ = LifeCycle::instance();
-		lifeCycle_.m_tLoadBegin.connect(bind(&SelectEngine::runLoad, this));
+		lifeCycle_.m_tLoadBegin.connect(bind(&ConditionEngine::runLoad, this));
 	}
 	
 	void ConditionEngine::runLoad()

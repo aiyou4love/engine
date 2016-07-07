@@ -2,28 +2,27 @@
 
 namespace cc {
 	
-	class Closed : noncopyable
+	class Reward : noncopyable
 	{
 	public:
-		void runDoing(EntityPtr& nEntity, ValuePtr& nValue, AspectEngine * nAspectEngine);
+		void runReward(EntityPtr& nEntity, ValuePtr& nValue);
 		
 		template<class T>
 		void serialize(T * nSerialize, int8_t nCount)
 		{
 			nSerialize->runMapStreamPtrsCount<int8_t, DoingPtr>(mDoings, "doings", "doing", 10);
 			
-			nSerialize->runNumber(mId, "id");
+			nSerialize->runNumber(mRewardId, "rewardId");
 		}
 		int32_t getKey();
 		
-		Closed();
-		~Closed();
+		Reward();
+		~Reward();
 		
 	private:
 		map<int8_t, DoingPtr> mDoings;
-		
-		int32_t mId;
+		int32_t mRewardId;
 	};
-	typedef boost::shared_ptr<Closed> ClosedPtr;
+	typedef boost::shared_ptr<Reward> RewardPtr;
 	
 }
