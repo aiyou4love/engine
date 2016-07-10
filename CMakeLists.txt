@@ -14,17 +14,11 @@ include_directories($ENV{MARIADB_ROOT}/include)
 include_directories($ENV{UNSEEN_ROOT}/include)
 link_directories($ENV{UNSEEN_ROOT}/lib)
 
-SET( LIBRARY_OUTPUT_PATH $ENV{UNSEEN_ROOT}/lib )
-
 set(Boost_USE_STATIC_LIBS TRUE)
 find_package(Boost COMPONENTS system exception date_time regex chrono thread filesystem log log_setup REQUIRED)
 
-set( LUAS lua/lua_tinker.cpp lua/lua_tinker.hpp
-	lua/LuaEngine.cpp lua/LuaEngine.hpp 
-	lua/LuaThread.cpp lua/LuaThread.hpp )
-	
 set( RANDOMS random/RandomEngine.cpp random/RandomEngine.hpp )
-	
-add_library( ${PROJECT_NAME} STATIC ${LUAS} 
-	${RANDOMS} )
 
+add_library( libengine STATIC ${RANDOMS} )
+
+install (TARGETS libengine DESTINATION $ENV{UNSEEN_ROOT}/lib)
