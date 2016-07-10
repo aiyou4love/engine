@@ -16,7 +16,16 @@ namespace cc {
 	void SelectEngine::runPreinit()
 	{
 		LifeCycle& lifeCycle_ = LifeCycle::instance();
+		lifeCycle_.m_tRunLuaApi.connect(bind(&SelectEngine::runLuaApi, this));
 		lifeCycle_.m_tLoadBegin.connect(bind(&SelectEngine::runLoad, this));
+	}
+	
+	void SelectEngine::runLuaApi()
+	{
+		LuaEngine& luaEngine_ = LuaEngine::instance();
+		luaEngine_.runClass<SelectEngine>("SelectEngine");
+		luaEngine_.runStatic<SelectEngine>(&SelectEngine::instance, "instance");
+		luaEngine_.runMethod<SelectEngine>(&SelectEngine::runIfSelect, "runIfSelect");
 	}
 	
 	void SelectEngine::runLoad()

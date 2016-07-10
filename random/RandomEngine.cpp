@@ -8,12 +8,6 @@ namespace cc {
 		return distribution_(mEngine);
 	}
 	
-	int32_t RandomEngine::runRandom(int32_t nValue)
-	{
-		uniform_int_distribution<> distribution_(0, nValue);
-		return distribution_(mEngine);
-	}
-	
 	void RandomEngine::runPreinit()
 	{
 		mEngine.seed(mDevice());

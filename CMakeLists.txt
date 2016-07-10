@@ -7,7 +7,7 @@ if(WIN32)
 	add_definitions( -D_SCL_SECURE_NO_WARNINGS )
 	add_definitions( -DCURL_STATICLIB )
 else()
-	set(CMAKE_CXX_FLAGS "-std=c++11")
+	set(CMAKE_CXX_FLAGS "-std=c++14")
 endif()
 
 include_directories($ENV{MARIADB_ROOT}/include)

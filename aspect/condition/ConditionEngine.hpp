@@ -19,6 +19,7 @@ namespace cc {
 		ConditionEngine& instance();
 		
 		void runPreinit();
+		void runLuaApi();
 		void runLoad();
 		
 		ConditionEngine();

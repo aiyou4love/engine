@@ -16,7 +16,16 @@ namespace cc {
 	void ConditionEngine::runPreinit()
 	{
 		LifeCycle& lifeCycle_ = LifeCycle::instance();
+		lifeCycle_.m_tRunLuaApi.connect(bind(&ConditionEngine::runLuaApi, this));
 		lifeCycle_.m_tLoadBegin.connect(bind(&ConditionEngine::runLoad, this));
+	}
+	
+	void ConditionEngine::runLuaApi()
+	{
+		LuaEngine& luaEngine_ = LuaEngine::instance();
+		luaEngine_.runClass<ConditionEngine>("ConditionEngine");
+		luaEngine_.runStatic<ConditionEngine>(&ConditionEngine::instance, "instance");
+		luaEngine_.runMethod<ConditionEngine>(&ConditionEngine::runCondition, "runCondition");
 	}
 	
 	void ConditionEngine::runLoad()

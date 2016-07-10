@@ -6,7 +6,6 @@ namespace cc {
 	{
 	public:
 		int32_t runRandom(int32_t nMin, int32_t nMax);
-		int32_t runRandom(int32_t nValue);
 		
 		void runPreinit();
 		

@@ -19,6 +19,7 @@ namespace cc {
 		SelectEngine& instance();
 		
 		void runPreinit();
+		void runLuaApi();
 		void runLoad();
 		
 		SelectEngine();
@@ -26,6 +27,7 @@ namespace cc {
 		
 	private:
 		map<int32_t, IfSelectPtr> mIfSelects;
+		map<
 		
 		static SelectEngine mSelectEngine;
 	};
