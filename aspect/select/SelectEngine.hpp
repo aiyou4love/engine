@@ -9,7 +9,7 @@ namespace cc {
 		
 	public:
 		template<class __t>
-		void headSerialize(__t& nSerialize)
+		void headSerialize(__t& nSerialize, const char * nName)
 		{
 			nSerialize.runMapStreamPtrs<int32_t, IfSelectPtr>(mIfSelects, "ifSelects", "ifSelects");
 		}
@@ -27,7 +27,6 @@ namespace cc {
 		
 	private:
 		map<int32_t, IfSelectPtr> mIfSelects;
-		map<
 		
 		static SelectEngine mSelectEngine;
 	};

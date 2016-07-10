@@ -5,18 +5,19 @@ namespace cc {
 	class ConditionEngine : noncopyable
 	{
 	public:
-		int8_t runCondition(int32_t nConditionId, EntityPtr& nEntity, ValuePtr& nValue)
+		int8_t runCondition(int32_t nConditionId, EntityPtr& nEntity, ValuePtr& nValue);
 		
 	public:
 		template<class __t>
-		void headSerialize(__t& nSerialize)
+		void headSerialize(__t& nSerialize, const char * nName)
 		{
 			nSerialize.runMapStreamPtrs<int32_t, ConditionPtr>(mConditions, "conditions", "condition");
 		}
+		
 		const char * streamName();
 		const char * streamUrl();
 		
-		ConditionEngine& instance();
+		static ConditionEngine& instance();
 		
 		void runPreinit();
 		void runLuaApi();

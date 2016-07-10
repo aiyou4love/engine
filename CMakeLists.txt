@@ -19,6 +19,17 @@ find_package(Boost COMPONENTS system exception date_time regex chrono thread fil
 
 set( RANDOMS random/RandomEngine.cpp random/RandomEngine.hpp )
 
-add_library( libengine STATIC ${RANDOMS} )
+set( ASPECTS aspect/condition/Condition.cpp aspect/condition/Condition.hpp 
+	aspect/condition/ConditionEngine.cpp aspect/condition/ConditionEngine.hpp 
+	aspect/doing/Doing.cpp aspect/doing/Doing.hpp aspect/doing/EdoingState.hpp 
+	aspect/entity/Entity.cpp aspect/entity/Entity.hpp 
+	aspect/reward/Reward.cpp aspect/reward/Reward.hpp 
+	aspect/reward/RewardEngine.cpp aspect/reward/RewardEngine.hpp 
+	aspect/select/IfSelect.cpp aspect/select/IfSelect.hpp 
+	aspect/select/SelectEngine.cpp aspect/select/SelectEngine.hpp 
+	aspect/select/Selector.cpp aspect/select/Selector.hpp 
+	aspect/select/SelectState.cpp aspect/select/SelectState.hpp )
+
+add_library( libengine STATIC ${RANDOMS} ${ASPECTS} )
 
 install (TARGETS libengine DESTINATION $ENV{UNSEEN_ROOT}/lib)

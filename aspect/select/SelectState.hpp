@@ -8,7 +8,7 @@ namespace cc {
 		void pushDoingState(int8_t nDoingId, EdoingState nDoingState);
 		
 		void setIfSelect(int32_t nIfSelectId);
-		void setSelect(int32_t nSelectId)
+		void setSelect(int32_t nSelectId);
 		
 		SelectState(int32_t nIfSelectId);
 		~SelectState();
@@ -20,6 +20,6 @@ namespace cc {
 		int32_t mSelectId;
 		ValuePtr mValue;
 	};
-	typedef boost::shared_ptr<ConditionState> ConditionStatePtr;
+	typedef boost::shared_ptr<SelectState> SelectStatePtr;
 	
 }

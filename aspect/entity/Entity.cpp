@@ -5,7 +5,7 @@ namespace cc {
 	void Entity::pushDoingState(int8_t nDoingId, EdoingState nDoingState)
 	{
 		SelectStatePtr& selectState_ = mSelectStates[mIfSelectId];
-		selectState_.pushDoingState(nDoingId, nDoingState);
+		selectState_->pushDoingState(nDoingId, nDoingState);
 		mIncrease = true;
 	}
 	
@@ -18,18 +18,18 @@ namespace cc {
 			mIncrease = false;
 		} else {
 			SelectStatePtr& selectState_ = mSelectStates[mIfSelectId];
-			selectState_.setIfSelectId(nIfSelectId);
+			selectState_->setIfSelect(nIfSelectId);
 		}
 	}
 	
 	void Entity::startSelect(int32_t nSelectId)
 	{
 		SelectStatePtr& selectState_ = mSelectStates[mIfSelectId];
-		selectState_.setSelectId(nSelectId);
+		selectState_->setSelect(nSelectId);
 	}
 	
 	Entity::Entity()
-		: mSelectId (0)
+		: mIfSelectId(0)
 		, mIncrease (true)
 	{
 		mSelectStates.clear();
@@ -39,7 +39,7 @@ namespace cc {
 	{
 		mSelectStates.clear();
 		
-		mSelectId = 0;
+		mIfSelectId = 0;
 		mIncrease = true;
 	}
 	

@@ -24,8 +24,8 @@ namespace cc {
 	{
 		LuaEngine& luaEngine_ = LuaEngine::instance();
 		luaEngine_.runClass<SelectEngine>("SelectEngine");
-		luaEngine_.runStatic<SelectEngine>(&SelectEngine::instance, "instance");
-		luaEngine_.runMethod<SelectEngine>(&SelectEngine::runIfSelect, "runIfSelect");
+		//luaEngine_.runStatic<SelectEngine>(&SelectEngine::instance, "instance");
+		//luaEngine_.runMethod<SelectEngine>(&SelectEngine::runIfSelect, "runIfSelect");
 	}
 	
 	void SelectEngine::runLoad()

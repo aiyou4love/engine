@@ -5,18 +5,18 @@ namespace cc {
 	class RewardEngine : noncopyable
 	{
 	public:
-		void runReward(int32_t nRewardId, EntityPtr& nEntity, ValuePtr& nValue)
+		void runReward(int32_t nRewardId, EntityPtr& nEntity, ValuePtr& nValue);
 		
 	public:
 		template<class __t>
-		void headSerialize(__t& nSerialize)
+		void headSerialize(__t& nSerialize, const char * nName)
 		{
 			nSerialize.runMapStreamPtrs<int32_t, RewardPtr>(mRewards, "rewards", "reward");
 		}
 		const char * streamName();
 		const char * streamUrl();
 		
-		RewardEngine& instance();
+		static RewardEngine& instance();
 		
 		void runPreinit();
 		void runLoad();

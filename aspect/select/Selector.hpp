@@ -7,6 +7,15 @@ namespace cc {
 	public:
 		bool runSelect(EntityPtr& nEntity, ValuePtr& nValue);
 		
+		template<class T>
+		void serialize(T * nSerialize, int8_t nCount)
+		{
+			nSerialize->runNumber(mConditionId, "conditionId");
+			nSerialize->runNumber(mRewardId, "rewardId");
+			nSerialize->runNumber(mSelectId, "selectId");
+		}
+
+		bool isDefault();
 		int8_t getKey();
 		
 		Selector();

@@ -4,8 +4,8 @@ namespace cc {
 	
 	void RewardEngine::runReward(int32_t nRewardId, EntityPtr& nEntity, ValuePtr& nValue)
 	{
-		auto it = mConditions.find(nRewardId);
-		if ( it == mConditions.end() ) {
+		auto it = mRewards.find(nRewardId);
+		if ( it == mRewards.end() ) {
 			LOGERROR("[%s]%d", __METHOD__, nRewardId);
 			return;
 		}

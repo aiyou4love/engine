@@ -20,7 +20,12 @@ namespace cc {
 			return true;
 		}
 	}
-	
+
+	bool Selector::isDefault()
+	{
+		return ( (0 == mSelectId) | (0 == mConditionId) );
+	}
+
 	int8_t Selector::getKey()
 	{
 		return mSelectId;

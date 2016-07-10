@@ -23,9 +23,9 @@ namespace cc {
 	void ConditionEngine::runLuaApi()
 	{
 		LuaEngine& luaEngine_ = LuaEngine::instance();
-		luaEngine_.runClass<ConditionEngine>("ConditionEngine");
-		luaEngine_.runStatic<ConditionEngine>(&ConditionEngine::instance, "instance");
-		luaEngine_.runMethod<ConditionEngine>(&ConditionEngine::runCondition, "runCondition");
+		//luaEngine_.runClass<ConditionEngine>("ConditionEngine");
+		//luaEngine_.runStatic<ConditionEngine>(&ConditionEngine::instance, "instance");
+		//luaEngine_.runMethod<ConditionEngine>(&ConditionEngine::runCondition, "runCondition");
 	}
 	
 	void ConditionEngine::runLoad()
