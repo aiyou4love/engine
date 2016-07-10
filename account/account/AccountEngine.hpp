@@ -4,14 +4,9 @@ namespace cc {
 	
 	class AccountEngine : noncopyable
 	{
-	public:				
-		AccountEngine& instance();
-		
+	public:
 		AccountEngine();
 		~AccountEngine();
-		
-	private:		
-		static AccountEngine mAccountEngine;
 	};
 	
 }
