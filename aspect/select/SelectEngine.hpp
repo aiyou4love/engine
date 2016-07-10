@@ -16,7 +16,7 @@ namespace cc {
 		const char * streamName();
 		const char * streamUrl();
 		
-		SelectEngine& instance();
+		static SelectEngine& instance();
 		
 		void runPreinit();
 		void runLuaApi();
