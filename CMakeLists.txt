@@ -30,6 +30,8 @@ set( ASPECTS aspect/condition/Condition.cpp aspect/condition/Condition.hpp
 	aspect/select/Selector.cpp aspect/select/Selector.hpp 
 	aspect/select/SelectState.cpp aspect/select/SelectState.hpp )
 
-add_library( libengine STATIC ${RANDOMS} ${ASPECTS} )
+set( ENGINES Engine.cpp Engine.hpp )
+
+add_library( libengine STATIC ${RANDOMS} ${ASPECTS} ${ASPECTS} )
 
 install (TARGETS libengine DESTINATION $ENV{UNSEEN_ROOT}/lib)

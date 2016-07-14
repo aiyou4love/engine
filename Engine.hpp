@@ -20,3 +20,5 @@
 #include "aspect/select/Selector.hpp"
 #include "aspect/select/IfSelect.hpp"
 #include "aspect/select/SelectEngine.hpp"
+
+extern void runEngine();
