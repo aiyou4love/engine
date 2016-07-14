@@ -6,7 +6,7 @@ namespace cc {
 	{
 		auto it = mIfSelects.find(nIfSelectId);
 		if ( it == mIfSelects.end() ) {
-			LOGERROR("[%s]%d", __METHOD__, nIfSelectId);
+			LOGE("[%s]%d", __METHOD__, nIfSelectId);
 			return;
 		}
 		IfSelectPtr& ifSelect_ = it->second;
@@ -41,7 +41,7 @@ namespace cc {
 	
 	const char * SelectEngine::streamUrl()
 	{
-		return "arc://selectEngine.json";
+		return "selectEngine.json";
 	}
 	
 	SelectEngine& SelectEngine::instance()

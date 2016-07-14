@@ -19,13 +19,13 @@ namespace cc {
 	
 	int8_t Doing::getKey()
 	{
-		return mId;
+		return mIndex;
 	}
 	
 	Doing::Doing()
 		: mAspectId (0)
 		, mDoingId (0)
-		, mId (0)
+		, mIndex (0)
 	{
 	}
 	
@@ -33,7 +33,7 @@ namespace cc {
 	{
 		mAspectId = 0;
 		mDoingId = 0;
-		mId = 0;
+		mIndex = 0;
 	}
 	
 }

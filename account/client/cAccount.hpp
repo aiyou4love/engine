@@ -2,6 +2,7 @@
 
 namespace cc {
 	
+#ifdef __CLIENT__
 	class cAccount : public Account
 	{
 	public:
@@ -23,5 +24,6 @@ namespace cc {
 		int16_t mAccountType;
 		int64_t mAccountId;
 	};
-	
+#endif
+
 }

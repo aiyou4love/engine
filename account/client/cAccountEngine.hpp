@@ -18,7 +18,7 @@ namespace cc {
 				nSerialize.runStream(mRoleList, "mRoleList");
 				nSerialize.runStream(mAccount, "mAccount");
 			} else {
-				LOGERROR("[%s]%s", __METHOD__, nName);
+				LOGE("[%s]%s", __METHOD__, nName);
 			}
 		}
 		

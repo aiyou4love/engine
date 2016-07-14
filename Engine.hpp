@@ -21,4 +21,5 @@
 #include "aspect/select/IfSelect.hpp"
 #include "aspect/select/SelectEngine.hpp"
 
-extern void runEngine();
+extern void engineStart();
+extern void engineStop();

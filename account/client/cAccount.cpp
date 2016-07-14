@@ -2,7 +2,8 @@
 
 namespace cc {
 	
-	Account::Account()
+#ifdef __CLIENT__
+	cAccount::cAccount()
 		: mAccountName ("")
 		, mAccountPassword ("")
 		, mAccountType (0)
@@ -10,12 +11,13 @@ namespace cc {
 	{
 	}
 	
-	Account::~Account()
+	cAccount::~cAccount()
 	{
 		mAccountName = "";
 		mAccountPassword = "";
 		mAccountType = 0;
 		mAccountId = 0;
 	}
-	
+#endif
+
 }

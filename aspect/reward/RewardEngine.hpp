@@ -19,6 +19,7 @@ namespace cc {
 		static RewardEngine& instance();
 		
 		void runPreinit();
+		void runLuaApi();
 		void runLoad();
 		
 		RewardEngine();

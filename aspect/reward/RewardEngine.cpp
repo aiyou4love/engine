@@ -6,7 +6,7 @@ namespace cc {
 	{
 		auto it = mRewards.find(nRewardId);
 		if ( it == mRewards.end() ) {
-			LOGERROR("[%s]%d", __METHOD__, nRewardId);
+			LOGE("[%s]%d", __METHOD__, nRewardId);
 			return;
 		}
 		RewardPtr& reward_ = it->second;
@@ -16,7 +16,16 @@ namespace cc {
 	void RewardEngine::runPreinit()
 	{
 		LifeCycle& lifeCycle_ = LifeCycle::instance();
+		lifeCycle_.m_tRunLuaApi.connect(bind(&ConditionEngine::runLuaApi, this));
 		lifeCycle_.m_tLoadBegin.connect(bind(&RewardEngine::runLoad, this));
+	}
+	
+	void RewardEngine::runLuaApi()
+	{
+		LuaEngine& luaEngine_ = LuaEngine::instance();
+		luaEngine_.runClass<RewardEngine>("RewardEngine");
+		luaEngine_.runStatic<RewardEngine>(RewardEngine::instance, "instance");
+		luaEngine_.runMethod<RewardEngine>(&RewardEngine::runCondition, "runReward");
 	}
 	
 	void RewardEngine::runLoad()
@@ -32,7 +41,7 @@ namespace cc {
 	
 	const char * RewardEngine::streamUrl()
 	{
-		return "arc://rewardEngine.json";
+		return "rewardEngine.json";
 	}
 	
 	RewardEngine& RewardEngine::instance()

@@ -1,6 +1,6 @@
 #include "Engine.hpp"
 
-void runEngine()
+void engineStart()
 {
 	RandomEngine& randomEngine_ = RandomEngine::instance();
 	randomEngine_.runPreinit();
@@ -13,4 +13,8 @@ void runEngine()
 	
 	SelectEngine& selectEngine_ = SelectEngine::instance();
 	selectEngine_.runPreinit();	
+}
+
+void engineStop()
+{
 }

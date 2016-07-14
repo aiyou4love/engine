@@ -6,7 +6,7 @@ namespace cc {
 	{
 		auto it = mConditions.find(nConditionId);
 		if ( it == mConditions.end() ) {
-			LOGERROR("[%s]%d", __METHOD__, nConditionId);
+			LOGE("[%s]%d", __METHOD__, nConditionId);
 			return 0x2;
 		}
 		ConditionPtr& condition_ = it->second;
@@ -41,7 +41,7 @@ namespace cc {
 	
 	const char * ConditionEngine::streamUrl()
 	{
-		return "arc://conditionEngine.json";
+		return "conditionEngine.json";
 	}
 	
 	ConditionEngine& ConditionEngine::instance()

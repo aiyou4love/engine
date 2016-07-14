@@ -10,7 +10,7 @@ namespace cc {
 		{
 			nSerialize->runNumberCount(mAspectId, "aspectId", nCount);
 			nSerialize->runNumberCount(mDoingId, "doingId", nCount);
-			nSerialize->runNumberCount(mId, "id", nCount);
+			nSerialize->runNumberCount(mIndex, "index", nCount);
 		}
 		int32_t getAspectId();
 		int32_t getDoingId();
@@ -25,7 +25,7 @@ namespace cc {
 	private:
 		int32_t mAspectId;
 		int32_t mDoingId;
-		int8_t mId;
+		int8_t mIndex;
 	};
 	typedef boost::shared_ptr<Doing> DoingPtr;
 	
