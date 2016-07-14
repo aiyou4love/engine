@@ -21,5 +21,13 @@
 #include "aspect/select/IfSelect.hpp"
 #include "aspect/select/SelectEngine.hpp"
 
+#include "aspect/select/SelectEngine.hpp"
+
+#include "account/account/Account.hpp"
+#include "account/account/AccountEngine.hpp"
+	
+#include "account/client/cAccount.hpp"
+#include "account/client/cAccountEngine.hpp"
+
 extern void engineStart();
 extern void engineStop();

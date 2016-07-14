@@ -1,5 +1,7 @@
 #include "Engine.hpp"
 
+using namespace cc;
+
 void engineStart()
 {
 	RandomEngine& randomEngine_ = RandomEngine::instance();
@@ -12,7 +14,10 @@ void engineStart()
 	rewardEngine_.runPreinit();
 	
 	SelectEngine& selectEngine_ = SelectEngine::instance();
-	selectEngine_.runPreinit();	
+	selectEngine_.runPreinit();
+	
+	cAccountEngine& accountEngine_ = cAccountEngine::instance();
+	accountEngine_.runPreinit();
 }
 
 void engineStop()

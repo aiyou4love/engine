@@ -2,6 +2,7 @@
 
 namespace cc {
 	
+#ifdef __CLIENT__
 	class cAccountEngine : public AccountEngine
 	{
 	public:
@@ -9,14 +10,7 @@ namespace cc {
 		void headSerialize(__t& nSerialize, const char * nName)
 		{
 			if ( 0 == strcmp(streamName(), nName) ) {
-				nSerialize.runNumber(mVersionNo, "versionNo");
-				nSerialize.runNumber(mOperatorName, "operatorName");
-				nSerialize.runNumber(mUpdateUrl, "updateUrl");
-				nSerialize.runNumber(mTimeout, "timeout");
 			} else if ( 0 == strcmp(saveName(), nName) ) {
-				nSerialize.runStream(mServerList, "mServerList");
-				nSerialize.runStream(mRoleList, "mRoleList");
-				nSerialize.runStream(mAccount, "mAccount");
 			} else {
 				LOGE("[%s]%s", __METHOD__, nName);
 			}
@@ -28,7 +22,7 @@ namespace cc {
 		const char * saveUrl();
 		const char * saveName();
 		
-		cAccountEngine& instance();
+		static cAccountEngine& instance();
 		
 		void runPreinit();
 		void runLuaApi();
@@ -39,12 +33,7 @@ namespace cc {
 		
 	private:
 		static cAccountEngine mAccountEngine;
-		
-		ServerList mServerList;
-		RoleList mRoleList;
-		cAccount mAccount;
-		
-		map<string, string> mAccountUrls;
 	};
-	
+#endif
+
 }

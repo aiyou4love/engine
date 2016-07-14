@@ -16,7 +16,7 @@ namespace cc {
 	void RewardEngine::runPreinit()
 	{
 		LifeCycle& lifeCycle_ = LifeCycle::instance();
-		lifeCycle_.m_tRunLuaApi.connect(bind(&ConditionEngine::runLuaApi, this));
+		lifeCycle_.m_tRunLuaApi.connect(bind(&RewardEngine::runLuaApi, this));
 		lifeCycle_.m_tLoadBegin.connect(bind(&RewardEngine::runLoad, this));
 	}
 	
@@ -25,7 +25,7 @@ namespace cc {
 		LuaEngine& luaEngine_ = LuaEngine::instance();
 		luaEngine_.runClass<RewardEngine>("RewardEngine");
 		luaEngine_.runStatic<RewardEngine>(RewardEngine::instance, "instance");
-		luaEngine_.runMethod<RewardEngine>(&RewardEngine::runCondition, "runReward");
+		luaEngine_.runMethod<RewardEngine>(&RewardEngine::runReward, "runReward");
 	}
 	
 	void RewardEngine::runLoad()

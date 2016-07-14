@@ -10,9 +10,9 @@ namespace cc {
 		template<class T>
 		void serialize(T * nSerialize, int8_t nCount)
 		{
-			nSerialize->runNumber(mConditionId, "conditionId");
-			nSerialize->runNumber(mRewardId, "rewardId");
-			nSerialize->runNumber(mSelectId, "selectId");
+			nSerialize->runNumberCount(mConditionId, "conditionId", nCount);
+			nSerialize->runNumberCount(mRewardId, "rewardId", nCount);
+			nSerialize->runNumberCount(mSelectId, "selectId", nCount);
 		}
 
 		bool isDefault();

@@ -2,17 +2,7 @@
 
 namespace cc {
 	
-	void SelectEngine::runIfSelect(int32_t nIfSelectId, EntityPtr& nEntity, ValuePtr& nValue)
-	{
-		auto it = mIfSelects.find(nIfSelectId);
-		if ( it == mIfSelects.end() ) {
-			LOGE("[%s]%d", __METHOD__, nIfSelectId);
-			return;
-		}
-		IfSelectPtr& ifSelect_ = it->second;
-		ifSelect_->runIfSelect(nEntity, nValue);
-	}
-	
+#ifdef __CLIENT__
 	void cAccountEngine::runPreinit()
 	{
 		LifeCycle& lifeCycle_ = LifeCycle::instance();
@@ -24,37 +14,31 @@ namespace cc {
 	{
 		LuaEngine& luaEngine_ = LuaEngine::instance();
 		luaEngine_.runClass<cAccountEngine>("cAccountEngine");
-		luaEngine_.runStatic<cAccountEngine>(&cAccountEngine::instance, "instance");
-		luaEngine_.runMethod<cAccountEngine>(&cAccountEngine::runIfSelect, "runIfSelect");
+		luaEngine_.runStatic<cAccountEngine>(cAccountEngine::instance, "instance");
 	}
 	
 	void cAccountEngine::runLoad()
 	{
-		UserDefault& userDefault_ = UserDefault::instance();
-		userDefault_.runReader<cAccountEngine *>(this, saveUrl(), saveName());
-		
-		TableEngine& tableEngine_ = TableEngine::instance();
-		tableEngine_.runTable<cAccountEngine *>(this, streamUrl(), streamName());
 	}
 	
 	const char * cAccountEngine::streamName()
 	{
-		return "cAccountEngine";
+		return "accountEngine";
 	}
 	
 	const char * cAccountEngine::streamUrl()
 	{
-		return "arc://cAccountEngine.json";
+		return "accountEngine.json";
 	}
 	
-	const char * cAccountEngine::streamName()
+	const char * cAccountEngine::saveName()
 	{
 		return "cAccountEngine";
 	}
 	
-	const char * cAccountEngine::streamUrl()
+	const char * cAccountEngine::saveUrl()
 	{
-		return "arc://cAccountEngine.json";
+		return "cAccountEngine.json";
 	}
 	
 	cAccountEngine& cAccountEngine::instance()
@@ -71,5 +55,6 @@ namespace cc {
 	}
 	
 	cAccountEngine cAccountEngine::mAccountEngine;
-	
+#endif
+
 }

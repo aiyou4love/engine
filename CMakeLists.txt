@@ -10,7 +10,8 @@ else()
 	set(CMAKE_CXX_FLAGS "-std=c++14")
 endif()
 
-add_definitions(-D__${__GAMEEXE__}__)
+string(TOUPPER ${__GAMEEXE__} __PROJNAME__)
+add_definitions(-D__${__PROJNAME__}__)
 
 include_directories($ENV{MARIADB_ROOT}/include)
 include_directories($ENV{UNSEEN_ROOT}/include)
@@ -40,6 +41,6 @@ set( ACCOUNTS account/account/Account.cpp account/account/Account.hpp
 set( ACCOUNTC account/client/cAccount.cpp account/client/cAccount.hpp 
 	account/client/cAccountEngine.cpp account/client/cAccountEngine.hpp )
 
-add_library( libengine STATIC ${RANDOMS} ${ASPECTS} ${ACCOUNTS} ${ACCOUNTC} )
+add_library( libengine STATIC ${RANDOMS} ${ASPECTS} ${ACCOUNTS} ${ACCOUNTC} ${ENGINES} )
 
 install (TARGETS libengine DESTINATION $ENV{UNSEEN_ROOT}/lib)
