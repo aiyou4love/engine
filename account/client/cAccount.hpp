@@ -6,6 +6,9 @@ namespace cc {
 	class cAccount : public Account
 	{
 	public:
+		EdoingState runCondition(DoingPtr& nDoing, ValuePtr& nValue);
+		void runReward(DoingPtr& nDoing, ValuePtr& nValue);
+		
 		template<class T>
 		void serialize(T nSerialize, const char * nName)
 		{
@@ -24,6 +27,7 @@ namespace cc {
 		int16_t mAccountType;
 		int64_t mAccountId;
 	};
+	typedef boost::shared_ptr<cAccount> cAccountPtr;
 #endif
 
 }

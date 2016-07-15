@@ -11,7 +11,7 @@ namespace cc {
 		template<class __t>
 		void headSerialize(__t& nSerialize, const char * nName)
 		{
-			nSerialize.runMapStreamPtrs<int32_t, IfSelectPtr>(mIfSelects, "ifSelects", "ifSelects");
+			nSerialize.runMapStreamPtrs<int32_t, IfSelectPtr>(mIfSelects, "ifSelects", "ifSelect");
 		}
 		const char * streamName();
 		const char * streamUrl();

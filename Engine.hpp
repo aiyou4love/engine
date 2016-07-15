@@ -23,9 +23,12 @@
 
 #include "aspect/select/SelectEngine.hpp"
 
+#include "aspect/aspect/IAspect.hpp"
+
 #include "account/account/Account.hpp"
 #include "account/account/AccountEngine.hpp"
-	
+
+#include "account/client/UrlValue.hpp"
 #include "account/client/cAccount.hpp"
 #include "account/client/cAccountEngine.hpp"
 

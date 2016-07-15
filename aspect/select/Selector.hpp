@@ -14,7 +14,7 @@ namespace cc {
 			nSerialize->runNumberCount(mRewardId, "rewardId", nCount);
 			nSerialize->runNumberCount(mSelectId, "selectId", nCount);
 		}
-
+		
 		bool isDefault();
 		int8_t getKey();
 		

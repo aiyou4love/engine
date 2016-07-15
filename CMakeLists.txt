@@ -31,14 +31,16 @@ set( ASPECTS aspect/condition/Condition.cpp aspect/condition/Condition.hpp
 	aspect/select/IfSelect.cpp aspect/select/IfSelect.hpp 
 	aspect/select/SelectEngine.cpp aspect/select/SelectEngine.hpp 
 	aspect/select/Selector.cpp aspect/select/Selector.hpp 
-	aspect/select/SelectState.cpp aspect/select/SelectState.hpp )
+	aspect/select/SelectState.cpp aspect/select/SelectState.hpp
+	aspect/aspect/IAspect.hpp )
 
 set( ENGINES Engine.cpp Engine.hpp )
 
 set( ACCOUNTS account/account/Account.cpp account/account/Account.hpp 
 	account/account/AccountEngine.cpp account/account/AccountEngine.hpp )
 	
-set( ACCOUNTC account/client/cAccount.cpp account/client/cAccount.hpp 
+set( ACCOUNTC  account/client/UrlValue.cpp account/client/UrlValue.hpp 
+	account/client/cAccount.cpp account/client/cAccount.hpp 
 	account/client/cAccountEngine.cpp account/client/cAccountEngine.hpp )
 
 add_library( libengine STATIC ${RANDOMS} ${ASPECTS} ${ACCOUNTS} ${ACCOUNTC} ${ENGINES} )

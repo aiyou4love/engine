@@ -23,7 +23,7 @@ namespace cc {
 
 	bool Selector::isDefault()
 	{
-		return ( (0 == mSelectId) | (0 == mConditionId) );
+		return ( (0 == mSelectId) || (0 == mConditionId) );
 	}
 
 	int8_t Selector::getKey()
