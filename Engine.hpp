@@ -32,5 +32,11 @@
 #include "account/client/cAccount.hpp"
 #include "account/client/cAccountEngine.hpp"
 
+#include "ui/UiEntity.hpp"
+#include "ui/UiEngine.hpp"
+
+#include "console/ConsoleItem.hpp"
+#include "console/ConsoleEngine.hpp"
+
 extern void engineStart();
 extern void engineStop();

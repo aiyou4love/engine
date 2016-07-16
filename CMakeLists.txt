@@ -36,6 +36,12 @@ set( ASPECTS aspect/condition/Condition.cpp aspect/condition/Condition.hpp
 
 set( ENGINES Engine.cpp Engine.hpp )
 
+set( UIS ui/UiEntity.cpp ui/UiEntity.hpp 
+	ui/UiEngine.cpp ui/UiEngine.hpp )
+	
+set( CONSOLES console/ConsoleItem.cpp console/ConsoleItem.hpp 
+	console/ConsoleEngine.cpp console/ConsoleEngine.hpp )
+	
 set( ACCOUNTS account/account/Account.cpp account/account/Account.hpp 
 	account/account/AccountEngine.cpp account/account/AccountEngine.hpp )
 	
@@ -43,6 +49,7 @@ set( ACCOUNTC  account/client/UrlValue.cpp account/client/UrlValue.hpp
 	account/client/cAccount.cpp account/client/cAccount.hpp 
 	account/client/cAccountEngine.cpp account/client/cAccountEngine.hpp )
 
-add_library( libengine STATIC ${RANDOMS} ${ASPECTS} ${ACCOUNTS} ${ACCOUNTC} ${ENGINES} )
+add_library( libengine STATIC ${RANDOMS} ${ASPECTS} ${ACCOUNTS} ${ACCOUNTC}
+	${ENGINES} ${UIS} ${CONSOLES} )
 
 install (TARGETS libengine DESTINATION $ENV{UNSEEN_ROOT}/lib)
