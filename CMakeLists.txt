@@ -51,5 +51,6 @@ set( ACCOUNTC  account/client/UrlValue.cpp account/client/UrlValue.hpp
 
 add_library( libengine STATIC ${RANDOMS} ${ASPECTS} ${ACCOUNTS} ${ACCOUNTC}
 	${ENGINES} ${UIS} ${CONSOLES} )
-
+	
 install (TARGETS libengine DESTINATION $ENV{UNSEEN_ROOT}/lib)
+
