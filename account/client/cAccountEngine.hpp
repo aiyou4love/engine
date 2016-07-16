@@ -8,6 +8,7 @@ namespace cc {
 	public:
 		EdoingState runCondition(DoingPtr& nDoing, ValuePtr& nValue);
 		void runReward(DoingPtr& nDoing, ValuePtr& nValue);
+		void registerAspect(int32_t nAspectId, IAspect * nAspect);
 		
 		template<class __t>
 		void headSerialize(__t& nSerialize, const char * nName)

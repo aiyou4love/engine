@@ -18,6 +18,7 @@ namespace cc {
 		LifeCycle& lifeCycle_ = LifeCycle::instance();
 		lifeCycle_.m_tRunLuaApi.connect(bind(&SelectEngine::runLuaApi, this));
 		lifeCycle_.m_tLoadBegin.connect(bind(&SelectEngine::runLoad, this));
+		lifeCycle_.m_tStartEnd.connect(bind(&SelectEngine::runStart, this));
 	}
 	
 	void SelectEngine::runLuaApi()
@@ -32,6 +33,17 @@ namespace cc {
 	{
 		TableEngine& tableEngine_ = TableEngine::instance();
 		tableEngine_.runTable<SelectEngine *>(this, streamUrl(), streamName());
+		tableEngine_.runTable<SelectEngine *>(this, startUrl(), startName());
+	}
+	
+	void SelectEngine::runStart()
+	{
+		EntityPtr entity_; ValuePtr value_;
+		auto it = mSelectStarts.begin();
+		for ( ; it != mSelectStarts.end(); ++it ) {
+			int32_t selectId_ = (*it);
+			this->runIfSelect(selectId_, entity_, value_);
+		}
 	}
 	
 	const char * SelectEngine::streamName()
@@ -42,6 +54,16 @@ namespace cc {
 	const char * SelectEngine::streamUrl()
 	{
 		return "selectEngine.json";
+	}
+	
+	const char * SelectEngine::startName()
+	{
+		return "selectStart";
+	}
+	
+	const char * SelectEngine::startUrl()
+	{
+		return "selectStart.json";
 	}
 	
 	SelectEngine& SelectEngine::instance()

@@ -25,8 +25,18 @@ namespace cc {
 			LOGE("[%s]%d", __METHOD__, aspectId_);
 			return;
 		}
-		IAspect * aspect_ = it->second;
+		IAspect * aspect_ = it->second; 
 		return aspect_->runReward(doingId_, mAccount, nValue);
+	}
+	
+	void cAccountEngine::registerAspect(int32_t nAspectId, IAspect * nAspect)
+	{
+		auto it = mAspects.find(nAspectId);
+		if ( it != mAspects.end() ) {
+			LOGE("[%s]%d", __METHOD__, nAspectId);
+			return;
+		}
+		mAspects[nAspectId] = nAspect;
 	}
 	
 	void cAccountEngine::runPreinit()
