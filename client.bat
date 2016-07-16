@@ -1,8 +1,8 @@
 @echo off
-if not exist build (
-	mkdir build
+if not exist client (
+	mkdir client
 )
-cd build
+cd client
 ::cmake .. -D__GAMEEXE__=client -G"Visual Studio 14 Win64"
 ::pause
 cmake .. -D__GAMEEXE__=client -G"NMake Makefiles"
