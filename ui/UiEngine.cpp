@@ -4,6 +4,8 @@ namespace cc {
 	
 	void UiEngine::showUi(const char * nName)
 	{
+		LOGF;
+		
 		auto it = mUiEntitys.find(nName);
 		if ( it != mUiEntitys.end() ) {
 			LOGE("[%s]%s", __METHOD__, nName);
@@ -16,6 +18,8 @@ namespace cc {
 	
 	void UiEngine::refreshUi(const char * nName, const char * nEvent)
 	{
+		LOGF;
+		
 		auto it = mUiEntitys.find(nName);
 		if ( it == mUiEntitys.end() ) {
 			LOGE("[%s]%s", __METHOD__, nName);
@@ -27,6 +31,8 @@ namespace cc {
 	
 	void UiEngine::closeUi(const char * nName)
 	{
+		LOGF;
+		
 		auto it = mUiEntitys.find(nName);
 		if ( it == mUiEntitys.end() ) {
 			LOGE("[%s]%s", __METHOD__, nName);
@@ -39,16 +45,18 @@ namespace cc {
 	
 	void UiEngine::runPreinit()
 	{
-		
+		LOGF;
 	}
 	
 	UiEngine& UiEngine::instance()
 	{
+		LOGF;
+		
 		return mUiEngine;
 	}
 	
 	UiEngine::UiEngine()
-	{
+	{	
 		mUiEntitys.clear();
 	}
 	

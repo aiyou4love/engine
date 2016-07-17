@@ -25,7 +25,6 @@ namespace cc {
 		string mAccountName;
 		string mAccountPassword;
 		int16_t mAccountType;
-		int64_t mAccountId;
 	};
 	typedef boost::shared_ptr<cAccount> cAccountPtr;
 #endif

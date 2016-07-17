@@ -4,6 +4,8 @@ namespace cc {
 	
 	bool Selector::runSelect(EntityPtr& nEntity, ValuePtr& nValue)
 	{
+		LOGF;
+		
 		if (mConditionId > 0) {
 			nEntity->startSelect(mSelectId);
 			
@@ -23,7 +25,7 @@ namespace cc {
 
 	bool Selector::isDefault()
 	{
-		return ( (0 == mSelectId) || (0 == mConditionId) );
+		return ( (0 == mSelectId) || (0 == mRewardId) );
 	}
 
 	int8_t Selector::getKey()

@@ -12,6 +12,11 @@ namespace cc {
 		return mUrlName.c_str();
 	}
 	
+	int16_t UrlValue::getTimeout()
+	{
+		return mTimeout;
+	}
+	
 	bool UrlValue::isDefault()
 	{
 		return ( ("" == mUrlName) || ("" == mUrlValue) );
@@ -25,6 +30,7 @@ namespace cc {
 	UrlValue::UrlValue()
 		: mUrlName ("")
 		, mUrlValue ("")
+		, mTimeout (10)
 	{
 	}
 	
@@ -32,6 +38,7 @@ namespace cc {
 	{
 		mUrlName = "";
 		mUrlValue = "";
+		mTimeout = 10;
 	}
 	
 }

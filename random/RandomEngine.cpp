@@ -10,11 +10,15 @@ namespace cc {
 	
 	void RandomEngine::runPreinit()
 	{
+		LOGF;
+		
 		mEngine.seed(mDevice());
 	}
 	
 	RandomEngine& RandomEngine::instance()
 	{
+		LOGF;
+		
 		return mRandomEngine;
 	}
 	

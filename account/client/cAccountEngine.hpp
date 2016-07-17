@@ -9,6 +9,9 @@ namespace cc {
 		EdoingState runCondition(DoingPtr& nDoing, ValuePtr& nValue);
 		void runReward(DoingPtr& nDoing, ValuePtr& nValue);
 		void registerAspect(int32_t nAspectId, IAspect * nAspect);
+		int8_t isRegister(const char * nValue);
+		
+		EntityPtr& getAccount();
 		
 		template<class __t>
 		void headSerialize(__t& nSerialize, const char * nName)

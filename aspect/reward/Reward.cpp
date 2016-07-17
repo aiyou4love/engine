@@ -4,6 +4,8 @@ namespace cc {
 	
 	void Reward::runReward(EntityPtr& nEntity, ValuePtr& nValue)
 	{
+		LOGF;
+		
 		auto it = mDoings.begin();
 		for ( ; it != mDoings.end(); ++it ) {
 			DoingPtr& doing_ = it->second;

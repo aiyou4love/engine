@@ -28,10 +28,13 @@ namespace cc {
 		, mIndex (0)
 		, mIsGlob (false)
 	{
+		LOGF;
 	}
 	
 	ConsoleItem::~ConsoleItem()
 	{
+		LOGF;
+		
 		mLuaMethod = "";
 		mText = "";
 		mIndex = 0;

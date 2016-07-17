@@ -11,6 +11,8 @@ namespace cc {
 		template<class __t>
 		void headSerialize(__t& nSerialize, const char * nName)
 		{
+			LOGF;
+			
 			nSerialize.runMapStreamPtrs<int32_t, ConditionPtr>(mConditions, "conditions", "condition");
 		}
 		

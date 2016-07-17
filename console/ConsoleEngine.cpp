@@ -4,6 +4,8 @@ namespace cc {
 	
 	void ConsoleEngine::showUi(const char * nName)
 	{
+		LOGF;
+		
 		WorkDirectory& workDirectory_ = WorkDirectory::instance();
 		string uiLuaPath_ = workDirectory_.uiLuaPath(nName);
 		string uiJsonPath_ = workDirectory_.uiJsonPath(nName);
@@ -46,11 +48,15 @@ namespace cc {
 	
 	void ConsoleEngine::refreshUi(const char * nEvent)
 	{
+		LOGF;
+		
 		mLuaThread->runCall(nEvent);
 	}
 	
 	void ConsoleEngine::closeUi()
 	{
+		LOGF;
+		
 		mLuaThread->runClose();
 		mLuaThread.reset();
 		
@@ -69,20 +75,23 @@ namespace cc {
 	
 	void ConsoleEngine::runPreinit()
 	{
+		LOGF;
 	}
 	
 	ConsoleEngine& ConsoleEngine::instance()
 	{
+		LOGF;
+		
 		return mConsoleEngine;
 	}
 	
 	ConsoleEngine::ConsoleEngine()
-	{
+	{		
 		mConsoleItems.clear();
 	}
 	
 	ConsoleEngine::~ConsoleEngine()
-	{
+	{		
 		mConsoleItems.clear();
 	}
 	

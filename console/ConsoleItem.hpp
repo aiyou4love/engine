@@ -12,6 +12,8 @@ namespace cc {
 		template<class T>
 		void serialize(T * nSerialize, int8_t nCount)
 		{
+			LOGF;
+			
 			nSerialize->runNumber(mLuaMethod, "luaMethod");
 			nSerialize->runNumber(mIndex, "index");
 			nSerialize->runNumber(mText, "text");

@@ -10,10 +10,12 @@ namespace cc {
 		{
 			nSerialize->runNumber(mUrlName, "urlName");
 			nSerialize->runNumber(mUrlValue, "urlValue");
+			nSerialize->runNumber(mTimeout, "timeout");
 		}
 		
 		const char * getUrlValue();
 		const char * getUrlName();
+		int16_t getTimeout();
 		
 		bool isDefault();
 		string getKey();
@@ -24,6 +26,7 @@ namespace cc {
 	private:
 		string mUrlName;
 		string mUrlValue;
+		int16_t mTimeout;
 	};
 	typedef boost::shared_ptr<UrlValue> UrlValuePtr;
 

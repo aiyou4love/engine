@@ -19,7 +19,6 @@ namespace cc {
 		: mAccountName ("")
 		, mAccountPassword ("")
 		, mAccountType (0)
-		, mAccountId (0)
 	{
 	}
 	
@@ -28,7 +27,6 @@ namespace cc {
 		mAccountName = "";
 		mAccountPassword = "";
 		mAccountType = 0;
-		mAccountId = 0;
 	}
 #endif
 
