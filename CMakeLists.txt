@@ -43,11 +43,19 @@ set( CONSOLES console/ConsoleItem.cpp console/ConsoleItem.hpp
 	console/ConsoleEngine.cpp console/ConsoleEngine.hpp )
 	
 set( ACCOUNTS account/account/Account.cpp account/account/Account.hpp 
-	account/account/AccountEngine.cpp account/account/AccountEngine.hpp )
+	account/account/AccountEngine.cpp account/account/AccountEngine.hpp 
+	account/account/RoleItem.cpp account/account/RoleItem.hpp 
+	account/account/ServerItem.cpp account/account/ServerItem.hpp 
+	account/account/ServerList.cpp account/account/ServerList.hpp )
 	
 set( ACCOUNTC  account/client/UrlValue.cpp account/client/UrlValue.hpp 
 	account/client/cAccount.cpp account/client/cAccount.hpp 
-	account/client/cAccountEngine.cpp account/client/cAccountEngine.hpp )
+	account/client/cAccountEngine.cpp account/client/cAccountEngine.hpp 
+	account/client/AgentResult.cpp account/client/AgentResult.hpp 
+	account/client/LoginResult.cpp account/client/LoginResult.hpp 
+	account/client/RoleResult.cpp account/client/RoleResult.hpp 
+	account/client/ServerInfo.cpp account/client/ServerInfo.hpp 
+	account/client/cRoleList.cpp account/client/cRoleList.hpp )
 
 add_library( libengine STATIC ${RANDOMS} ${ASPECTS} ${ACCOUNTS} ${ACCOUNTC}
 	${ENGINES} ${UIS} ${CONSOLES} )

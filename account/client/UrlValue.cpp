@@ -7,11 +7,16 @@ namespace cc {
 		return mUrlValue.c_str();
 	}
 	
-	const char * UrlValue::getUrlName()
+	const char * UrlValue::getUrlBody()
 	{
-		return mUrlName.c_str();
+		return mUrlBody.c_str();
 	}
 	
+	int8_t UrlValue::getUrlType()
+	{
+		return mUrlType;
+	}
+		
 	int16_t UrlValue::getTimeout()
 	{
 		return mTimeout;
@@ -19,26 +24,30 @@ namespace cc {
 	
 	bool UrlValue::isDefault()
 	{
-		return ( ("" == mUrlName) || ("" == mUrlValue) );
+		return ( (0 == mUrlId) || ("" == mUrlValue) );
 	}
-
-	string UrlValue::getKey()
+	
+	int8_t UrlValue::getKey()
 	{
-		return mUrlName;
+		return mUrlId;
 	}
 	
 	UrlValue::UrlValue()
-		: mUrlName ("")
+		: mUrlId (0)
 		, mUrlValue ("")
 		, mTimeout (10)
+		, mUrlBody ("")
+		, mUrlType (0)
 	{
 	}
 	
 	UrlValue::~UrlValue()
 	{
-		mUrlName = "";
+		mUrlId = 0;
 		mUrlValue = "";
+		mUrlBody = "";
 		mTimeout = 10;
+		mUrlType = 0;
 	}
 	
 }

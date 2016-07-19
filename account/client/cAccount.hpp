@@ -9,6 +9,14 @@ namespace cc {
 		EdoingState runCondition(DoingPtr& nDoing, ValuePtr& nValue);
 		void runReward(DoingPtr& nDoing, ValuePtr& nValue);
 		
+		const char * getAccountName();
+		const char * getAccountPassword();
+		int16_t getAccountType();
+		
+		void runReset();
+		
+		const char * getRoleName();
+		
 		template<class T>
 		void serialize(T nSerialize, const char * nName)
 		{

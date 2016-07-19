@@ -25,9 +25,18 @@
 
 #include "aspect/aspect/IAspect.hpp"
 
+#include "account/account/RoleItem.hpp"
+#include "account/account/ServerItem.hpp"
+#include "account/account/ServerList.hpp"
 #include "account/account/Account.hpp"
 #include "account/account/AccountEngine.hpp"
 
+#include "account/client/ServerInfo.hpp"
+#include "account/client/cRoleList.hpp"
+#include "account/client/LoginResult.hpp"
+#include "account/client/AgentResult.hpp"
+#include "account/client/RoleResult.hpp"
+#include "account/client/UrlValue.hpp"
 #include "account/client/UrlValue.hpp"
 #include "account/client/cAccount.hpp"
 #include "account/client/cAccountEngine.hpp"

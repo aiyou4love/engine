@@ -8,26 +8,31 @@ namespace cc {
 		template<class T>
 		void serialize(T nSerialize, const char * nName)
 		{
-			nSerialize->runNumber(mUrlName, "urlName");
+			nSerialize->runNumber(mUrlId, "urlName");
 			nSerialize->runNumber(mUrlValue, "urlValue");
+			nSerialize->runNumber(mUrlType, "urlType");
+			nSerialize->runNumber(mUrlBody, "urlBody");
 			nSerialize->runNumber(mTimeout, "timeout");
 		}
 		
 		const char * getUrlValue();
-		const char * getUrlName();
+		const char * getUrlBody();
 		int16_t getTimeout();
+		int8_t getUrlType();
 		
 		bool isDefault();
-		string getKey();
+		int8_t getKey();
 		
 		UrlValue();
 		~UrlValue();
 		
 	private:
-		string mUrlName;
+		int8_t mUrlId;
 		string mUrlValue;
+		int8_t mUrlType;
+		string mUrlBody;
 		int16_t mTimeout;
 	};
 	typedef boost::shared_ptr<UrlValue> UrlValuePtr;
-
+	
 }
