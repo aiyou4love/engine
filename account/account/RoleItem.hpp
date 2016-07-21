@@ -8,7 +8,7 @@ namespace cc {
 		void luaValue(LuaWriter * nLuaWriter, const char * nName);
 		
 		template<class T>
-		void serialize(T nSerialize, const char * nName)
+		void serialize(T * nSerialize, int8_t nCount)
 		{
 			nSerialize->runNumber(mServerId, "mServerId");
 			nSerialize->runNumber(mRoleId, "mRoleId");

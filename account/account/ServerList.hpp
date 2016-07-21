@@ -12,6 +12,22 @@ namespace cc {
 		void pushServerItems(list<ServerItemPtr>& nServerItems);
 		void pushServerItem(ServerItem& nServerItem);
 		
+		template<class __t>
+		void headSerialize(__t& nSerialize, const char * nName)
+		{
+			LOGF;
+			if ( 0 == strcmp(streamName(), nName) ) {
+				nSerialize.runMapStreamPtrs<int32_t, ServerItemPtr>(mServerItems, "serverItems", "serverItem");
+			} else {
+				LOGE("[%s]%s", __METHOD__, nName);
+			}
+		}
+		const char * streamName();
+		const char * streamUrl();
+		
+		void runLoad();
+		void runSave();
+		
 		bool isLoad();
 		
 		ServerList();

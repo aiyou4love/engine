@@ -5,8 +5,8 @@ namespace cc {
 	class Doing : noncopyable
 	{
 	public:
-		template <class __t>
-		void serialize(__t * nSerialize, int8_t nCount)
+		template <class T>
+		void serialize(T * nSerialize, int8_t nCount)
 		{
 			nSerialize->runNumberCount(mAspectId, "aspectId", nCount);
 			nSerialize->runNumberCount(mDoingId, "doingId", nCount);

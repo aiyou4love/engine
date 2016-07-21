@@ -17,14 +17,26 @@ namespace cc {
 		
 		const char * getRoleName();
 		
-		template<class T>
-		void serialize(T nSerialize, const char * nName)
+		template<class __t>
+		void headSerialize(__t& nSerialize, const char * nName)
 		{
-			nSerialize->runNumber(mAccountName, "mAccountName");
-			nSerialize->runNumber(mAccountPassword, "mAccountPassword");
-			nSerialize->runNumber(mAccountType, "mAccountType");
-			nSerialize->runNumber(mAccountId, "mAccountId");
+			if ( 0 == strcmp(streamName(), nName) ) {
+				nSerialize->runNumber(mAccountName, "mAccountName");
+				nSerialize->runNumber(mAccountPassword, "mAccountPassword");
+				nSerialize->runNumber(mAccountType, "mAccountType");
+				nSerialize->runNumber(mAccountId, "mAccountId");
+				nSerialize->runNumber(mServerId, "mServerId");
+				nSerialize->runNumber(mRoleId, "mRoleId");
+			} else {
+				LOGE("[%s]%s", __METHOD__, nName);
+			}
 		}
+		
+		const char * streamName();
+		const char * streamUrl();
+		
+		void runLoad();
+		void runSave();
 		
 		cAccount();
 		~cAccount();

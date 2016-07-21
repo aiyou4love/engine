@@ -35,6 +35,28 @@ namespace cc {
 		return mRoleItems;
 	}
 	
+	const char * cRoleList::streamName()
+	{
+		return "roleList";
+	}
+	
+	const char * cRoleList::streamUrl()
+	{
+		return "roleList.json";
+	}
+	
+	void cRoleList::runLoad()
+	{
+		UserDefault& userDefault_ = UserDefault::instance();
+		userDefault_.runReader<cRoleList *>(this, streamUrl(), streamName());
+	}
+	
+	void cRoleList::runSave()
+	{
+		UserDefault& userDefault_ = UserDefault::instance();
+		userDefault_.runSave<cRoleList *>(this, streamUrl(), streamName());
+	}
+		
 	void cRoleList::runClear()
 	{
 		mRoleItems.clear();

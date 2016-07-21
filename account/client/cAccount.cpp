@@ -30,6 +30,28 @@ namespace cc {
 		return mAccountType;
 	}
 	
+	const char * cAccount::streamName()
+	{
+		return "account";
+	}
+	
+	const char * cAccount::streamUrl()
+	{
+		return "account.json";
+	}
+	
+	void cAccount::runLoad()
+	{
+		UserDefault& userDefault_ = UserDefault::instance();
+		userDefault_.runReader<cAccount *>(this, streamUrl(), streamName());
+	}
+	
+	void cAccount::runSave()
+	{
+		UserDefault& userDefault_ = UserDefault::instance();
+		userDefault_.runSave<cAccount *>(this, streamUrl(), streamName());
+	}
+	
 	void cAccount::runReset()
 	{
 		mAccountId = 0;

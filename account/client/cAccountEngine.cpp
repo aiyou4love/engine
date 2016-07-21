@@ -193,6 +193,11 @@ namespace cc {
 		account_->setRoleId(roleItem_.getRoleId());
 		mServerList->pushServerItem(serverItem_);
 		mRoleList->pushRoleItem(roleItem_);
+		
+		mAccount->runSave();
+		mServerList->runSave();
+		mRoleList->runSave();
+		
 		return 1;
 	}
 	
@@ -238,6 +243,10 @@ namespace cc {
 	{
 		TableEngine& tableEngine_ = TableEngine::instance();
 		tableEngine_.runTable<cAccountEngine *>(this, streamUrl(), streamName());
+		
+		mAccount->runLoad();
+		mRoleList->runLoad();
+		mServerList->runLoad();
 	}
 	
 	const char * cAccountEngine::streamName()

@@ -49,6 +49,18 @@ namespace cc {
 		mServerItems[serverId_] = serverItem_;
 	}
 	
+	void ServerList::runLoad()
+	{
+		UserDefault& userDefault_ = UserDefault::instance();
+		userDefault_.runReader<ServerList *>(this, streamUrl(), streamName());
+	}
+	
+	void ServerList::runSave()
+	{
+		UserDefault& userDefault_ = UserDefault::instance();
+		userDefault_.runSave<ServerList *>(this, streamUrl(), streamName());
+	}
+	
 	bool ServerList::isLoad()
 	{
 		return (mServerItems.size() > 0);

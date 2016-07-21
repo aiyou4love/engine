@@ -6,7 +6,7 @@ namespace cc {
 	{
 	public:
 		template<class T>
-		void serialize(T nSerialize, const char * nName)
+		void serialize(T * nSerialize, int8_t nCount)
 		{
 			nSerialize->runNumber(mUrlId, "urlName");
 			nSerialize->runNumber(mUrlValue, "urlValue");
