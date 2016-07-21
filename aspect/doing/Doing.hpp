@@ -27,6 +27,6 @@ namespace cc {
 		int32_t mDoingId;
 		int8_t mIndex;
 	};
-	typedef boost::shared_ptr<Doing> DoingPtr;
+	typedef std::shared_ptr<Doing> DoingPtr;
 	
 }

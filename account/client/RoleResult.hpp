@@ -31,6 +31,6 @@ namespace cc {
 		int64_t mAccountId;
 		int32_t mErrorCode;
 	};
-	typedef boost::shared_ptr<RoleResult> RoleResultPtr;
+	typedef std::shared_ptr<RoleResult> RoleResultPtr;
 	
 }

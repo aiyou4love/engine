@@ -42,6 +42,6 @@ namespace cc {
         int16_t mRoleStep;
         int32_t mRoleLevel;
 	};
-	typedef boost::shared_ptr<RoleItem> RoleItemPtr;
+	typedef std::shared_ptr<RoleItem> RoleItemPtr;
 	
 }

@@ -20,6 +20,6 @@ namespace cc {
 	private:
 		map<int32_t, ServerItemPtr> mServerItems;
 	};
-	typedef boost::shared_ptr<ServerList> ServerListPtr;
+	typedef std::shared_ptr<ServerList> ServerListPtr;
 	
 }

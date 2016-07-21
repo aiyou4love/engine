@@ -28,6 +28,6 @@ namespace cc {
         string mServerName;
         int32_t mServerNo;
 	};
-	typedef boost::shared_ptr<ServerItem> ServerItemPtr;
+	typedef std::shared_ptr<ServerItem> ServerItemPtr;
 	
 }

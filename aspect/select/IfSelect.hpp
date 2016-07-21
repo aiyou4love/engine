@@ -24,6 +24,6 @@ namespace cc {
 		
 		int32_t mIfSelectId;
 	};
-	typedef boost::shared_ptr<IfSelect> IfSelectPtr;
+	typedef std::shared_ptr<IfSelect> IfSelectPtr;
 	
 }

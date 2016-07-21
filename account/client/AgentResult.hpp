@@ -31,6 +31,6 @@ namespace cc {
         int32_t mErrorCode;
         string mAgentIp;
 	};
-	typedef boost::shared_ptr<AgentResult> AgentResultPtr;
+	typedef std::shared_ptr<AgentResult> AgentResultPtr;
 	
 }

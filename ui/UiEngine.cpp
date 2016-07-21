@@ -6,46 +6,35 @@ namespace cc {
 	{
 		LOGF;
 		
-		auto it = mUiEntitys.find(nName);
-		if ( it != mUiEntitys.end() ) {
-			LOGE("[%s]%s", __METHOD__, nName);
-			return;
-		}
-		UiEntityPtr uiEntity_(new UiEntity(nName));
-		mUiEntitys[nName] = uiEntity_;
-		uiEntity_->runShow();
+		ConsoleEngine& consoleEngine_ = ConsoleEngine::instance();
+		consoleEngine_.showUi(nName);
 	}
 	
-	void UiEngine::refreshUi(const char * nName, const char * nEvent)
+	void UiEngine::loadUi(const char * nName)
 	{
-		LOGF;
-		
-		auto it = mUiEntitys.find(nName);
-		if ( it == mUiEntitys.end() ) {
-			LOGE("[%s]%s", __METHOD__, nName);
-			return;
-		}
-		UiEntityPtr& uiEntity_ = it->second;
-		uiEntity_->runRefresh(nEvent);
+		ConsoleEngine& consoleEngine_ = ConsoleEngine::instance();
+		consoleEngine_.loadUi(nName);
 	}
 	
-	void UiEngine::closeUi(const char * nName)
+	void UiEngine::refreshUi(const char * nName, IndexValue& nIndexValue)
 	{
 		LOGF;
-		
-		auto it = mUiEntitys.find(nName);
-		if ( it == mUiEntitys.end() ) {
-			LOGE("[%s]%s", __METHOD__, nName);
-			return;
-		}
-		UiEntityPtr& uiEntity_ = it->second;
-		uiEntity_->runClose();
-		mUiEntitys.erase(it);
+		ConsoleEngine& consoleEngine_ = ConsoleEngine::instance();
+		consoleEngine_.refreshUi(nName, nIndexValue);
 	}
 	
-	void UiEngine::runPreinit()
+	void UiEngine::closeUi()
 	{
 		LOGF;
+		ConsoleEngine& consoleEngine_ = ConsoleEngine::instance();
+		consoleEngine_.closeUi();
+	}
+	
+	void UiEngine::clearUi()
+	{
+		LOGF;
+		ConsoleEngine& consoleEngine_ = ConsoleEngine::instance();
+		consoleEngine_.clearUi();
 	}
 	
 	UiEngine& UiEngine::instance()
@@ -56,14 +45,13 @@ namespace cc {
 	}
 	
 	UiEngine::UiEngine()
-	{	
-		mUiEntitys.clear();
+	{
 	}
 	
 	UiEngine::~UiEngine()
 	{
-		mUiEntitys.clear();
 	}
+	
 	UiEngine UiEngine::mUiEngine;
 	
 }

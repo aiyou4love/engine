@@ -20,6 +20,6 @@ namespace cc {
 	private:
 		map<int64_t, RoleItemPtr> mRoleItems;
 	};
-	typedef boost::shared_ptr<cRoleList> cRoleListPtr;
+	typedef std::shared_ptr<cRoleList> cRoleListPtr;
 	
 }

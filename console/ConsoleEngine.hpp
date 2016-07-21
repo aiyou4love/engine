@@ -6,17 +6,15 @@ namespace cc {
 	{
 	public:
 		void showUi(const char * nName);
-		void refreshUi(const char * nEvent);
+		void loadUi(const char * nName);
+		void refreshUi(const char * nName, IndexValue& nIndexValue);
 		void closeUi();
+		void clearUi();
 		
-		template<class __t>
-		void headSerialize(__t& nSerialize, const char * nName)
-		{
-			nSerialize.runMapStreamPtrs<int16_t, ConsoleItemPtr>(mConsoleItems, "consoleItems", "consoleItem");
-		}
-		const char * streamName();
-		const char * streamUrl();
+	private:
+		void runRefresh();
 		
+	public:
 		void runPreinit();
 		
 		static ConsoleEngine& instance();
@@ -25,9 +23,7 @@ namespace cc {
 		~ConsoleEngine();
 		
 	private:
-		map<int16_t, ConsoleItemPtr> mConsoleItems;
-		
-		LuaThreadPtr mLuaThread;
+		deque<ConsoleUiPtr> mConsoleUis;
 		
 		static ConsoleEngine mConsoleEngine;
 	};

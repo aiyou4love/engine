@@ -22,6 +22,6 @@ namespace cc {
 	private:
 		int64_t mServerStart;
 	};
-	typedef boost::shared_ptr<ServerInfo> ServerInfoPtr;
+	typedef std::shared_ptr<ServerInfo> ServerInfoPtr;
 	
 }

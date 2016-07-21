@@ -9,7 +9,7 @@ namespace cc {
 		auto it = mConditions.find(nConditionId);
 		if ( it == mConditions.end() ) {
 			LOGE("[%s]%d", __METHOD__, nConditionId);
-			return 0x2;
+			return 0x0;
 		}
 		ConditionPtr& condition_ = it->second;
 		return condition_->runCondition(nEntity, nValue);

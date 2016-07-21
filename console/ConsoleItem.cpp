@@ -2,9 +2,9 @@
 
 namespace cc {
 	
-	const char * ConsoleItem::getLuaMethod()
+	const char * ConsoleItem::getMethod()
 	{
-		return mLuaMethod.c_str();
+		return mMethod.c_str();
 	}
 	
 	const char * ConsoleItem::getText()
@@ -12,9 +12,14 @@ namespace cc {
 		return mText.c_str();
 	}
 	
-	bool ConsoleItem::isGlob()
+	const char * ConsoleItem::getName()
 	{
-		return mIsGlob;
+		return mName.c_str();
+	}
+	
+	int8_t ConsoleItem::getType()
+	{
+		return mType;
 	}
 	
 	int16_t ConsoleItem::getKey()
@@ -23,10 +28,11 @@ namespace cc {
 	}
 	
 	ConsoleItem::ConsoleItem()
-		: mLuaMethod ("")
+		: mMethod ("")
 		, mText ("")
+		, mType (0)
 		, mIndex (0)
-		, mIsGlob (false)
+		, mName ("")
 	{
 		LOGF;
 	}
@@ -35,10 +41,11 @@ namespace cc {
 	{
 		LOGF;
 		
-		mLuaMethod = "";
+		mMethod = "";
 		mText = "";
+		mType = 0;
 		mIndex = 0;
-		mIsGlob = false;
+		mName = "";
 	}
-		
+	
 }

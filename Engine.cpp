@@ -21,8 +21,7 @@ void engineStart()
 	cAccountEngine& accountEngine_ = cAccountEngine::instance();
 	accountEngine_.runPreinit();
 	
-	UiEngine& uiEngine_ = UiEngine::instance();
-	uiEngine_.runPreinit();
+	UiEngine::instance();
 	
 	ConsoleEngine& consoleEngine_ = ConsoleEngine::instance();
 	consoleEngine_.runPreinit();

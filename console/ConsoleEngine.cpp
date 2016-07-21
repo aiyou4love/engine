@@ -1,76 +1,65 @@
 #include "../Engine.hpp"
 
+#include <cstdlib>
+
 namespace cc {
 	
 	void ConsoleEngine::showUi(const char * nName)
 	{
 		LOGF;
-		
-		WorkDirectory& workDirectory_ = WorkDirectory::instance();
-		string uiLuaPath_ = workDirectory_.uiLuaPath(nName);
-		string uiJsonPath_ = workDirectory_.uiJsonPath(nName);
-		
-		TableReader tableReader_;
-		tableReader_.loadFile(uiJsonPath_.c_str());
-		tableReader_.selectStream(streamName());
-		if ( tableReader_.runChild(streamName())) {
-			IoReader<TableReader> ioReader_(tableReader_);
-			this->headSerialize(ioReader_, streamName());
-		}
-		
-		LuaEngine& luaEngine_ = LuaEngine::instance();
-		mLuaThread = luaEngine_.createLuaThread(nName);
-		mLuaThread->openFile(uiLuaPath_.c_str());
-		
-		auto it = mConsoleItems.begin();
-		for ( ; it != mConsoleItems.end(); ++it ) {
-			ConsoleItemPtr& consoleItem_ = it->second;
-			if (!consoleItem_->isGlob()) {
-				continue;
-			}
-			cout << endl << it->first;
-			cout << ":) ";
-			cout << consoleItem_->getText() << endl;
-		}
-		it = mConsoleItems.begin();
-		for ( ; it != mConsoleItems.end(); ++it ) {
-			ConsoleItemPtr& consoleItem_ = it->second;
-			if (consoleItem_->isGlob()) {
-				continue;
-			}
-			cout << consoleItem_->getText() << endl;
-			cout << ":) ";
-			string value_;
-			cin >> value_;
-			
-		}
+		this->loadUi(nName);
+		this->runRefresh();
 	}
 	
-	void ConsoleEngine::refreshUi(const char * nEvent)
+	void ConsoleEngine::loadUi(const char * nName)
 	{
 		LOGF;
-		
-		mLuaThread->runCall(nEvent);
+		ConsoleUiPtr consoleUi_(new ConsoleUi());
+		consoleUi_->runInit(nName);
+		mConsoleUis.push_back(consoleUi_);
+	}
+	
+	void ConsoleEngine::refreshUi(const char * nName, IndexValue& nIndexValue)
+	{
+		LOGF;
+		auto it = mConsoleUis.begin();
+		for ( ; it != mConsoleUis.end(); ++it ) {
+			ConsoleUiPtr& consoleUi_ = (*it);
+			consoleUi_->runRefresh(nName, nIndexValue);
+		}
+		this->runRefresh();
+	}
+	
+	void ConsoleEngine::runRefresh()
+	{
+		//std::system("cls");
+		auto it = mConsoleUis.begin();
+		for ( ; it != mConsoleUis.end(); ++it ) {
+			ConsoleUiPtr& consoleUi_ = (*it);
+			consoleUi_->runText();
+		}
+		ConsoleUiPtr& consoleUi_ = mConsoleUis.back();
+		consoleUi_->runShow();
 	}
 	
 	void ConsoleEngine::closeUi()
 	{
 		LOGF;
-		
-		mLuaThread->runClose();
-		mLuaThread.reset();
-		
-		mConsoleItems.clear();
+		ConsoleUiPtr& consoleUi_ = mConsoleUis.back();
+		consoleUi_->runClose();
+		mConsoleUis.pop_back();
+		this->runRefresh();
 	}
 	
-	const char * ConsoleEngine::streamName()
+	void ConsoleEngine::clearUi()
 	{
-		return "consoleEngine";
-	}
-	
-	const char * ConsoleEngine::streamUrl()
-	{
-		return "consoleEngine.json";
+		LOGF;
+		auto it = mConsoleUis.begin();
+		for ( ; it != mConsoleUis.end(); ++it ) {
+			ConsoleUiPtr& consoleUi_ = (*it);
+			consoleUi_->runClose();
+		}
+		mConsoleUis.clear();
 	}
 	
 	void ConsoleEngine::runPreinit()
@@ -81,18 +70,17 @@ namespace cc {
 	ConsoleEngine& ConsoleEngine::instance()
 	{
 		LOGF;
-		
 		return mConsoleEngine;
 	}
 	
 	ConsoleEngine::ConsoleEngine()
-	{		
-		mConsoleItems.clear();
+	{
+		mConsoleUis.clear();
 	}
 	
 	ConsoleEngine::~ConsoleEngine()
-	{		
-		mConsoleItems.clear();
+	{
+		mConsoleUis.clear();
 	}
 	
 	ConsoleEngine ConsoleEngine::mConsoleEngine;

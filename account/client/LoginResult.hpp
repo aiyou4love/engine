@@ -28,6 +28,6 @@ namespace cc {
 		RoleItem mRoleItem;
 		int64_t mAccountId;
 	};
-	typedef boost::shared_ptr<LoginResult> LoginResultPtr;
+	typedef std::shared_ptr<LoginResult> LoginResultPtr;
 	
 }

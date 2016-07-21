@@ -33,6 +33,6 @@ namespace cc {
 		string mUrlBody;
 		int16_t mTimeout;
 	};
-	typedef boost::shared_ptr<UrlValue> UrlValuePtr;
+	typedef std::shared_ptr<UrlValue> UrlValuePtr;
 	
 }

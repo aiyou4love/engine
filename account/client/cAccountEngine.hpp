@@ -59,15 +59,20 @@ namespace cc {
 			
 			boost::format format_(urlBody_);
 			this->runFormat(format_, nArgs ...);
+
+			string body_ = format_.str().c_str();
+			body_ = stringDelete(body_, '\\');
 			
 			HttpCurl httpCurl_;
 			CurlString curlString_;
-			
+
 			httpCurl_.runInit(urlNumber_);
+
 			httpCurl_.runCurlValue(&curlString_);
 			httpCurl_.runTimeout(timeout_);
 			httpCurl_.runHttpHeader(urlType_);
-			httpCurl_.runHttpPost(format_.str().c_str());
+			httpCurl_.runHttpPost(body_.c_str());
+
 			if ( !httpCurl_.runPerform() ) {
 				return 4;
 			}

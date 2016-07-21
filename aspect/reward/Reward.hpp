@@ -23,6 +23,6 @@ namespace cc {
 		map<int8_t, DoingPtr> mDoings;
 		int32_t mRewardId;
 	};
-	typedef boost::shared_ptr<Reward> RewardPtr;
+	typedef std::shared_ptr<Reward> RewardPtr;
 	
 }

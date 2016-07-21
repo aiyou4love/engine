@@ -22,6 +22,6 @@ namespace cc {
 		int32_t mIfSelectId;
 		bool mIncrease;
 	};
-	typedef boost::shared_ptr<Entity> EntityPtr;
+	typedef std::shared_ptr<Entity> EntityPtr;
 	
 }

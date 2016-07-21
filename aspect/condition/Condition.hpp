@@ -23,6 +23,6 @@ namespace cc {
 		map<int8_t, DoingPtr> mDoings;
 		int32_t mConditionId;
 	};
-	typedef boost::shared_ptr<Condition> ConditionPtr;
+	typedef std::shared_ptr<Condition> ConditionPtr;
 	
 }

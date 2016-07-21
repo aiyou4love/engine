@@ -36,10 +36,10 @@ set( ASPECTS aspect/condition/Condition.cpp aspect/condition/Condition.hpp
 
 set( ENGINES Engine.cpp Engine.hpp )
 
-set( UIS ui/UiEntity.cpp ui/UiEntity.hpp 
-	ui/UiEngine.cpp ui/UiEngine.hpp )
+set( UIS ui/UiEngine.cpp ui/UiEngine.hpp )
 	
 set( CONSOLES console/ConsoleItem.cpp console/ConsoleItem.hpp 
+	console/ConsoleUi.cpp console/ConsoleUi.hpp 
 	console/ConsoleEngine.cpp console/ConsoleEngine.hpp )
 	
 set( ACCOUNTS account/account/Account.cpp account/account/Account.hpp 

@@ -6,10 +6,10 @@ namespace cc {
 	{
 	public:
 		void showUi(const char * nName);
-		void refreshUi(const char * nName, const char * nEvent);
-		void closeUi(const char * Name);
-		
-		void runPreinit();
+		void loadUi(const char * nName);
+		void refreshUi(const char * nName, IndexValue& nIndexValue);
+		void closeUi();
+		void clearUi();
 		
 		static UiEngine& instance();
 		
@@ -17,8 +17,6 @@ namespace cc {
 		~UiEngine();
 		
 	private:
-		map<string, UiEntityPtr> mUiEntitys;
-		
 		static UiEngine mUiEngine;
 	};
 	

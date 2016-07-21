@@ -90,7 +90,11 @@ namespace cc {
 		}
 		LoginResult loginResult_;
 		this->runClass(&loginResult_, value_, loginResult_.streamName());
-		cAccountPtr account_ = boost::dynamic_pointer_cast<cAccount>(mAccount);
+		int64_t accountId_ = loginResult_.getAccountId();
+		if (0 == accountId_) {
+			return 2;
+		}
+		cAccountPtr account_ = std::dynamic_pointer_cast<cAccount>(mAccount);
 		ServerItem& serverItem_ = loginResult_.getServerItem();
 		RoleItem& roleItem_ = loginResult_.getRoleItem();
 		account_->setAccountId(loginResult_.getAccountId());
@@ -103,7 +107,7 @@ namespace cc {
 	
 	void cAccountEngine::cancelAccount(int64_t nAccountId)
 	{
-		cAccountPtr account_ = boost::dynamic_pointer_cast<cAccount>(mAccount);
+		cAccountPtr account_ = std::dynamic_pointer_cast<cAccount>(mAccount);
 		account_->runReset();
 		
 		mRoleList->runClear();
@@ -115,7 +119,7 @@ namespace cc {
 		const char * operatorName_ = workDirectory_.getOperatorName();
 		int16_t versionNo_ = workDirectory_.getVersionNo();
 		
-		cAccountPtr account_ = boost::dynamic_pointer_cast<cAccount>(mAccount);
+		cAccountPtr account_ = std::dynamic_pointer_cast<cAccount>(mAccount);
 		int32_t serverId_ = account_->getServerId();
 		
 		string value_;
@@ -138,7 +142,7 @@ namespace cc {
 	
 	void cAccountEngine::selectServer(int32_t nServerId, int32_t nRoleId)
 	{
-		cAccountPtr account_ = boost::dynamic_pointer_cast<cAccount>(mAccount);
+		cAccountPtr account_ = std::dynamic_pointer_cast<cAccount>(mAccount);
 		account_->setServerId(nServerId);
 		account_->setRoleId(nRoleId);
 	}
@@ -166,7 +170,7 @@ namespace cc {
 		const char * operatorName_ = workDirectory_.getOperatorName();
 		int16_t versionNo_ = workDirectory_.getVersionNo();
 		
-		cAccountPtr account_ = boost::dynamic_pointer_cast<cAccount>(mAccount);
+		cAccountPtr account_ = std::dynamic_pointer_cast<cAccount>(mAccount);
 		const char * accountName_ = account_->getAccountName();
 		const char * password_ = account_->getAccountPassword();
 		int16_t accountType_ = account_->getAccountType();
