@@ -9,6 +9,10 @@ namespace cc {
 		EdoingState runCondition(DoingPtr& nDoing, ValuePtr& nValue);
 		void runReward(DoingPtr& nDoing, ValuePtr& nValue);
 		
+		void setAccountName(const char * nAccountName);
+		void setAccountPassword(const char * nPassword);
+		void setAccountType(int16_t nAccountType);
+
 		const char * getAccountName();
 		const char * getAccountPassword();
 		int16_t getAccountType();

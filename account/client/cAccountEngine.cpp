@@ -100,8 +100,16 @@ namespace cc {
 		account_->setAccountId(loginResult_.getAccountId());
 		account_->setServerId(roleItem_.getServerId());
 		account_->setRoleId(roleItem_.getRoleId());
+		account_->setAccountName(nName);
+		account_->setAccountPassword(nPassword);
+		account_->setAccountType(nAccountType);
 		mServerList->pushServerItem(serverItem_);
 		mRoleList->pushRoleItem(roleItem_);
+
+		account_->runSave();
+		mServerList->runSave();
+		mRoleList->runSave();
+
 		return 1;
 	}
 	
@@ -193,11 +201,7 @@ namespace cc {
 		account_->setRoleId(roleItem_.getRoleId());
 		mServerList->pushServerItem(serverItem_);
 		mRoleList->pushRoleItem(roleItem_);
-		
-		account_->runSave();
-		mServerList->runSave();
-		mRoleList->runSave();
-		
+				
 		return 1;
 	}
 	

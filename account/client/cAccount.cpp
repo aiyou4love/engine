@@ -14,6 +14,21 @@ namespace cc {
 		cAccountEngine& accountEngine_ = cAccountEngine::instance();
 		accountEngine_.runReward(nDoing, nValue);
 	}
+
+	void cAccount::setAccountName(const char * nAccountName)
+	{
+		mAccountName = nAccountName;
+	}
+
+	void cAccount::setAccountPassword(const char * nPassword)
+	{
+		mAccountPassword = nPassword;
+	}
+
+	void cAccount::setAccountType(int16_t nAccountType)
+	{
+		mAccountType = nAccountType;
+	}
 	
 	const char * cAccount::getAccountName()
 	{

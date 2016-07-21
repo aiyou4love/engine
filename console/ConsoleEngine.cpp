@@ -47,9 +47,9 @@ namespace cc {
 	void ConsoleEngine::closeUi()
 	{
 		LOGF;
-		ConsoleUiPtr& consoleUi_ = mConsoleUis.back();
-		consoleUi_->runClose();
+		ConsoleUiPtr consoleUi_ = mConsoleUis.back();
 		mConsoleUis.pop_back();
+		consoleUi_->runClose();
 		this->runRefresh();
 	}
 	

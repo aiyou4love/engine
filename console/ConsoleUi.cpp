@@ -14,6 +14,8 @@ namespace cc {
 	
 	void ConsoleUi::runClose()
 	{
+		mLuaThread->runCall("runClose");
+
 		mLuaThread->runClose();
 		mLuaThread.reset();
 		
