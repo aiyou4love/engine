@@ -22,6 +22,31 @@ namespace cc {
 		
 	}
 	
+	int8_t AccountEngine::accountEnter()
+	{
+		
+	}
+	
+	string AccountEngine::startServers()
+	{
+		
+	}
+	
+	string AccountEngine::pageServers(int16_t nPageId, int16_t nPageCount)
+	{
+		
+	}
+	
+	void AccountEngine::selectServer(int32_t nServerId, int32_t nRoleId)
+	{
+		
+	}
+	
+	int8_t AccountEngine::roleCreate(const char * nRoleName, int16_t nRoleRace)
+	{
+		
+	}
+		
 	const char * AccountEngine::getServerName(int32_t nServerId)
 	{
 		ServerItemPtr serverItem_ = mServerList->getServerItem(nServerId);
