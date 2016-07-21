@@ -51,6 +51,7 @@ namespace cc {
 		LuaEngine& luaEngine_ = LuaEngine::instance();
 		mLuaThread = luaEngine_.createLuaThread(mName.c_str());
 		mLuaThread->openFile(nPath);
+		mLuaThread->runCall("runInit");
 	}
 	
 	void ConsoleUi::initUi(const char * nPath)
