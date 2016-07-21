@@ -39,7 +39,9 @@ namespace cc {
 			consoleUi_->runText();
 		}
 		ConsoleUiPtr& consoleUi_ = mConsoleUis.back();
-		consoleUi_->runShow();
+		if ( consoleUi_->runShow() ) {
+			this->closeUi();
+		}
 	}
 	
 	void ConsoleEngine::closeUi()

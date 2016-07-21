@@ -29,6 +29,9 @@ namespace cc {
 		
 		int64_t getId();
 		
+		int64_t getKey();
+		bool isDefault();
+		
 		RoleItem();
 		RoleItem(RoleItem& nRoleItem);
 		~RoleItem();

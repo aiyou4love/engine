@@ -61,6 +61,19 @@ namespace cc {
 		return (result_ | mRoleId);
 	}
 	
+	int64_t RoleItem::getKey()
+	{
+		return getId();
+	}
+	
+	bool RoleItem::isDefault()
+	{
+		return ( (0 == mServerId ) || (0 == mRoleId )
+				|| (0 == mRoleType ) || ("" == mRoleName )
+				|| (0 == mRoleRace ) || (0 == mRoleStep )
+				|| (0 == mRoleLevel ) );
+	}
+	
 	RoleItem::RoleItem()
 		: mServerId (0)
 		, mRoleId (0)
@@ -81,7 +94,6 @@ namespace cc {
 		, mRoleStep (nRoleItem.mRoleStep)
 		, mRoleLevel (nRoleItem.mRoleLevel)
 	{
-		
 	}
 	
 	RoleItem::~RoleItem()

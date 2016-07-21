@@ -19,6 +19,9 @@ namespace cc {
         const char * getServerName();
         int16_t getServerNo();
 		
+		bool isDefault();
+		int32_t getKey();
+		
 		ServerItem();
 		ServerItem(ServerItem& nServerItem);
 		~ServerItem();

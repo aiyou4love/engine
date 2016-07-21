@@ -21,6 +21,7 @@ namespace cc {
 			nSerialize->runNumber(mIndex, "index");
 		}
 		
+		bool isDefault();
 		int16_t getKey();
 		
 		ConsoleItem();

@@ -14,6 +14,7 @@ namespace cc {
 			
 			nSerialize->runNumber(mRewardId, "rewardId");
 		}
+		bool isDefault();
 		int32_t getKey();
 		
 		Reward();

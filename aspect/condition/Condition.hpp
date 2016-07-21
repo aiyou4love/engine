@@ -14,6 +14,7 @@ namespace cc {
 			
 			nSerialize->runNumber(mConditionId, "conditionId");
 		}
+		bool isDefault();
 		int32_t getKey();
 		
 		Condition();

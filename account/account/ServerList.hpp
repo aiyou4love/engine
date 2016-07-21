@@ -12,8 +12,8 @@ namespace cc {
 		void pushServerItems(list<ServerItemPtr>& nServerItems);
 		void pushServerItem(ServerItem& nServerItem);
 		
-		template<class __t>
-		void headSerialize(__t& nSerialize, const char * nName)
+		template<class T>
+		void headSerialize(T& nSerialize, const char * nName)
 		{
 			LOGF;
 			if ( 0 == strcmp(streamName(), nName) ) {

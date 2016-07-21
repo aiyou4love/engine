@@ -8,8 +8,8 @@ namespace cc {
 		void runReward(int32_t nRewardId, EntityPtr& nEntity, ValuePtr& nValue);
 		
 	public:
-		template<class __t>
-		void headSerialize(__t& nSerialize, const char * nName)
+		template<class T>
+		void headSerialize(T& nSerialize, const char * nName)
 		{
 			LOGF;
 			

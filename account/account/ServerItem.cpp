@@ -26,6 +26,16 @@ namespace cc {
 		return mServerNo;
 	}
 	
+	bool ServerItem::isDefault()
+	{
+		return (0 == mServerId);
+	}
+	
+	int32_t ServerItem::getKey()
+	{
+		return (0 == mServerId);
+	}
+	
 	ServerItem::ServerItem()
 		: mServerId (0)
 		, mServerName ("")

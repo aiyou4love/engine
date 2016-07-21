@@ -48,6 +48,11 @@ namespace cc {
 		return errorCode_;
 	}
 	
+	bool Condition::isDefault()
+	{
+		return ((0 == mConditionId) || (mDoings.size() <= 0));
+	}
+	
 	int32_t Condition::getKey()
 	{
 		return mConditionId;

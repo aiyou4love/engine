@@ -13,6 +13,11 @@ namespace cc {
 		}
 	}
 	
+	bool Reward::isDefault()
+	{
+		return ( (0 == mRewardId) || (mDoings.size() <= 0) );
+	}
+	
 	int32_t Reward::getKey()
 	{
 		return mRewardId;

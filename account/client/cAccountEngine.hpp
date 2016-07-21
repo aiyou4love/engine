@@ -82,8 +82,8 @@ namespace cc {
 		}
 		
 	public:
-		template<class __t>
-		void headSerialize(__t& nSerialize, const char * nName)
+		template<class T>
+		void headSerialize(T& nSerialize, const char * nName)
 		{
 			if ( 0 == strcmp(streamName(), nName) ) {
 				nSerialize.runMapStreamPtrs<int8_t, UrlValuePtr>(mUrlValues, "urlValues", "urlValue");

@@ -70,7 +70,7 @@ namespace cc {
 		mLuaThread->runCall("showText");
 	}
 	
-	void ConsoleUi::runShow()
+	bool ConsoleUi::runShow()
 	{
 		mLuaThread->runCall("runShow");
 		
@@ -133,8 +133,9 @@ namespace cc {
 			}
 		}
 		if (itemIndex_ > 0) {
-			this->runItemIndex(itemIndex_);
+			return this->runItemIndex(itemIndex_);
 		}
+		return false;
 	}
 	
 	int16_t ConsoleUi::getItemIndex(string& nText)
@@ -162,16 +163,16 @@ namespace cc {
 		return 0;
 	}
 	
-	void ConsoleUi::runItemIndex(int16_t nItemIndex)
+	bool ConsoleUi::runItemIndex(int16_t nItemIndex)
 	{
 		auto it = mConsoleItems.find(nItemIndex);
 		if (it == mConsoleItems.end()) {
 			LOGE("[%s]%d", __METHOD__, nItemIndex);
-			return;
+			return true;
 		}
 		ConsoleItemPtr& consoleItem_ = it->second;
 		const char * method_ = consoleItem_->getMethod();
-		mLuaThread->runCall(method_);
+		return mLuaThread->runCall<bool>(method_);
 	}
 	
 	const char * ConsoleUi::uiName()

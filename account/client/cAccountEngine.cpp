@@ -194,7 +194,7 @@ namespace cc {
 		mServerList->pushServerItem(serverItem_);
 		mRoleList->pushRoleItem(roleItem_);
 		
-		mAccount->runSave();
+		account_->runSave();
 		mServerList->runSave();
 		mRoleList->runSave();
 		
@@ -244,7 +244,8 @@ namespace cc {
 		TableEngine& tableEngine_ = TableEngine::instance();
 		tableEngine_.runTable<cAccountEngine *>(this, streamUrl(), streamName());
 		
-		mAccount->runLoad();
+		cAccountPtr account_ = std::dynamic_pointer_cast<cAccount>(mAccount);
+		account_->runLoad();
 		mRoleList->runLoad();
 		mServerList->runLoad();
 	}

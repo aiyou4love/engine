@@ -16,6 +16,11 @@ namespace cc {
 		}
 	}
 	
+	bool IfSelect::isDefault()
+	{
+		return ( (0 == mIfSelectId) || (mSelectors.size() <= 0) );
+	}
+	
 	int32_t IfSelect::getKey()
 	{
 		return mIfSelectId;

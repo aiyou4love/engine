@@ -14,6 +14,7 @@ namespace cc {
 			
 			nSerialize->runNumber(mIfSelectId, "ifSelectorId");
 		}
+		bool isDefault();
 		int32_t getKey();
 		
 		IfSelect();

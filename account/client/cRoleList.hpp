@@ -12,8 +12,8 @@ namespace cc {
 		
 		map<int64_t, RoleItemPtr>& getRoleItems();
 		
-		template<class __t>
-		void headSerialize(__t& nSerialize, const char * nName)
+		template<class T>
+		void headSerialize(T& nSerialize, const char * nName)
 		{
 			LOGF;
 			if ( 0 == strcmp(streamName(), nName) ) {

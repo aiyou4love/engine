@@ -11,7 +11,7 @@ namespace cc {
 		void runInit(const char * nName);
 		
 		void runText();
-		void runShow();
+		bool runShow();
 		
 	private:
 		void initEvent(const char * nPath);
@@ -20,11 +20,11 @@ namespace cc {
 		int8_t runText(string& nText);
 		
 		int16_t getItemIndex(string& nText);
-		void runItemIndex(int16_t nItemIndex);
+		bool runItemIndex(int16_t nItemIndex);
 		
 	public:
-		template<class __t>
-		void headSerialize(__t& nSerialize, const char * nName)
+		template<class T>
+		void headSerialize(T& nSerialize, const char * nName)
 		{
 			LOGF;
 			if ( 0 == strcmp(eventName(), nName) ) {

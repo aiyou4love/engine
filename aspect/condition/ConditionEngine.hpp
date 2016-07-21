@@ -8,8 +8,8 @@ namespace cc {
 		int8_t runCondition(int32_t nConditionId, EntityPtr& nEntity, ValuePtr& nValue);
 		
 	public:
-		template<class __t>
-		void headSerialize(__t& nSerialize, const char * nName)
+		template<class T>
+		void headSerialize(T& nSerialize, const char * nName)
 		{
 			LOGF;
 			

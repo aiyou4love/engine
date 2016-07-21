@@ -22,6 +22,12 @@ namespace cc {
 		return mType;
 	}
 	
+	bool ConsoleItem::isDefault()
+	{
+		return ( (0 == mIndex) || (0 == mType) 
+			|| ("" == mName) || ("" == mMethod) );
+	}
+	
 	int16_t ConsoleItem::getKey()
 	{
 		return mIndex;
