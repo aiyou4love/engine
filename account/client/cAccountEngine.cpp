@@ -105,11 +105,11 @@ namespace cc {
 		account_->setAccountType(nAccountType);
 		mServerList->pushServerItem(serverItem_);
 		mRoleList->pushRoleItem(roleItem_);
-
+		
 		account_->runSave();
 		mServerList->runSave();
 		mRoleList->runSave();
-
+		
 		return 1;
 	}
 	
