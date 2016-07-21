@@ -18,7 +18,7 @@ namespace cc {
 		const char * getServerName(int32_t nServerId);
 		
 		AccountEngine();
-		~AccountEngine();
+		virtual ~AccountEngine();
 		
 	protected:
 		ServerListPtr mServerList;

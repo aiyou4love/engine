@@ -27,7 +27,7 @@ namespace cc {
 		auto it = mServerItems.find(nServerId);
 		if ( it == mServerItems.end() ) {
 			LOGE("[%s]", __METHOD__);
-			return defaultValue<std::shared_ptr<ServerItem> >();
+			return defaultValue<ServerItemPtr>();
 		}
 		return it->second;
 	}

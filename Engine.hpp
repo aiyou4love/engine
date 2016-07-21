@@ -9,6 +9,7 @@
 
 #include "aspect/select/SelectState.hpp"
 
+#include "aspect/entity/Property.hpp"
 #include "aspect/entity/Entity.hpp"
 
 #include "aspect/condition/Condition.hpp"

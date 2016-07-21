@@ -2,10 +2,29 @@
 
 namespace cc {
 	
+	void Entity::insertProperty(int32_t nPropertyId, PropertyPtr& nProperty)
+	{
+		auto it = mPropertys.find(nPropertyId);
+		if (it != mPropertys.end()) {
+			LOGE("[%s]%d", __METHOD__, nPropertyId);
+			return;
+		}
+		mPropertys[nPropertyId] = nProperty;
+	}
+	
+	PropertyPtr& Entity::getProperty(int32_t nPropertyId)
+	{
+		auto it = mPropertys.find(nPropertyId);
+		if (it == mPropertys.end()) {
+			LOGE("[%s]%d", __METHOD__, nPropertyId);
+			return defaultValue<PropertyPtr>();
+		}
+		return it->second;
+	}
+	
 	void Entity::pushDoingState(int8_t nDoingId, EdoingState nDoingState)
 	{
 		LOGF;
-		
 		SelectStatePtr& selectState_ = mSelectStates[mIfSelectId];
 		selectState_->pushDoingState(nDoingId, nDoingState);
 		mIncrease = true;
@@ -14,7 +33,6 @@ namespace cc {
 	void Entity::startIfSelect(int32_t nIfSelectId)
 	{
 		LOGF;
-		
 		if (mIncrease) {
 			mIfSelectId++;
 			SelectStatePtr selectState_(new SelectState(nIfSelectId));
@@ -29,21 +47,22 @@ namespace cc {
 	void Entity::startSelect(int32_t nSelectId)
 	{
 		LOGF;
-		
 		SelectStatePtr& selectState_ = mSelectStates[mIfSelectId];
 		selectState_->setSelect(nSelectId);
 	}
 	
 	Entity::Entity()
-		: mIfSelectId(0)
-		, mIncrease (true)
+		: mIncrease (true)
+		, mIfSelectId(0)
 	{
 		mSelectStates.clear();
+		mPropertys.clear();
 	}
 	
 	Entity::~Entity()
 	{
 		mSelectStates.clear();
+		mPropertys.clear();
 		
 		mIfSelectId = 0;
 		mIncrease = true;

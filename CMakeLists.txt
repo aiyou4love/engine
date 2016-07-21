@@ -25,6 +25,7 @@ set( RANDOMS random/RandomEngine.cpp random/RandomEngine.hpp )
 set( ASPECTS aspect/condition/Condition.cpp aspect/condition/Condition.hpp 
 	aspect/condition/ConditionEngine.cpp aspect/condition/ConditionEngine.hpp 
 	aspect/doing/Doing.cpp aspect/doing/Doing.hpp aspect/doing/EdoingState.hpp 
+	aspect/entity/Property.cpp aspect/entity/Property.hpp 
 	aspect/entity/Entity.cpp aspect/entity/Entity.hpp 
 	aspect/reward/Reward.cpp aspect/reward/Reward.hpp 
 	aspect/reward/RewardEngine.cpp aspect/reward/RewardEngine.hpp 

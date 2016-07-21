@@ -19,7 +19,7 @@ namespace cc {
 		bool isLogin();
 		
 		Account();
-		~Account();
+		virtual ~Account();
 		
 	protected:
 		int64_t mAccountId;
