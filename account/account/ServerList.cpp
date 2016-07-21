@@ -61,6 +61,16 @@ namespace cc {
 		userDefault_.runSave<ServerList *>(this, streamUrl(), streamName());
 	}
 	
+	const char * ServerList::streamName()
+	{
+		return "serverList";
+	}
+	
+	const char * ServerList::streamUrl()
+	{
+		return "serverList.json";
+	}
+	
 	bool ServerList::isLoad()
 	{
 		return (mServerItems.size() > 0);
