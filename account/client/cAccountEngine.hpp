@@ -116,7 +116,7 @@ namespace cc {
 		EntityPtr mAccount;
 		
 		ServerInfo mServerInfo;
-        int32_t mAgentPort;
+        string mAgentPort;
         string mAgentIp;
 	};
 #endif

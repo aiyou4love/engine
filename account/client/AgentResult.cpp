@@ -17,9 +17,9 @@ namespace cc {
 		return mServerInfo;
 	}
 	
-	int32_t AgentResult::getAgentPort()
+	const char * AgentResult::getAgentPort()
 	{
-		return mAgentPort;
+		return mAgentPort.c_str();
 	}
 	
 	const char * AgentResult::getAgentIp()
@@ -35,7 +35,7 @@ namespace cc {
 	AgentResult::AgentResult()
 		: mErrorCode (0)
         , mAgentIp("")
-        , mAgentPort(0)
+        , mAgentPort("")
 	{
 	}
 	
@@ -43,7 +43,7 @@ namespace cc {
 	{
 		mErrorCode = 0;
 		mAgentIp = "";
-		mAgentPort = 0;
+		mAgentPort = "";
 	}
 	
 }

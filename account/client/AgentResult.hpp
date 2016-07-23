@@ -27,8 +27,8 @@ namespace cc {
 		
 	private:
         ServerInfo mServerInfo;
-        int32_t mAgentPort;
         int32_t mErrorCode;
+        string mAgentPort;
         string mAgentIp;
 	};
 	typedef std::shared_ptr<AgentResult> AgentResultPtr;

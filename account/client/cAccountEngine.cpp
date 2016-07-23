@@ -284,7 +284,7 @@ namespace cc {
 	cAccountEngine::cAccountEngine()
 		: mAccount (new cAccount())
 		, mRoleList (new cRoleList())
-		, mAgentPort(0)
+		, mAgentPort("")
 		, mAgentIp("")
 	{
 		mUrlValues.clear();
@@ -297,7 +297,7 @@ namespace cc {
 		mRoleList.reset();
 		mUrlValues.clear();
 		mAspects.clear();
-		mAgentPort = 0;
+		mAgentPort = "";
 		mAgentIp = "";
 	}
 	
