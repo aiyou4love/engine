@@ -2,7 +2,6 @@
 
 namespace cc {
 	
-	typedef std::shared_ptr<asio::deadline_timer> DeadlineTimerPtr;
 	class Session : public std::enable_shared_from_this<Session>, public Property
 	{
 	public:
@@ -11,7 +10,7 @@ namespace cc {
 		enum { write_timeout = 150 };
 		enum { read_timeout = 300 };
 		
-		Session();
+		Session(asio::io_service& nIoService);
 		~Session();
 		
 	private:

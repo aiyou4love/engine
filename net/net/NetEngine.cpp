@@ -2,7 +2,7 @@
 
 namespace cc {
 	
-	void NetEngine::initNet(EntityPtr& nEntity, const char * nIp, int32_t nPort, int32_t nRewardId)
+	void NetEngine::initNet(EntityPtr& nEntity, const char * nIp, const char * nPort, int32_t nConnectId, int32_t nDisconnectId)
 	{
 		LOGF;
 	}
@@ -19,5 +19,5 @@ namespace cc {
 	NetEngine::~NetEngine()
 	{
 	}
-		
+	
 }

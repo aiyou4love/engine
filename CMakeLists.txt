@@ -38,6 +38,12 @@ set( ASPECTS aspect/condition/Condition.cpp aspect/condition/Condition.hpp
 set( ENGINES Engine.cpp Engine.hpp )
 
 set( UIS ui/UiEngine.cpp ui/UiEngine.hpp )
+
+set( NETS net/net/NetEngine.cpp net/net/NetEngine.hpp 
+	net/client/cNetEngine.cpp net/client/cNetEngine.hpp 
+	net/tcp/IoService.cpp net/tcp/IoService.hpp 
+	net/tcp/Session.cpp net/tcp/Session.hpp 
+	net/tcp/TcpConnector.cpp net/tcp/TcpConnector.hpp )
 	
 set( CONSOLES console/ConsoleItem.cpp console/ConsoleItem.hpp 
 	console/ConsoleUi.cpp console/ConsoleUi.hpp 
@@ -59,7 +65,7 @@ set( ACCOUNTC  account/client/UrlValue.cpp account/client/UrlValue.hpp
 	account/client/cRoleList.cpp account/client/cRoleList.hpp )
 
 add_library( libengine STATIC ${RANDOMS} ${ASPECTS} ${ACCOUNTS} ${ACCOUNTC}
-	${ENGINES} ${UIS} ${CONSOLES} )
+	${ENGINES} ${UIS} ${CONSOLES} ${NETS} )
 	
 install (TARGETS libengine DESTINATION $ENV{UNSEEN_ROOT}/lib)
 

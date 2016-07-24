@@ -2,7 +2,7 @@
 
 namespace cc {
 	
-	Session::Session()
+	Session::Session(asio::io_service& nIoService)
 	{
 	}
 	
