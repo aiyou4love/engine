@@ -27,6 +27,11 @@ namespace cc {
 		mDisconnectId = nDisconnectId;
 	}
 	
+	void ConnectInfo::setExceptionId(int32_t nExceptionId)
+	{
+		mExceptionId = nExceptionId;
+	}
+	
 	void ConnectInfo::setAutoConnect(int8_t nAutoConnect)
 	{
 		mAutoConnect = ( (1 == nAutoConnect) ? true : false );
@@ -57,6 +62,11 @@ namespace cc {
 		return mDisconnectId;
 	}
 	
+	int32_t ConnectInfo::getExceptionId()
+	{
+		return mExceptionId;
+	}
+	
 	bool ConnectInfo::getAutoConnect()
 	{
 		return mAutoConnect;
@@ -68,6 +78,7 @@ namespace cc {
 		, mConnectId (0)
 		, mTimeoutId (0)
 		, mDisconnectId (0)
+		, mExceptionId (0)
 		, mAutoConnect (false)
 	{
 		
@@ -80,6 +91,7 @@ namespace cc {
 		mConnectId = 0;
 		mTimeoutId = 0;
 		mDisconnectId = 0;
+		mExceptionId = 0;
 		mAutoConnect = false;
 	}
 	

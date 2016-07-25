@@ -29,11 +29,22 @@ namespace cc {
 		if (nError) {
 			LOGE("[%s]%s", __METHOD__, nError.message());
 			this->runClose();
+			
+			SelectEngine& selectEngine_ = SelectEngine::instance();
+			EntityPtr& entity_ = this->getEntity();
+			ValuePtr value_(new Value());
+			selectEngine_runIfSelect(mExceptionId, entity_, value_);
 			return;
 		}
 		if (mConnectTimer.expires_at() <= asio::deadline_timer::traits_type::now()) {
-			this->runClose();
 			mConnectTimer.expires_at(boost::posix_time::pos_infin);
+			
+			this->runClose();
+			
+			SelectEngine& selectEngine_ = SelectEngine::instance();
+			EntityPtr& entity_ = this->getEntity();
+			ValuePtr value_(new Value());
+			selectEngine_runIfSelect(mTimeoutId, entity_, value_);
 		}
 	}
 	
@@ -43,8 +54,19 @@ namespace cc {
 		if (nError) {
 			LOGE("[%s]%s", __METHOD__, nError.message());
 			this->runClose();
+			
+			SelectEngine& selectEngine_ = SelectEngine::instance();
+			EntityPtr& entity_ = this->getEntity();
+			ValuePtr value_(new Value());
+			selectEngine_runIfSelect(mExceptionId, entity_, value_);
+			
 			return;
 		}
+		
+		SelectEngine& selectEngine_ = SelectEngine::instance();
+		EntityPtr& entity_ = this->getEntity();
+		ValuePtr value_(new Value());
+		selectEngine_runIfSelect(mExceptionId, entity_, value_);
 	}
 	
 	TcpConnector::TcpConnector(asio::io_service& nIoService)
@@ -52,6 +74,7 @@ namespace cc {
 		, Session (nIoService)
 		, mDisconnectId (0)
 		, mConnectId (0)
+		, mExceptionId (0)
 		, mTimeoutId (0)
 		, mAutoConnect (false)
 	{
@@ -62,6 +85,7 @@ namespace cc {
 		mDisconnectId = 0;
 		mConnectId = 0;
 		mTimeoutId = 0;
+		mExceptionId = 0;
 		mAutoConnect = false;
 	}
 	
