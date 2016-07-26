@@ -26,7 +26,6 @@ namespace cc {
 	{
 		if (nError) {
 			LOGE("[%s]%s", __METHOD__, nError.message());
-			
 			this->runException();
 			return;
 		}
@@ -39,18 +38,16 @@ namespace cc {
 	
 	void TcpConnector::handleConnect(const boost::system::error_code& nError)
 	{
-		mConnectTimer.cancel();
 		if (nError) {
 			LOGE("[%s]%s", __METHOD__, nError.message());
-			
 			this->runException();
 			return;
 		}
+		mConnectTimer.cancel();
 		
-		this->startRead();
+		this->runRead();
 		this->runConnect();
 	}
-	
 	
 	void TcpConnector::runConnect()
 	{
@@ -64,6 +61,8 @@ namespace cc {
 	
 	void TcpConnector::runDisconnect()
 	{
+		Session::runDisconnect();
+		
 		if (mDisconnectId > 0) {
 			SelectEngine& selectEngine_ = SelectEngine::instance();
 			EntityPtr& entity_ = this->getEntity();
@@ -74,6 +73,8 @@ namespace cc {
 	
 	void TcpConnector::runException()
 	{
+		Session::runException();
+		
 		if (mExceptionId > 0) {
 			SelectEngine& selectEngine_ = SelectEngine::instance();
 			EntityPtr& entity_ = this->getEntity();
@@ -84,6 +85,8 @@ namespace cc {
 	
 	void TcpConnector::runTimeout()
 	{
+		this->runClose();
+		
 		if (mTimeoutId > 0) {
 			SelectEngine& selectEngine_ = SelectEngine::instance();
 			EntityPtr& entity_ = this->getEntity();

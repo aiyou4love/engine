@@ -5,7 +5,13 @@ namespace cc {
 	class Session : public std::enable_shared_from_this<Session>, public Property
 	{
 	public:
-		void startRead();
+		void handleWriteTimeout(const boost::system::error_code& nError);
+		void handleWrite(const boost::system::error_code& nError);
+		void runWrite();
+		
+		void handleRead(const boost::system::error_code& nError, size_t nBytes);
+		void handleReadTimeout(const boost::system::error_code& nError);
+		void runRead();
 		
 		virtual void runDisconnect();
 		virtual void runException();
@@ -20,6 +26,9 @@ namespace cc {
 		
 	protected:
 		asio::ip::tcp::socket mSocket;
+		
+		asio::deadline_timer mWriteTimer;
+		asio::deadline_timer mReadTimer;
 	};
 	typedef std::shared_ptr<Session> SessionPtr;
 	typedef std::weak_ptr<Session> SessionWtr;
