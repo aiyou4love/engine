@@ -10,9 +10,7 @@ namespace cc {
 		void setConnectId(int32_t nConnectId);
 		void setTimeoutId(int32_t nTimeoutId);
 		void setDisconnectId(int32_t nDisconnectId);
-		void setAutoConnect(int8_t nAutoConnect);
 		void setExceptionId(int32_t nExceptionId);
-		void setAutoConnect(int8_t nAutoConnect);
 		
 		const char * getServerIp();
 		const char * getServerPort();
@@ -20,7 +18,6 @@ namespace cc {
 		int32_t getTimeoutId();
 		int32_t getDisconnectId();
 		int32_t getExceptionId();
-		bool getAutoConnect();
 		
 		ConnectInfo();
 		~ConnectInfo();
@@ -32,7 +29,6 @@ namespace cc {
 		int32_t mTimeoutId;
 		int32_t mDisconnectId;
 		int32_t mExceptionId;
-		bool mAutoConnect;
 	};
 	typedef std::shared_ptr<ConnectInfo> ConnectInfPtr;
 	

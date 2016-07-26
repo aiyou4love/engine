@@ -32,11 +32,6 @@ namespace cc {
 		mExceptionId = nExceptionId;
 	}
 	
-	void ConnectInfo::setAutoConnect(int8_t nAutoConnect)
-	{
-		mAutoConnect = ( (1 == nAutoConnect) ? true : false );
-	}
-	
 	const char * ConnectInfo::getServerIp()
 	{
 		return mServerIp.c_str();
@@ -67,11 +62,6 @@ namespace cc {
 		return mExceptionId;
 	}
 	
-	bool ConnectInfo::getAutoConnect()
-	{
-		return mAutoConnect;
-	}
-	
 	ConnectInfo::ConnectInfo()
 		: mServerIp ("")
 		, mServerPort ("")
@@ -79,7 +69,6 @@ namespace cc {
 		, mTimeoutId (0)
 		, mDisconnectId (0)
 		, mExceptionId (0)
-		, mAutoConnect (false)
 	{
 		
 	}
@@ -92,7 +81,6 @@ namespace cc {
 		mTimeoutId = 0;
 		mDisconnectId = 0;
 		mExceptionId = 0;
-		mAutoConnect = false;
 	}
 	
 }

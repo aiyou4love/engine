@@ -5,10 +5,10 @@ namespace cc {
 	class Session : public std::enable_shared_from_this<Session>, public Property
 	{
 	public:
-		virtual void runException();
-		
 		void startRead();
 		
+		virtual void runDisconnect();
+		virtual void runException();
 		virtual void runClose();
 		
 	public:

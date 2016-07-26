@@ -7,6 +7,12 @@ namespace cc {
 	public:
 		void runConnector(asio::ip::tcp::resolver::iterator& nIterator, ConnectInfo& nConnectInfo);
 		
+		void runDisconnect();
+		void runConnect();
+		void runException();
+		void runTimeout();
+		void runClose();
+		
 	private:
 		void handleConnectTimeout(const boost::system::error_code& nError);
 		void handleConnect(const boost::system::error_code& nError);
@@ -24,7 +30,6 @@ namespace cc {
 		int32_t mTimeoutId;
 		int32_t mConnectId;
 		int32_t mExceptionId;
-		bool mAutoConnect;
 	};
 	typedef std::shared_ptr<TcpConnector> TcpConnectorPtr;
 	
