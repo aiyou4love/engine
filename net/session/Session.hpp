@@ -7,10 +7,12 @@ namespace cc {
 	public:
 		void handleWriteTimeout(const boost::system::error_code& nError);
 		void handleWrite(const boost::system::error_code& nError);
+		void internalWrite();
 		void runWrite();
 		
 		void handleRead(const boost::system::error_code& nError, size_t nBytes);
 		void handleReadTimeout(const boost::system::error_code& nError);
+		void internalRead();
 		void runRead();
 		
 		virtual void runDisconnect();

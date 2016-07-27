@@ -20,7 +20,13 @@ namespace cc {
 			return;
 		}
 		mWriteTimer.cancel();
+		this->internalWrite();
 		this->runWrite();
+	}
+	
+	void Session::internalWrite()
+	{
+		
 	}
 	
 	void Session::runWrite()
@@ -45,34 +51,9 @@ namespace cc {
 			this->runException();
 			return;
 		}
-		mWriteTimer.cancel();
-		this->runWrite();
-		
 		mReadTimer.cancel();
-		if (nError) {
-			LogService& logService_ = Service<LogService>::instance();
-			logService_.logError(log_1(nError.message()));
-			this->runClose();
-			return;
-		}
-		BlockPushType_ blockPushType_ = mReadBlock->runPush(mReadBuffer.data(), nBytes);
-		if (BlockPushType_::mError_ == blockPushType_) {
-			LogService& logService_ = Service<LogService>::instance();
-			logService_.logError(log_1("mBlockPushTypeError_ == blockPushType_"));
-			this->runClose();
-			return;
-		}
-		if (BlockPushType_::mLength_ == blockPushType_) return;
-		ProtocolService& protocolService_ = Service<ProtocolService>::instance();
-		if (!protocolService_.runReadBlock(mReadBlock, shared_from_this())) {
-			LogService& logService_ = Service<LogService>::instance();
-			logService_.logError(log_1("protocolService_.runReadBlock"));
-			this->runClose();
-			return;
-		}
-		mReadBlock->endPush();
-		mReadBuffer.assign(0);
-		this->runStart();
+		this->internalRead();
+		this->runRead();
 	}
 	
 	void Session::handleReadTimeout(const boost::system::error_code& nError)
@@ -83,6 +64,11 @@ namespace cc {
 			LOGE("[%s]%s", __METHOD__, nError.message());
 			this->runDisconnect();
 		}
+	}
+	
+	void Session::internalRead()
+	{
+		
 	}
 	
 	void Session::runRead()
