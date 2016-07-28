@@ -44,7 +44,7 @@ namespace cc {
 			return;
 		}
 		mConnectTimer.cancel();
-		
+		mClosed = false;
 		this->runRead();
 		this->runConnect();
 	}

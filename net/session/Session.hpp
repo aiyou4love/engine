@@ -10,12 +10,13 @@ namespace cc {
 		void internalWrite();
 		void runWrite();
 		
+		void runSend(ValuePtr& nValue);
+		
 		void handleRead(const boost::system::error_code& nError, size_t nBytes);
 		void handleReadTimeout(const boost::system::error_code& nError);
 		void internalRead(size_t nBytes);
 		void runRead();
 		
-		void runSend(ValuePtr& nValue);
 		
 		virtual void runDisconnect();
 		virtual void runException();
@@ -36,6 +37,10 @@ namespace cc {
 		
 		boost::array<int8_t, PACKETSIZE> mReadBuffer;
 		BufReader mBufReader;
+		
+		deque<ValuePtr> mPackets;
+		atomic<bool> mSending;
+		bool mClosed;
 	};
 	typedef std::shared_ptr<Session> SessionPtr;
 	typedef std::weak_ptr<Session> SessionWtr;

@@ -16,6 +16,9 @@ namespace cc {
 		void startIfSelect(int32_t nIfSelectId);
 		void startSelect(int32_t nSelectId);
 		
+		void pushValue(ValuePtr& nValue);
+		ValuePtr popValue();
+		
 		Entity();
 		virtual ~Entity();
 		
@@ -23,6 +26,9 @@ namespace cc {
 		map<int32_t, SelectStatePtr> mSelectStates;
 		
 		map<int32_t, PropertyPtr> mPropertys;
+		
+		mutex mMutex;
+		deque<ValuePtr> mValues;
 		
 		int32_t mIfSelectId;
 		bool mIncrease;

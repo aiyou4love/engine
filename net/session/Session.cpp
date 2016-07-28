@@ -44,6 +44,35 @@ namespace cc {
 		}
 	}
 	
+	void Session::runSend(ValuePtr& nValue)
+	{
+		if ( mClosed ) {
+			LOGE("[%s]socket closed", __METHOD__);
+			return;
+		}
+		this->pushPacket(nValue);
+		if (false == mSending) {
+			this->internalSend();
+		}
+	}
+	
+	void Session::pushPacket(ValuePtr& nValue)
+	{
+		lock_guard<mutex> lock_(mMutex);
+		mPackets.push_back(nValue);
+	}
+
+	PacketPtr Session::popPacket()
+	{
+		lock_guard<mutex> lock_(mMutex);
+		PacketPtr packet_;
+		if (mPackets.size() > 0) {
+			packet_ = mPackets.front();
+			mPackets.pop_front();
+		}
+		return packet_;
+	}
+	
 	void Session::handleRead(const boost::system::error_code& nError, size_t nBytes)
 	{
 		if (nError) {
@@ -80,6 +109,8 @@ namespace cc {
 		ValuePtr value_(new Value());
 		IoReader<BufReader> ioReader_(mBufReader);
 		value_->headSerialize(ioReader_, "");
+		EntityPtr& entity_ = this->getEntity();
+		entity_->pushValue(value_);
 		mBufReader.finishBuf();
 		mReadBuffer.assign(0);
 	}
@@ -98,11 +129,6 @@ namespace cc {
 			LOGE("[%s]%s", __METHOD__, e.what());
 			this->runException();
 		}
-	}
-	
-	void Session::runSend(ValuePtr& nValue)
-	{
-		
 	}
 	
 	void Session::runDisconnect()
@@ -124,13 +150,21 @@ namespace cc {
 		}
 		mWriteTimer.cancel();
 		mReadTimer.cancel();
+		mClosed = true;
+		mSending = false;
+		mReadBuffer.fill(0);
+		mPackets.clear();
 	}
 	
 	Session::Session(asio::io_service& nIoService)
 		: mSocket (nIoService)
 		, mWriteTimer (nIoService)
 		, mReadTimer (nIoService)
+		, mClosed (true)
+		, mSending(false)
 	{
+		mReadBuffer.fill(0);
+		mPackets.clear();
 	}
 	
 	Session::~Session()
