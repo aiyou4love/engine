@@ -2,10 +2,15 @@
 
 namespace cc {
 	
-	void TcpConnector::runConnector(asio::ip::tcp::resolver::iterator& nIterator, int32_t nConnectId, int32_t nDisconnectId)
+	void TcpConnector::runConnector(asio::ip::tcp::resolver::iterator& nIterator, ConnectInfo& nConnectInfo)
 	{
-		mDisconnectId = nDisconnectId;
-		mConnectId = nConnectId;
+		mDisconnectId = nConnectInfo.getDisconnectId();
+		mTimeoutId = nConnectInfo.getTimeoutId();
+		mConnectId = nConnectInfo.getConnectId();
+		mAutoConnect = nConnectInfo.getAutoConnect();
+		mExceptionId = nConnectInfo.getExceptionId();
+		
+		this->runClose();
 		
 		try {
 			boost::asio::async_connect(mSocket, nIterator,
@@ -23,9 +28,11 @@ namespace cc {
 	{
 		if (nError) {
 			LOGE("[%s]%s", __METHOD__, nError.message());
+			this->runClose();
+			return;
 		}
 		if (mConnectTimer.expires_at() <= asio::deadline_timer::traits_type::now()) {
-			LOGE("[%s]%s", __METHOD__, nError.message());
+			this->runClose();
 			mConnectTimer.expires_at(boost::posix_time::pos_infin);
 		}
 	}
@@ -35,9 +42,9 @@ namespace cc {
 		mConnectTimer.cancel();
 		if (nError) {
 			LOGE("[%s]%s", __METHOD__, nError.message());
+			this->runClose();
 			return;
 		}
-		this->runRecv();
 	}
 	
 	TcpConnector::TcpConnector(asio::io_service& nIoService)
@@ -45,6 +52,8 @@ namespace cc {
 		, Session (nIoService)
 		, mDisconnectId (0)
 		, mConnectId (0)
+		, mTimeoutId (0)
+		, mAutoConnect (false)
 	{
 	}
 	
@@ -52,6 +61,8 @@ namespace cc {
 	{
 		mDisconnectId = 0;
 		mConnectId = 0;
+		mTimeoutId = 0;
+		mAutoConnect = false;
 	}
 	
 }

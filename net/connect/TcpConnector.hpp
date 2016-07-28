@@ -5,7 +5,7 @@ namespace cc {
 	class TcpConnector : public Session
 	{
 	public:
-		void runConnector(asio::ip::tcp::resolver::iterator& nIterator, int32_t nConnectId, int32_t nDisconnectId);
+		void runConnector(asio::ip::tcp::resolver::iterator& nIterator, ConnectInfo& nConnectInfo);
 		
 	private:
 		void handleConnectTimeout(const boost::system::error_code& nError);
@@ -23,6 +23,8 @@ namespace cc {
 		int32_t mDisconnectId;
 		int32_t mTimeoutId;
 		int32_t mConnectId;
+		int32_t mExceptionId;
+		bool mAutoConnect;
 	};
 	typedef std::shared_ptr<TcpConnector> TcpConnectorPtr;
 	
