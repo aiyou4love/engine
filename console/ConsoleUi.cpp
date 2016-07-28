@@ -14,7 +14,7 @@ namespace cc {
 	
 	void ConsoleUi::runClose()
 	{
-		mLuaThread->runCall("runClose");
+		mLuaThread->runCall<void>("runClose");
 
 		mLuaThread->runClose();
 		mLuaThread.reset();
@@ -53,7 +53,7 @@ namespace cc {
 		LuaEngine& luaEngine_ = LuaEngine::instance();
 		mLuaThread = luaEngine_.createLuaThread(mName.c_str());
 		mLuaThread->openFile(nPath);
-		mLuaThread->runCall("runInit");
+		mLuaThread->runCall<void>("runInit");
 	}
 	
 	void ConsoleUi::initUi(const char * nPath)
@@ -69,12 +69,12 @@ namespace cc {
 	
 	void ConsoleUi::runText()
 	{
-		mLuaThread->runCall("showText");
+		mLuaThread->runCall<void>("showText");
 	}
 	
 	bool ConsoleUi::runShow()
 	{
-		mLuaThread->runCall("runShow");
+		mLuaThread->runCall<void>("runShow");
 		
 		bool needCin_ = false;
 		auto it = mConsoleItems.begin();

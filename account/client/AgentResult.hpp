@@ -18,7 +18,7 @@ namespace cc {
 		const char * streamUrl();
 		
 		ServerInfo& getServerInfo();
-		int32_t getAgentPort();
+		const char * getAgentPort();
 		const char * getAgentIp();
 		int32_t getErrorCode();
 		

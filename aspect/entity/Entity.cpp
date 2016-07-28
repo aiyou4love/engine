@@ -17,7 +17,7 @@ namespace cc {
 		auto it = mPropertys.find(nPropertyId);
 		if (it == mPropertys.end()) {
 			LOGE("[%s]%d", __METHOD__, nPropertyId);
-			return defaultValue<PropertyPtr>();
+			return defaultPtr<Property>();
 		}
 		return it->second;
 	}

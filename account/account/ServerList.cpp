@@ -22,12 +22,12 @@ namespace cc {
 		
 	}
 	
-	ServerItemPtr ServerList::getServerItem(int32_t nServerId)
+	ServerItemPtr& ServerList::getServerItem(int32_t nServerId)
 	{
 		auto it = mServerItems.find(nServerId);
 		if ( it == mServerItems.end() ) {
 			LOGE("[%s]", __METHOD__);
-			return defaultValue<ServerItemPtr>();
+			return defaultPtr<ServerItem>();
 		}
 		return it->second;
 	}

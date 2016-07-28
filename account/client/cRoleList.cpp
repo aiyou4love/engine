@@ -2,7 +2,7 @@
 
 namespace cc {
 		
-	RoleItemPtr cRoleList::getRoleItem(int32_t nServerId, int32_t nRoleId)
+	RoleItemPtr& cRoleList::getRoleItem(int32_t nServerId, int32_t nRoleId)
 	{
 		int64_t id_ = nServerId;
 		 id_ <<= 32;
@@ -10,7 +10,7 @@ namespace cc {
 		auto it = mRoleItems.find(id_);
 		if ( it == mRoleItems.end() ) {
 			LOGE("[%s]", __METHOD__);
-			return defaultValue<RoleItemPtr>();
+			return defaultPtr<RoleItem>();
 		}
 		return it->second;
 	}

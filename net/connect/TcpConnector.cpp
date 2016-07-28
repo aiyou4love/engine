@@ -11,7 +11,7 @@ namespace cc {
 		
 		try {
 			boost::asio::async_connect(mSocket, nIterator,
-			boost::bind(&TcpConnector+::handleConnect, this, boost::asio::placeholders::error));
+			boost::bind(&TcpConnector::handleConnect, this, boost::asio::placeholders::error));
 			
 			mConnectTimer.expires_from_now(boost::posix_time::seconds(TcpConnector::connect_timeout));
 			mConnectTimer.async_wait(boost::bind(&TcpConnector::handleConnectTimeout, 
@@ -55,7 +55,7 @@ namespace cc {
 			SelectEngine& selectEngine_ = SelectEngine::instance();
 			EntityPtr& entity_ = this->getEntity();
 			ValuePtr value_(new Value());
-			selectEngine_runIfSelect(mConnectId, entity_, value_);
+			selectEngine_.runIfSelect(mConnectId, entity_, value_);
 		}
 	}
 	
@@ -67,7 +67,7 @@ namespace cc {
 			SelectEngine& selectEngine_ = SelectEngine::instance();
 			EntityPtr& entity_ = this->getEntity();
 			ValuePtr value_(new Value());
-			selectEngine_runIfSelect(mDisconnectId, entity_, value_);
+			selectEngine_.runIfSelect(mDisconnectId, entity_, value_);
 		}
 	}
 	
@@ -79,7 +79,7 @@ namespace cc {
 			SelectEngine& selectEngine_ = SelectEngine::instance();
 			EntityPtr& entity_ = this->getEntity();
 			ValuePtr value_(new Value());
-			selectEngine_runIfSelect(mExceptionId, entity_, value_);
+			selectEngine_.runIfSelect(mExceptionId, entity_, value_);
 		}
 	}
 	
@@ -91,7 +91,7 @@ namespace cc {
 			SelectEngine& selectEngine_ = SelectEngine::instance();
 			EntityPtr& entity_ = this->getEntity();
 			ValuePtr value_(new Value());
-			selectEngine_runIfSelect(mTimeoutId, entity_, value_);
+			selectEngine_.runIfSelect(mTimeoutId, entity_, value_);
 		}
 	}
 	

@@ -7,11 +7,13 @@ namespace cc {
 	public:
 		asio::io_service& getIoService();
 		
-		bool runPreinit();
+		void runPreinit();
 		void runInit();
 		void runStart();
 		void runStop();
 		void runRun();
+		
+		static IoService& instance();
 		
 		IoService();
 		~IoService();
@@ -27,6 +29,8 @@ namespace cc {
 		vector<WorkPtr> mWorks;
 		size_t mNextIoService;
 		int32_t mIoServiceCount;
+		
+		static IoService mIoService;
 	};
 	
 }

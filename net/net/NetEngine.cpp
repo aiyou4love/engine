@@ -9,10 +9,11 @@ namespace cc {
 		IoService& ioService_ = IoService::instance();
 		asio::io_service& ioHandle_ = ioService_.getIoService();
 		
-		PropertyPtr property_ = nEntity->getProperty(EpropertyType::mNetSession);
+		PropertyPtr& property_ = nEntity->getProperty(EpropertyType::mNetSession);
 		if (!property_) {
-			property_.reset(new TcpConnector(ioHandle_));
-			nEntity->insertProperty(EpropertyType::mNetSession, property_);
+			PropertyPtr tempProperty_(new TcpConnector(ioHandle_));
+			nEntity->insertProperty(EpropertyType::mNetSession, tempProperty_);
+			property_ = tempProperty_;
 		}
 		TcpConnectorPtr tcpConnector_ = std::dynamic_pointer_cast<TcpConnector>(property_);
 		
@@ -23,7 +24,7 @@ namespace cc {
 		asio::ip::tcp::resolver::query query_(serverIp_, serverPort_);
 		asio::ip::tcp::resolver::iterator iterator_ = resolver_.resolve(query_);
 		
-		tcpConnector_->runConnector(iterator, nConnectInfo);		
+		tcpConnector_->runConnector(iterator_, nConnectInfo);		
 	}
 	
 	void NetEngine::sendNet(EntityPtr& nEntity, ValuePtr& nValue)

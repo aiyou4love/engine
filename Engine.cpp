@@ -25,6 +25,11 @@ void engineStart()
 	
 	ConsoleEngine& consoleEngine_ = ConsoleEngine::instance();
 	consoleEngine_.runPreinit();
+	
+	NetEngine::instance();
+	
+	IoService& ioService_ = IoService::instance();
+	ioService_.runPreinit();
 }
 
 void engineStop()

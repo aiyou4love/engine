@@ -207,7 +207,7 @@ namespace cc {
 	
 	const char * cAccountEngine::getRoleName(int32_t nServerId, int32_t nRoleId)
 	{
-		RoleItemPtr roleItem_ = mRoleList->getRoleItem(nServerId, nRoleId);
+		RoleItemPtr& roleItem_ = mRoleList->getRoleItem(nServerId, nRoleId);
 		if (!roleItem_) {
 			return roleItem_->getRoleName();
 		}

@@ -9,6 +9,7 @@
 
 #include "aspect/select/SelectState.hpp"
 
+#include "aspect/entity/EpropertyType.hpp"
 #include "aspect/entity/Property.hpp"
 #include "aspect/entity/Entity.hpp"
 
@@ -42,12 +43,17 @@
 #include "account/client/cAccount.hpp"
 #include "account/client/cAccountEngine.hpp"
 
-
 #include "ui/UiEngine.hpp"
 
 #include "console/ConsoleItem.hpp"
 #include "console/ConsoleUi.hpp"
 #include "console/ConsoleEngine.hpp"
+
+#include "net/ioservice/IoService.hpp"
+#include "net/connect/ConnectInfo.hpp"
+#include "net/session/Session.hpp"
+#include "net/connect/TcpConnector.hpp" 
+#include "net/net/NetEngine.hpp"
 
 extern void engineStart();
 extern void engineStop();

@@ -2,7 +2,7 @@
 
 namespace cc {
 	
-	bool IoService::runPreinit()
+	void IoService::runPreinit()
 	{
 		LifeCycle& lifeCycle_ = LifeCycle::instance();
 		lifeCycle_.m_tInitBegin.connect(bind(&IoService::runInit, this));
@@ -34,7 +34,7 @@ namespace cc {
 		vector<ThreadPtr> threads_;
 		for (size_t i = 0; i < mIoServices.size(); ++i) {
 			ThreadPtr thread_(new std::thread(boost::bind(&asio::io_service::run, mIoServices[i])));
-			threads.push_back(thread_);
+			threads_.push_back(thread_);
 		}
 	#ifdef __RUNING__
 		for (size_t i = 0; i < threads_.size(); ++i) {
@@ -68,6 +68,11 @@ namespace cc {
 		mIoServiceCount = 1;
 	}
 	
+	IoService& IoService::instance()
+	{
+		return mIoService;
+	}
+	
 	IoService::IoService()
 	{
 		this->runClear();
@@ -77,5 +82,7 @@ namespace cc {
 	{
 		this->runClear();
 	}
+	
+	IoService IoService::mIoService;
 	
 }

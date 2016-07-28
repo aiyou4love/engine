@@ -36,8 +36,8 @@ namespace cc {
 			mWriteTimer.async_wait(boost::bind(&Session::handleWriteTimeout,
 				shared_from_this(), boost::asio::placeholders::error));
 				
-			asio::async_write(mSocket, boost::asio::buffer(mWriteBlock->getBuffer(), mWriteBlock->getTotal()),
-				boost::bind(&Session::handleWrite, shared_from_this(), asio::placeholders::error));
+			//asio::async_write(mSocket, boost::asio::buffer(mWriteBlock->getBuffer(), mWriteBlock->getTotal()),
+			//	boost::bind(&Session::handleWrite, shared_from_this(), asio::placeholders::error));
 		} catch (boost::system::system_error& e) {
 			LOGE("[%s]%s", __METHOD__, e.what());
 			this->runException();
@@ -78,9 +78,9 @@ namespace cc {
 			mReadTimer.async_wait(boost::bind(&Session::handleReadTimeout, 
 				shared_from_this(), boost::asio::placeholders::error));
 				
-			mSocket.async_read_some(boost::asio::buffer(mReadBuffer),
-				boost::bind(&Session::handleRead, shared_from_this(),
-				asio::placeholders::error, asio::placeholders::bytes_transferred));
+			//mSocket.async_read_some(boost::asio::buffer(mReadBuffer),
+			//	boost::bind(&Session::handleRead, shared_from_this(),
+			//	asio::placeholders::error, asio::placeholders::bytes_transferred));
 		} catch (boost::system::system_error& e) {
 			LOGE("[%s]%s", __METHOD__, e.what());
 			this->runException();
@@ -104,10 +104,14 @@ namespace cc {
 			mSocket.shutdown(asio::socket_base::shutdown_both, error_);
 			mSocket.close(error_);
 		}
+		mWriteTimer.cancel();
+		mReadTimer.cancel();
 	}
 	
 	Session::Session(asio::io_service& nIoService)
 		: mSocket (nIoService)
+		, mWriteTimer (nIoService)
+		, mReadTimer (nIoService)
 	{
 	}
 	

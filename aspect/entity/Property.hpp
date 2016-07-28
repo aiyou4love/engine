@@ -16,6 +16,6 @@ namespace cc {
 	protected:
 		EntityPtr * mEntity;
 	};
-	typedef shared_ptr<Property> PropertyPtr;
+	typedef std::shared_ptr<Property> PropertyPtr;
 	
 }
