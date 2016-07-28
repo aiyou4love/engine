@@ -12,8 +12,10 @@ namespace cc {
 		
 		void handleRead(const boost::system::error_code& nError, size_t nBytes);
 		void handleReadTimeout(const boost::system::error_code& nError);
-		void internalRead();
+		void internalRead(size_t nBytes);
 		void runRead();
+		
+		void runSend(ValuePtr& nValue);
 		
 		virtual void runDisconnect();
 		virtual void runException();
@@ -31,6 +33,9 @@ namespace cc {
 		
 		asio::deadline_timer mWriteTimer;
 		asio::deadline_timer mReadTimer;
+		
+		boost::array<int8_t, PACKETSIZE> mReadBuffer;
+		BufReader mBufReader;
 	};
 	typedef std::shared_ptr<Session> SessionPtr;
 	typedef std::weak_ptr<Session> SessionWtr;

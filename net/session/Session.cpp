@@ -36,8 +36,8 @@ namespace cc {
 			mWriteTimer.async_wait(boost::bind(&Session::handleWriteTimeout,
 				shared_from_this(), boost::asio::placeholders::error));
 				
-			//asio::async_write(mSocket, boost::asio::buffer(mWriteBlock->getBuffer(), mWriteBlock->getTotal()),
-			//	boost::bind(&Session::handleWrite, shared_from_this(), asio::placeholders::error));
+			asio::async_write(mSocket, boost::asio::buffer(mWriteBlock->getBuffer(), mWriteBlock->getTotal()),
+				boost::bind(&Session::handleWrite, shared_from_this(), asio::placeholders::error));
 		} catch (boost::system::system_error& e) {
 			LOGE("[%s]%s", __METHOD__, e.what());
 			this->runException();
@@ -66,9 +66,22 @@ namespace cc {
 		}
 	}
 	
-	void Session::internalRead()
+	void Session::internalRead(size_t nBytes)
 	{
-		
+		EpushBuf pushBuf_ = mBufReader.pushBuf(mReadBuffer.data(), nBytes);
+		if (EpushBuf::mError == pushBuf_) {
+			LOGE("[%s]pushBuf:%d", __METHOD__, (int8_t)pushBuf_);
+			this->runException();
+			return;
+		}
+		if (EpushBuf::mLength == pushBuf_) {
+			return;
+		}
+		ValuePtr value_(new Value());
+		IoReader<BufReader> ioReader_(mBufReader);
+		value_->headSerialize(ioReader_, "");
+		mBufReader.finishBuf();
+		mReadBuffer.assign(0);
 	}
 	
 	void Session::runRead()
@@ -78,13 +91,18 @@ namespace cc {
 			mReadTimer.async_wait(boost::bind(&Session::handleReadTimeout, 
 				shared_from_this(), boost::asio::placeholders::error));
 				
-			//mSocket.async_read_some(boost::asio::buffer(mReadBuffer),
-			//	boost::bind(&Session::handleRead, shared_from_this(),
-			//	asio::placeholders::error, asio::placeholders::bytes_transferred));
+			mSocket.async_read_some(boost::asio::buffer(mReadBuffer),
+				boost::bind(&Session::handleRead, shared_from_this(),
+				asio::placeholders::error, asio::placeholders::bytes_transferred));
 		} catch (boost::system::system_error& e) {
 			LOGE("[%s]%s", __METHOD__, e.what());
 			this->runException();
 		}
+	}
+	
+	void Session::runSend(ValuePtr& nValue)
+	{
+		
 	}
 	
 	void Session::runDisconnect()
