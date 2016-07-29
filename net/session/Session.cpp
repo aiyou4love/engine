@@ -26,7 +26,15 @@ namespace cc {
 	
 	void Session::internalWrite()
 	{
-		
+		ValuePtr value_ = this->popValue();
+		if (!value_) {
+			mWriting = false;
+			return;
+		}
+		mBufWriter.runClear();
+		IoWriter<BufWriter> ioWriter_(mBufWriter);
+		value_->headSerialize(ioWriter_, "");
+		mBufWriter.runEnd();
 	}
 	
 	void Session::runWrite()
@@ -38,6 +46,7 @@ namespace cc {
 				
 			asio::async_write(mSocket, boost::asio::buffer(mWriteBlock->getBuffer(), mWriteBlock->getTotal()),
 				boost::bind(&Session::handleWrite, shared_from_this(), asio::placeholders::error));
+			mWriting = true;
 		} catch (boost::system::system_error& e) {
 			LOGE("[%s]%s", __METHOD__, e.what());
 			this->runException();
@@ -50,27 +59,27 @@ namespace cc {
 			LOGE("[%s]socket closed", __METHOD__);
 			return;
 		}
-		this->pushPacket(nValue);
-		if (false == mSending) {
-			this->internalSend();
+		this->pushValue(nValue);
+		if (false == mWriting) {
+			this->internalWrite();
 		}
 	}
 	
-	void Session::pushPacket(ValuePtr& nValue)
+	void Session::pushValue(ValuePtr& nValue)
 	{
 		lock_guard<mutex> lock_(mMutex);
-		mPackets.push_back(nValue);
+		mValues.push_back(nValue);
 	}
 
-	PacketPtr Session::popPacket()
+	ValuePtr Session::popValue()
 	{
 		lock_guard<mutex> lock_(mMutex);
-		PacketPtr packet_;
-		if (mPackets.size() > 0) {
-			packet_ = mPackets.front();
-			mPackets.pop_front();
+		ValuePtr value_;
+		if (mValues.size() > 0) {
+			value_ = mValues.front();
+			mValues.pop_front();
 		}
-		return packet_;
+		return value_;
 	}
 	
 	void Session::handleRead(const boost::system::error_code& nError, size_t nBytes)
@@ -151,7 +160,7 @@ namespace cc {
 		mWriteTimer.cancel();
 		mReadTimer.cancel();
 		mClosed = true;
-		mSending = false;
+		mWriting = false;
 		mReadBuffer.fill(0);
 		mPackets.clear();
 	}
@@ -161,7 +170,7 @@ namespace cc {
 		, mWriteTimer (nIoService)
 		, mReadTimer (nIoService)
 		, mClosed (true)
-		, mSending(false)
+		, mWriting(false)
 	{
 		mReadBuffer.fill(0);
 		mPackets.clear();

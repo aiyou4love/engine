@@ -4,7 +4,6 @@ namespace cc {
 	
 	void ConsoleUi::runRefresh(const char * nName, IndexValue& nIndexValue)
 	{
-		LOGF;
 		auto it = mOnEvents.find(nName);
 		if ( it == mOnEvents.end() ) {
 			return;
@@ -15,7 +14,7 @@ namespace cc {
 	void ConsoleUi::runClose()
 	{
 		mLuaThread->runCall<void>("runClose");
-
+		
 		mLuaThread->runClose();
 		mLuaThread.reset();
 		

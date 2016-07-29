@@ -13,7 +13,6 @@ namespace cc {
 		template<class T>
 		void serialize(T * nSerialize, int8_t nCount)
 		{
-			LOGF;
 			nSerialize->runNumber(mMethod, "method");
 			nSerialize->runNumber(mType, "type");
 			nSerialize->runNumber(mName, "name");
