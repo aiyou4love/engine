@@ -24,7 +24,6 @@ namespace cc {
 	
 	void Entity::pushDoingState(int8_t nDoingId, EdoingState nDoingState)
 	{
-		LOGF;
 		SelectStatePtr& selectState_ = mSelectStates[mIfSelectId];
 		selectState_->pushDoingState(nDoingId, nDoingState);
 		mIncrease = true;
@@ -32,7 +31,6 @@ namespace cc {
 	
 	void Entity::startIfSelect(int32_t nIfSelectId)
 	{
-		LOGF;
 		if (mIncrease) {
 			mIfSelectId++;
 			SelectStatePtr selectState_(new SelectState(nIfSelectId));
@@ -46,20 +44,19 @@ namespace cc {
 	
 	void Entity::startSelect(int32_t nSelectId)
 	{
-		LOGF;
 		SelectStatePtr& selectState_ = mSelectStates[mIfSelectId];
 		selectState_->setSelect(nSelectId);
 	}
 	
 	void Entity::pushValue(ValuePtr& nValue)
 	{
-		lock_guard<mutex> lock_(mMutex);
+		std::lock_guard<mutex> lock_(mMutex);
 		mValues.push_back(nValue);
 	}
 	
 	ValuePtr Entity::popValue()
 	{
-		lock_guard<mutex> lock_(mMutex);
+		std::lock_guard<mutex> lock_(mMutex);
 		ValuePtr value_;
 		if (mValues.size() > 0) {
 			value_ = mValues.front();

@@ -1,71 +1,71 @@
-#include "../Common.hpp"
+#include "../Engine.hpp"
 
 namespace cc {
 
-	const string& CommandArgs::getCommandArg(const __i32 nIndex) const
+	const char * CommandArgs::getCommandArgs(int8_t nIndex)
 	{
-		__i32 commandArgsCount_ = static_cast<__i32>(mCommandArgs.size());
-		if (commandArgsCount_ >= nIndex) {
-			return mCommandArgs[nIndex - 1];
+		int8_t count_ = (int8_t)(mCommandArgs.size());
+		if (count_ < nIndex) {
+			return "";
 		}
-		return __defaultstr();
+		return mCommandArgs[nIndex - 1].c_str();
 	}
 	
-	__i32 CommandArgs::getCommandCount() const
+	int8_t CommandArgs::getCommandCount()
 	{
-		return mCommandArgs.size();
+		return (int8_t)(mCommandArgs.size());
 	}
 	
-	const string& CommandArgs::getService() const
+	int32_t CommandArgs::getSelectId()
 	{
-		return mService;
+		return mSelectId;
 	}
 	
-	const string& CommandArgs::getFlags() const
+	int8_t CommandArgs::getFlag()
 	{
-		return mFlags;
+		return mFlag;
 	}
 	
-	void CommandArgs::runParse(const string& nCommand)
+	void CommandArgs::runParse(const char * nCommand)
 	{
 		this->runClear();
-		string command_("");
-		bool space_ = true; __i32 commandType_ = 0;
-		__i32 commandLength_ = static_cast<__i32>(nCommand.length());
-		for (__i32 i = 0; i < commandLength_; ++i) {
-			if (' ' == nCommand[i]) {
-				if (space_) {
-					continue;
-				}
-				space_ = true;
-				if (commandType_ > 2) {
-					mCommandArgs.push_back(command_);
-					command_ = "";
-				}
-				continue;
-			}
-			if (space_) {
-				commandType_++;
-				space_ = false;
-			}
-			if (1 == commandType_) {
-				mService.push_back(nCommand[i]);
-			} else if (2 == commandType_) {
-				mFlags.push_back(nCommand[i]);
+		
+		vector<string> commands_;
+		stringSplit<vector<string>, string>(nCommand, commands_, " ");
+		auto it = commands_.begin();
+		for ( ; it != commands_.end(); ) {
+			string& value_ = (*it);
+			if ("" == value_) {
+				it = commands_.erase(it);
 			} else {
-				command_.push_back(nCommand[i]);
+				it++;
 			}
 		}
-		if ("" != command_) {
-			mCommandArgs.push_back(command_);
+		if (commands_.size() < 2) {
+			LOGE("[%s]size:%d", __METHOD__, commands_.size());
+			return;
+		}
+		if ("-u" == commands_[0]) {
+			mFlag = 1;
+		} else if ("-s" == commands_[0]) {
+			mFlag = 2;
+		} else if ("-b" == commands_[0]) {
+			mFlag = 3;
+		} else {
+			LOGE("[%s]%s", __METHOD__, commands_[0].c_str());
+			mFlag = 0;
+		}
+		mSelectId = convertValue<string, int32_t>(commands_[1]);
+		for ( int i = 2; i < commands_.size(); ++i ) {
+			mCommandArgs.push_back(commands_[i]);
 		}
 	}
 	
 	void CommandArgs::runClear()
 	{
 		mCommandArgs.clear();
-		mService = "";
-		mFlags = "";
+		mSelectId = 0;
+		mFlag = 0;
 	}
 	
 	CommandArgs::CommandArgs()

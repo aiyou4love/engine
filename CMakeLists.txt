@@ -13,6 +13,8 @@ endif()
 string(TOUPPER ${__GAMEEXE__} __PROJNAME__)
 add_definitions(-D__${__PROJNAME__}__)
 
+add_definitions(-D__RUNING__)
+
 include_directories($ENV{MARIADB_ROOT}/include)
 include_directories($ENV{UNSEEN_ROOT}/include)
 link_directories($ENV{UNSEEN_ROOT}/lib)
@@ -47,6 +49,10 @@ set( NETS net/net/NetEngine.cpp net/net/NetEngine.hpp
 	
 set( CONSOLES console/ConsoleItem.cpp console/ConsoleItem.hpp 
 	console/ConsoleUi.cpp console/ConsoleUi.hpp 
+	console/CommandArgs.cpp console/CommandArgs.hpp 
+	console/CommandBat.cpp console/CommandBat.hpp 
+	console/ConsoleInput.cpp console/ConsoleInput.hpp 
+	console/ConsoleUpdate.cpp console/ConsoleUpdate.hpp 
 	console/ConsoleEngine.cpp console/ConsoleEngine.hpp )
 	
 set( ACCOUNTS account/account/Account.cpp account/account/Account.hpp 
@@ -55,7 +61,7 @@ set( ACCOUNTS account/account/Account.cpp account/account/Account.hpp
 	account/account/ServerItem.cpp account/account/ServerItem.hpp 
 	account/account/ServerList.cpp account/account/ServerList.hpp )
 	
-set( ACCOUNTC  account/client/UrlValue.cpp account/client/UrlValue.hpp 
+set( ACCOUNTC account/client/UrlValue.cpp account/client/UrlValue.hpp 
 	account/client/cAccount.cpp account/client/cAccount.hpp 
 	account/client/cAccountEngine.cpp account/client/cAccountEngine.hpp 
 	account/client/AgentResult.cpp account/client/AgentResult.hpp 

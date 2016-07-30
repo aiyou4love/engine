@@ -4,8 +4,6 @@ namespace cc {
 	
 	void IfSelect::runIfSelect(EntityPtr& nEntity, ValuePtr& nValue)
 	{
-		LOGF;
-		
 		nEntity->startIfSelect(mIfSelectId);
 		auto it = mSelectors.begin();
 		for ( ; it != mSelectors.end(); ++it ) {

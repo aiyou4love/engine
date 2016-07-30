@@ -2,13 +2,13 @@
 
 namespace cc {
 	
-	class ConsoleInput : public Context
+	class ConsoleUpdate : public Context
 	{
 	public:
 		const char * contextName();
 		
 		void runContext();
 	};
-	typedef std::shared_ptr<ConsoleInput> ConsoleInputPtr;
+	typedef std::shared_ptr<ConsoleUpdate> ConsoleUpdatePtr;
 	
 }

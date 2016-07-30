@@ -11,8 +11,6 @@ namespace cc {
 		template<class T>
 		void headSerialize(T& nSerialize, const char * nName)
 		{
-			LOGF;
-			
 			if ( 0 == strcmp(streamName(), nName) ) {
 				nSerialize.runMapStreamPtrs<int32_t, IfSelectPtr>(mIfSelects, "ifSelects", "ifSelect");
 			} else {

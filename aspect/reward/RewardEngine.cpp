@@ -4,8 +4,6 @@ namespace cc {
 	
 	void RewardEngine::runReward(int32_t nRewardId, EntityPtr& nEntity, ValuePtr& nValue)
 	{
-		LOGF;
-		
 		auto it = mRewards.find(nRewardId);
 		if ( it == mRewards.end() ) {
 			LOGE("[%s]%d", __METHOD__, nRewardId);
@@ -17,8 +15,6 @@ namespace cc {
 	
 	void RewardEngine::runPreinit()
 	{
-		LOGF;
-		
 		LifeCycle& lifeCycle_ = LifeCycle::instance();
 		lifeCycle_.m_tRunLuaApi.connect(bind(&RewardEngine::runLuaApi, this));
 		lifeCycle_.m_tLoadBegin.connect(bind(&RewardEngine::runLoad, this));
@@ -26,8 +22,6 @@ namespace cc {
 	
 	void RewardEngine::runLuaApi()
 	{
-		LOGF;
-		
 		LuaEngine& luaEngine_ = LuaEngine::instance();
 		luaEngine_.runClass<RewardEngine>("RewardEngine");
 		luaEngine_.runStatic<RewardEngine>(RewardEngine::instance, "instance");
@@ -36,8 +30,6 @@ namespace cc {
 	
 	void RewardEngine::runLoad()
 	{
-		LOGF;
-		
 		TableEngine& tableEngine_ = TableEngine::instance();
 		tableEngine_.runTable<RewardEngine *>(this, streamUrl(), streamName());
 	}
@@ -54,8 +46,6 @@ namespace cc {
 	
 	RewardEngine& RewardEngine::instance()
 	{
-		LOGF;
-		
 		return mRewardEngine;
 	}
 	

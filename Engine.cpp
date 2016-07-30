@@ -4,8 +4,6 @@ using namespace cc;
 
 void engineStart()
 {
-	LOGF;
-	
 	RandomEngine& randomEngine_ = RandomEngine::instance();
 	randomEngine_.runPreinit();
 	
@@ -34,5 +32,4 @@ void engineStart()
 
 void engineStop()
 {
-	LOGF;
 }

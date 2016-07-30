@@ -5,12 +5,12 @@ namespace cc {
 	class CommandArgs : noncopyable
 	{
 	public:
-		const string& getCommandArg(const __i32 nIndex);
-		__i32 getCommandCount();
-		string& getService();
-		string& getFlags();
+		const char * getCommandArgs(int8_t nIndex);
+		int8_t getCommandCount();
+		int32_t getSelectId();
+		int8_t getFlag();
 		
-		void runParse(const string& nCommand);
+		void runParse(const char * nCommand);
 		void runClear();
 		
 	public:
@@ -19,8 +19,9 @@ namespace cc {
 		
 	private:
 		vector<string> mCommandArgs;
-		string mService;
-		string mFlags;
+		int32_t mSelectId;
+		int8_t mFlag;
 	};
+	typedef std::shared_ptr<CommandArgs> CommandArgsPtr;
 	
 }

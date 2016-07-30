@@ -4,8 +4,6 @@ namespace cc {
 	
 	int8_t Condition::runCondition(EntityPtr& nEntity, ValuePtr& nValue)
 	{
-		LOGF;
-		
 		bool waite_ = false;
 		bool reward_ = true;
 		bool continue_ = false;

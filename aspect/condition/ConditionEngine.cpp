@@ -4,8 +4,6 @@ namespace cc {
 	
 	int8_t ConditionEngine::runCondition(int32_t nConditionId, EntityPtr& nEntity, ValuePtr& nValue)
 	{
-		LOGF;
-		
 		auto it = mConditions.find(nConditionId);
 		if ( it == mConditions.end() ) {
 			LOGE("[%s]%d", __METHOD__, nConditionId);
@@ -17,8 +15,6 @@ namespace cc {
 	
 	void ConditionEngine::runPreinit()
 	{
-		LOGF;
-		
 		LifeCycle& lifeCycle_ = LifeCycle::instance();
 		lifeCycle_.m_tRunLuaApi.connect(bind(&ConditionEngine::runLuaApi, this));
 		lifeCycle_.m_tLoadBegin.connect(bind(&ConditionEngine::runLoad, this));
@@ -26,8 +22,6 @@ namespace cc {
 	
 	void ConditionEngine::runLuaApi()
 	{
-		LOGF;
-		
 		LuaEngine& luaEngine_ = LuaEngine::instance();
 		luaEngine_.runClass<ConditionEngine>("ConditionEngine");
 		luaEngine_.runStatic<ConditionEngine>(ConditionEngine::instance, "instance");
@@ -36,8 +30,6 @@ namespace cc {
 	
 	void ConditionEngine::runLoad()
 	{
-		LOGF;
-		
 		TableEngine& tableEngine_ = TableEngine::instance();
 		tableEngine_.runTable<ConditionEngine *>(this, streamUrl(), streamName());
 	}
@@ -54,8 +46,6 @@ namespace cc {
 	
 	ConditionEngine& ConditionEngine::instance()
 	{
-		LOGF;
-		
 		return mConditionEngine;
 	}
 	

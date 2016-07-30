@@ -44,7 +44,7 @@ namespace cc {
 			mWriteTimer.async_wait(boost::bind(&Session::handleWriteTimeout,
 				shared_from_this(), boost::asio::placeholders::error));
 				
-			asio::async_write(mSocket, boost::asio::buffer(mWriteBlock->getBuffer(), mWriteBlock->getTotal()),
+			asio::async_write(mSocket, boost::asio::buffer(mBufWriter.getValue(), mBufWriter.getSize()),
 				boost::bind(&Session::handleWrite, shared_from_this(), asio::placeholders::error));
 			mWriting = true;
 		} catch (boost::system::system_error& e) {
@@ -67,13 +67,13 @@ namespace cc {
 	
 	void Session::pushValue(ValuePtr& nValue)
 	{
-		lock_guard<mutex> lock_(mMutex);
+		std::lock_guard<mutex> lock_(mMutex);
 		mValues.push_back(nValue);
 	}
 
 	ValuePtr Session::popValue()
 	{
-		lock_guard<mutex> lock_(mMutex);
+		std::lock_guard<mutex> lock_(mMutex);
 		ValuePtr value_;
 		if (mValues.size() > 0) {
 			value_ = mValues.front();
@@ -90,7 +90,7 @@ namespace cc {
 			return;
 		}
 		mReadTimer.cancel();
-		this->internalRead();
+		this->internalRead(nBytes);
 		this->runRead();
 	}
 	
@@ -106,7 +106,7 @@ namespace cc {
 	
 	void Session::internalRead(size_t nBytes)
 	{
-		EpushBuf pushBuf_ = mBufReader.pushBuf(mReadBuffer.data(), nBytes);
+		EpushBuf pushBuf_ = mBufReader.pushBuf((char *)(mReadBuffer.data()), (int16_t)nBytes);
 		if (EpushBuf::mError == pushBuf_) {
 			LOGE("[%s]pushBuf:%d", __METHOD__, (int8_t)pushBuf_);
 			this->runException();
@@ -162,7 +162,7 @@ namespace cc {
 		mClosed = true;
 		mWriting = false;
 		mReadBuffer.fill(0);
-		mPackets.clear();
+		mValues.clear();
 	}
 	
 	Session::Session(asio::io_service& nIoService)
@@ -173,7 +173,7 @@ namespace cc {
 		, mWriting(false)
 	{
 		mReadBuffer.fill(0);
-		mPackets.clear();
+		mValues.clear();
 	}
 	
 	Session::~Session()

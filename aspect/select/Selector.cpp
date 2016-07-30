@@ -3,9 +3,7 @@
 namespace cc {
 	
 	bool Selector::runSelect(EntityPtr& nEntity, ValuePtr& nValue)
-	{
-		LOGF;
-		
+	{		
 		if (mConditionId > 0) {
 			nEntity->startSelect(mSelectId);
 			

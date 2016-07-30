@@ -40,8 +40,9 @@ namespace cc {
 		boost::array<int8_t, PACKETSIZE> mReadBuffer;
 		BufReader mBufReader;
 		
+		mutex mMutex;
 		deque<ValuePtr> mValues;
-		atomic<bool> mSending;
+		atomic<bool> mWriting;
 		BufWriter mBufWriter;
 		
 		bool mClosed;

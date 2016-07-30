@@ -45,6 +45,10 @@
 
 #include "ui/UiEngine.hpp"
 
+#include "console/CommandArgs.hpp"
+#include "console/CommandBat.hpp"
+#include "console/ConsoleInput.hpp"
+#include "console/ConsoleUpdate.hpp"
 #include "console/ConsoleItem.hpp"
 #include "console/ConsoleUi.hpp"
 #include "console/ConsoleEngine.hpp"
