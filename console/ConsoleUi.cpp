@@ -11,21 +11,21 @@ namespace cc {
 		mLuaThread->runCall<void, IndexValue *>(nName, &nIndexValue);
 	}
 	
-	bool ConsoleUi::runCommandArgs(CommandArgsPtr& nCommandArgs)
+	bool ConsoleUi::isCommandArgs(CommandArgsPtr& nCommandArgs)
 	{
 		int16_t itemIndex_ = (int16_t)(nCommandArgs->getSelectId());
 		auto it = mConsoleItems.find(itemIndex_);
 		if (it == mConsoleItems.end()) {
 			LOGE("[%s]%d", __METHOD__, itemIndex_);
-			return true;
+			return false;
 		}
 		ConsoleItemPtr& consoleItem_ = it->second;
 		const char * method_ = consoleItem_->getMethod();
 		int8_t type_ = consoleItem_->getType();
 		if (3 == type_) {
-			this->runClose();
+			return true;
 		} else if (1 == type_) {
-			mLuaThread->runCall<void>(method_);
+			return mLuaThread->runCall<bool>(method_);
 		} else if (2 == type_) {
 			int8_t count_ = nCommandArgs->getCommandCount();
 			if (count_ > 0) {
@@ -33,8 +33,31 @@ namespace cc {
 				mLuaThread->runCall<void, const char *>(method_, commandArgs_);
 			}
 		} else {
+			LOGE("[%s]%d", __METHOD__, type_);
 		}
 		return false;
+	}
+	
+	void ConsoleUi::runCommandArgs(CommandArgsPtr& nCommandArgs)
+	{
+		int16_t itemIndex_ = (int16_t)(nCommandArgs->getSelectId());
+		auto it = mConsoleItems.find(itemIndex_);
+		if (it == mConsoleItems.end()) {
+			LOGE("[%s]%d", __METHOD__, itemIndex_);
+			return;
+		}
+		ConsoleItemPtr& consoleItem_ = it->second;
+		const char * switch_ = consoleItem_->getSwitch();
+		int8_t type_ = consoleItem_->getType();
+		if (3 == type_) {
+			this->runClose();
+		} else if (1 == type_) {
+			mLuaThread->runCall<void>(switch_);
+		} else if (2 == type_) {
+			LOGE("[%s]%d", __METHOD__, type_);
+		} else {
+			LOGE("[%s]%d", __METHOD__, type_);
+		}
 	}
 	
 	void ConsoleUi::runText()

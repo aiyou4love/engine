@@ -5,8 +5,6 @@ namespace cc {
 #ifdef __CLIENT__
 	EdoingState cAccountEngine::runCondition(DoingPtr& nDoing, ValuePtr& nValue)
 	{
-		LOGF;
-		
 		int32_t aspectId_= nDoing->getAspectId();
 		int32_t doingId_= nDoing->getDoingId();
 		auto it = mAspects.find(aspectId_);
@@ -20,8 +18,6 @@ namespace cc {
 	
 	void cAccountEngine::runReward(DoingPtr& nDoing, ValuePtr& nValue)
 	{
-		LOGF;
-		
 		int32_t aspectId_= nDoing->getAspectId();
 		int32_t doingId_= nDoing->getDoingId();
 		auto it = mAspects.find(aspectId_);
@@ -35,8 +31,6 @@ namespace cc {
 	
 	void cAccountEngine::registerAspect(int32_t nAspectId, IAspect * nAspect)
 	{
-		LOGF;
-		
 		auto it = mAspects.find(nAspectId);
 		if ( it != mAspects.end() ) {
 			LOGE("[%s]%d", __METHOD__, nAspectId);
@@ -226,8 +220,6 @@ namespace cc {
 	
 	void cAccountEngine::runPreinit()
 	{
-		LOGF;
-		
 		LifeCycle& lifeCycle_ = LifeCycle::instance();
 		lifeCycle_.m_tRunLuaApi.connect(bind(&cAccountEngine::runLuaApi, this));
 		lifeCycle_.m_tLoadBegin.connect(bind(&cAccountEngine::runLoad, this));
@@ -235,8 +227,6 @@ namespace cc {
 	
 	void cAccountEngine::runLuaApi()
 	{
-		LOGF;
-		
 		LuaEngine& luaEngine_ = LuaEngine::instance();
 		luaEngine_.runClass<cAccountEngine>("cAccountEngine");
 		luaEngine_.runStatic<cAccountEngine>(cAccountEngine::instance, "instance");
@@ -276,8 +266,6 @@ namespace cc {
 	
 	cAccountEngine& cAccountEngine::instance()
 	{
-		LOGF;
-		
 		return mAccountEngine;
 	}
 	

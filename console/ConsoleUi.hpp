@@ -7,8 +7,9 @@ namespace cc {
 	public:
 		void runRefresh(const char * nName, IndexValue& nIndexValue);
 		
-		bool runCommandArgs(CommandArgsPtr& nCommandArgs);
-		
+		bool isCommandArgs(CommandArgsPtr& nCommandArgs);
+		void runCommandArgs(CommandArgsPtr& nCommandArgs);
+				
 		void runClose();
 		
 		void runInit(const char * nName);

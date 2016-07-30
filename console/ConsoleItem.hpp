@@ -6,6 +6,7 @@ namespace cc {
 	{
 	public:
 		const char * getMethod();
+		const char * getSwitch();
 		const char * getText();
 		const char * getName();
 		int8_t getType();
@@ -14,6 +15,7 @@ namespace cc {
 		void serialize(T * nSerialize, int8_t nCount)
 		{
 			nSerialize->runNumber(mMethod, "method");
+			nSerialize->runNumber(mSwitch, "switch");
 			nSerialize->runNumber(mType, "type");
 			nSerialize->runNumber(mName, "name");
 			nSerialize->runNumber(mText, "text");
@@ -28,6 +30,7 @@ namespace cc {
 		
 	private:
 		string mMethod;
+		string mSwitch;
 		int8_t mType;
 		string mName;
 		string mText;

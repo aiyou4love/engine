@@ -43,8 +43,8 @@ namespace cc {
 	void ConsoleEngine::closeUi()
 	{
 		ConsoleUiPtr consoleUi_ = mConsoleUis.back();
-		consoleUi_->runClose();
 		mConsoleUis.pop_back();
+		consoleUi_->runClose();
 		
 		this->runRefresh();
 	}
@@ -103,10 +103,13 @@ namespace cc {
 		if (!commandArgs_) {
 			return;
 		}
-		ConsoleUiPtr& consoleUi_ = mConsoleUis.back();
-		if ( consoleUi_->runCommandArgs(commandArgs_) ) {
+		ConsoleUiPtr consoleUi_ = mConsoleUis.back();
+		if ( consoleUi_->isCommandArgs(commandArgs_) ) {
 			mConsoleUis.pop_back();
+			consoleUi_->runCommandArgs(commandArgs_);
+			consoleUi_->runClose();
 		}
+		this->runRefresh();
 	}
 	
 	void ConsoleEngine::runPreinit()
