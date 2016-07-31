@@ -115,7 +115,7 @@ namespace cc {
 		mRoleList->runClear();
 	}
 	
-	int8_t cAccountEngine::accountEnter()
+	int8_t cAccountEngine::getAgentServer()
 	{
 		WorkDirectory& workDirectory_ = WorkDirectory::instance();
 		const char * operatorName_ = workDirectory_.getOperatorName();

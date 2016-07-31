@@ -16,7 +16,7 @@ namespace cc {
 		int8_t roleCreate(const char * nRoleName, int16_t nRoleRace);
 		void cancelAccount(int64_t nAccountId);
 		void selectServer(int32_t nServerId, int32_t nRoleId);
-		int8_t accountEnter();
+		int8_t getAgentServer();
 		string startServers();
 		string pageServers(int16_t nPageId, int16_t nPageCount);
 		
