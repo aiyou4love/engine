@@ -70,8 +70,16 @@ set( ACCOUNTC account/client/UrlValue.cpp account/client/UrlValue.hpp
 	account/client/ServerInfo.cpp account/client/ServerInfo.hpp 
 	account/client/cRoleList.cpp account/client/cRoleList.hpp )
 
-add_library( libengine STATIC ${RANDOMS} ${ASPECTS} ${ACCOUNTS} ${ACCOUNTC}
+if(${__GAMEEXE__} MATCHES "client")
+add_library( libclient STATIC ${RANDOMS} ${ASPECTS} ${ACCOUNTS} ${ACCOUNTC}
 	${ENGINES} ${UIS} ${CONSOLES} ${NETS} )
-	
-install (TARGETS libengine DESTINATION $ENV{UNSEEN_ROOT}/lib)
+install (TARGETS libclient DESTINATION $ENV{UNSEEN_ROOT}/lib)
+endif()
+
+if(${__GAMEEXE__} MATCHES "agent")
+add_library( libagent STATIC ${RANDOMS} ${ASPECTS} ${ACCOUNTS} ${ACCOUNTC}
+	${ENGINES} ${UIS} ${CONSOLES} ${NETS} )
+install (TARGETS libagent DESTINATION $ENV{UNSEEN_ROOT}/lib)
+endif()
+
 
