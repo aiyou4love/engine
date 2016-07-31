@@ -3,9 +3,7 @@
 namespace cc {
 	
 	void NetEngine::initNet(EntityPtr& nEntity, ConnectInfo& nConnectInfo)
-	{
-		LOGF;
-		
+	{		
 		IoService& ioService_ = IoService::instance();
 		asio::io_service& ioHandle_ = ioService_.getIoService();
 		
@@ -29,7 +27,6 @@ namespace cc {
 	
 	void NetEngine::sendNet(EntityPtr& nEntity, ValuePtr& nValue)
 	{
-		LOGF;
 	}
 	
 	NetEngine& NetEngine::instance()

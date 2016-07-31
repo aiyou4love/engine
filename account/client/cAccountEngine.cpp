@@ -38,7 +38,7 @@ namespace cc {
 		}
 		mAspects[nAspectId] = nAspect;
 	}
-	
+		
 	int8_t cAccountEngine::isRegister(const char * nValue)
 	{
 		string value_;
@@ -115,7 +115,7 @@ namespace cc {
 		mRoleList->runClear();
 	}
 	
-	int8_t cAccountEngine::getAgentServer()
+	int8_t cAccountEngine::getAgentServer(ValuePtr& nValue)
 	{
 		WorkDirectory& workDirectory_ = WorkDirectory::instance();
 		const char * operatorName_ = workDirectory_.getOperatorName();
@@ -127,18 +127,22 @@ namespace cc {
 		string value_;
 		int8_t errorCode_ = runHttp(value_, 6, operatorName_, versionNo_, serverId_);
 		if (1 != errorCode_) {
+			nValue->pushInt8(errorCode_);
 			return errorCode_;
 		}
 		AgentResult agentResult_;
 		this->runClass(&agentResult_, value_, agentResult_.streamName());
 		if (1 != agentResult_.getErrorCode()) {
+			nValue->pushInt8((int8_t)2);
 			return 2;
 		}
 		
 		mServerInfo.setServerInfo(agentResult_.getServerInfo());
         mAgentPort = agentResult_.getAgentPort();
         mAgentIp = agentResult_.getAgentIp();
-		
+		nValue->pushInt8((int8_t)1);
+		nValue->pushString(mAgentIp.c_str());
+		nValue->pushString(mAgentPort.c_str());
 		return 1;
 	}
 	

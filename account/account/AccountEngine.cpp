@@ -22,7 +22,7 @@ namespace cc {
 		
 	}
 	
-	int8_t AccountEngine::getAgentServer()
+	int8_t AccountEngine::getAgentServer(ValuePtr& nValue)
 	{
 		return 0;
 	}

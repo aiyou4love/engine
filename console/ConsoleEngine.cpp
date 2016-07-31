@@ -27,7 +27,7 @@ namespace cc {
 	
 	void ConsoleEngine::runRefresh()
 	{
-		//std::system("cls");
+		std::system("cls");
 		if (mConsoleUis.empty()) {
 			return;
 		}
@@ -114,7 +114,7 @@ namespace cc {
 	
 	void ConsoleEngine::runPreinit()
 	{
-		std::system("chcp 65001");
+		//std::system("chcp 65001");
 		
 		LifeCycle& lifeCycle_ = LifeCycle::instance();
 		lifeCycle_.m_tIniting.connect(bind(&ConsoleEngine::runInit, this));
