@@ -27,7 +27,7 @@ namespace cc {
 	
 	void ConsoleEngine::runRefresh()
 	{
-		std::system("cls");
+		//std::system("cls");
 		if (mConsoleUis.empty()) {
 			return;
 		}
