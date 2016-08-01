@@ -3,6 +3,15 @@
 namespace cc {
 	
 #ifdef __CLIENT__
+	struct EaccountUrl
+	{
+		static const int8_t mAccountCheck = 1;
+		static const int8_t mAccountRegister = 2;
+		static const int8_t mAccountLogin = 3;
+		static const int8_t mServerList = 4;
+		static const int8_t mIdleServer = 5;
+		static const int8_t mCreateRole = 6;
+	};
 	EdoingState cAccountEngine::runCondition(DoingPtr& nDoing, ValuePtr& nValue)
 	{
 		int32_t aspectId_= nDoing->getAspectId();
@@ -42,7 +51,7 @@ namespace cc {
 	int8_t cAccountEngine::isRegister(const char * nValue)
 	{
 		string value_;
-		int8_t errorCode_ = runHttp(value_, 1, nValue);
+		int8_t errorCode_ = runHttp(value_, EaccountUrl::mAccountCheck, nValue);
 		if (1 != errorCode_) {
 			return errorCode_;
 		}
@@ -58,7 +67,7 @@ namespace cc {
 	int8_t cAccountEngine::registerAccount(const char * nName, const char * nPassword)
 	{
 		string value_;
-		int8_t errorCode_ = runHttp(value_, 2, nName, nPassword);
+		int8_t errorCode_ = runHttp(value_, EaccountUrl::mAccountRegister, nName, nPassword);
 		if (1 != errorCode_) {
 			return errorCode_;
 		}
@@ -78,7 +87,7 @@ namespace cc {
 		int16_t versionNo_ = workDirectory_.getVersionNo();
 		
 		string value_;
-		int8_t errorCode_ = runHttp(value_, 3, nName, nPassword, operatorName_, versionNo_, nAccountType);
+		int8_t errorCode_ = runHttp(value_, EaccountUrl::mAccountLogin, nName, nPassword, operatorName_, versionNo_, nAccountType);
 		if (1 != errorCode_) {
 			return errorCode_;
 		}
@@ -125,7 +134,7 @@ namespace cc {
 		int32_t serverId_ = account_->getServerId();
 		
 		string value_;
-		int8_t errorCode_ = runHttp(value_, 6, operatorName_, versionNo_, serverId_);
+		int8_t errorCode_ = runHttp(value_, EaccountUrl::mIdleServer, operatorName_, versionNo_, serverId_);
 		if (1 != errorCode_) {
 			nValue->pushInt8(errorCode_);
 			return errorCode_;
@@ -185,7 +194,7 @@ namespace cc {
 		bool update_ = !(account_->isStartRole());
 		
 		string value_;
-		int8_t errorCode_ = runHttp(value_, 7, accountName_, password_, accountType_, operatorName_, versionNo_,
+		int8_t errorCode_ = runHttp(value_, EaccountUrl::mCreateRole, accountName_, password_, accountType_, operatorName_, versionNo_,
 			accountId_, serverId_, nRoleName, nRoleRace, update_);
 		if (1 != errorCode_) {
 			return errorCode_;
