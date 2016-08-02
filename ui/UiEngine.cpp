@@ -8,6 +8,12 @@ namespace cc {
 		consoleEngine_.showUi(nName);
 	}
 	
+	void UiEngine::loadUi(const char * nName)
+	{
+		ConsoleEngine& consoleEngine_ = ConsoleEngine::instance();
+		consoleEngine_.loadUi(nName);
+	}
+	
 	void UiEngine::refreshUi(const char * nName, IndexValue& nIndexValue)
 	{
 		ConsoleEngine& consoleEngine_ = ConsoleEngine::instance();

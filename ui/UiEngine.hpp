@@ -6,7 +6,8 @@ namespace cc {
 	{
 	public:
 		void showUi(const char * nName);
-		
+		void loadUi(const char * nName);
+				
 		void refreshUi(const char * nName, IndexValue& nIndexValue);
 		
 		void closeUi();
