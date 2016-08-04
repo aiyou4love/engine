@@ -14,6 +14,11 @@ namespace cc {
 		}
 	}
 	
+	int16_t IfSelect::getAppType()
+	{
+		return mAppType;
+	}
+	
 	bool IfSelect::isDefault()
 	{
 		return ( (0 == mIfSelectId) || (mSelectors.size() <= 0) );
@@ -26,12 +31,14 @@ namespace cc {
 	
 	IfSelect::IfSelect()
 	{
+		mAppType = EappType::mGameClient;
 		mSelectors.clear();
 		mIfSelectId = 0;
 	}
 	
 	IfSelect::~IfSelect()
 	{
+		mAppType = EappType::mGameClient;
 		mSelectors.clear();
 		mIfSelectId = 0;
 	}

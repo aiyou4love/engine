@@ -3,7 +3,7 @@
 namespace cc {
 	
 	bool Selector::runSelect(EntityPtr& nEntity, ValuePtr& nValue)
-	{		
+	{
 		if (mConditionId > 0) {
 			nEntity->startSelect(mSelectId);
 			
@@ -20,12 +20,12 @@ namespace cc {
 			return true;
 		}
 	}
-
+	
 	bool Selector::isDefault()
 	{
 		return ( (0 == mSelectId) || (0 == mRewardId) );
 	}
-
+	
 	int8_t Selector::getKey()
 	{
 		return mSelectId;

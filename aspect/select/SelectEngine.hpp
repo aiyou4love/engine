@@ -11,17 +11,10 @@ namespace cc {
 		template<class T>
 		void headSerialize(T& nSerialize, const char * nName)
 		{
-			if ( 0 == strcmp(streamName(), nName) ) {
-				nSerialize.runMapStreamPtrs<int32_t, IfSelectPtr>(mIfSelects, "ifSelects", "ifSelect");
-			} else {
-				LOGE("[%s]%s", __METHOD__, nName);
-			}
+			nSerialize.runMapStreamPtrs<int32_t, IfSelectPtr>(mIfSelects, "ifSelects", "ifSelect");
 		}
 		const char * streamName();
 		const char * streamUrl();
-		
-		const char * startName();
-		const char * startUrl();
 		
 		static SelectEngine& instance();
 		
@@ -34,7 +27,6 @@ namespace cc {
 		
 	private:
 		map<int32_t, IfSelectPtr> mIfSelects;
-		list<int32_t> mSelectStarts;
 		
 		static SelectEngine mSelectEngine;
 	};

@@ -10,7 +10,18 @@ namespace cc {
 			return;
 		}
 		IfSelectPtr& ifSelect_ = it->second;
-		ifSelect_->runIfSelect(nEntity, nValue);
+		
+		WorkDirectory& workDirectory_ = WorkDirectory::instance();
+		
+		int16_t appType_ = ifSelect_->getAppType();
+		int16_t appType1_ = workDirectory_.getAppType();
+		
+		if ( (appType_ & appType1_) > 0 ) {
+			ifSelect_->runIfSelect(nEntity, nValue);
+		} else {
+			DispatchEngine& dispatchEngine_ = DispatchEngine::instance();
+			dispatchEngine_->runIfSelect(ifSelect_, nEntity, nValue);
+		}
 	}
 	
 	void SelectEngine::runPreinit()

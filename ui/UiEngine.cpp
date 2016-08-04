@@ -20,10 +20,10 @@ namespace cc {
 		consoleEngine_.refreshUi(nName, nIndexValue);
 	}
 	
-	void UiEngine::closeUi()
+	void UiEngine::closeUi(const char * nName)
 	{
 		ConsoleEngine& consoleEngine_ = ConsoleEngine::instance();
-		consoleEngine_.closeUi();
+		consoleEngine_.closeUi(nName);
 	}
 	
 	void UiEngine::clearUi()
