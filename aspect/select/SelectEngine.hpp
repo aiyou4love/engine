@@ -5,7 +5,7 @@ namespace cc {
 	class SelectEngine : noncopyable
 	{
 	public:
-		void runIfSelect(int32_t nIfSelectId, EntityPtr& nEntity, ValuePtr& nValue);
+		void runIfSelect(EntityPtr& nEntity, ValuePtr& nValue);
 		
 	public:
 		template<class T>

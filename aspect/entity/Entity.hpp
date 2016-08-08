@@ -8,30 +8,14 @@ namespace cc {
 		void insertProperty(int32_t nPropertyId, PropertyPtr& nProperty);
 		PropertyPtr& getProperty(int32_t nPropertyId);
 		
-		virtual EdoingState runCondition(DoingPtr& nDoing, ValuePtr& nValue) = 0;
+		virtual bool runCondition(DoingPtr& nDoing, ValuePtr& nValue) = 0;
 		virtual void runReward(DoingPtr& nDoing, ValuePtr& nValue) = 0;
-		
-		void pushDoingState(int8_t nDoingId, EdoingState nDoingState);
-		
-		void startIfSelect(int32_t nIfSelectId);
-		void startSelect(int32_t nSelectId);
-		
-		void pushValue(ValuePtr& nValue);
-		ValuePtr popValue();
 		
 		Entity();
 		virtual ~Entity();
 		
 	private:
-		map<int32_t, SelectStatePtr> mSelectStates;
-		
 		map<int32_t, PropertyPtr> mPropertys;
-		
-		mutex mMutex;
-		deque<ValuePtr> mValues;
-		
-		int32_t mIfSelectId;
-		bool mIncrease;
 	};
 	
 }

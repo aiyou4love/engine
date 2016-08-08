@@ -22,64 +22,14 @@ namespace cc {
 		return it->second;
 	}
 	
-	void Entity::pushDoingState(int8_t nDoingId, EdoingState nDoingState)
-	{
-		SelectStatePtr& selectState_ = mSelectStates[mIfSelectId];
-		selectState_->pushDoingState(nDoingId, nDoingState);
-		mIncrease = true;
-	}
-	
-	void Entity::startIfSelect(int32_t nIfSelectId)
-	{
-		if (mIncrease) {
-			mIfSelectId++;
-			SelectStatePtr selectState_(new SelectState(nIfSelectId));
-			mSelectStates[mIfSelectId] = selectState_;
-			mIncrease = false;
-		} else {
-			SelectStatePtr& selectState_ = mSelectStates[mIfSelectId];
-			selectState_->setIfSelect(nIfSelectId);
-		}
-	}
-	
-	void Entity::startSelect(int32_t nSelectId)
-	{
-		SelectStatePtr& selectState_ = mSelectStates[mIfSelectId];
-		selectState_->setSelect(nSelectId);
-	}
-	
-	void Entity::pushValue(ValuePtr& nValue)
-	{
-		std::lock_guard<mutex> lock_(mMutex);
-		mValues.push_back(nValue);
-	}
-	
-	ValuePtr Entity::popValue()
-	{
-		std::lock_guard<mutex> lock_(mMutex);
-		ValuePtr value_;
-		if (mValues.size() > 0) {
-			value_ = mValues.front();
-			mValues.pop_front();
-		}
-		return value_;
-	}
-	
 	Entity::Entity()
-		: mIncrease (true)
-		, mIfSelectId(0)
 	{
-		mSelectStates.clear();
 		mPropertys.clear();
 	}
 	
 	Entity::~Entity()
 	{
-		mSelectStates.clear();
 		mPropertys.clear();
-		
-		mIfSelectId = 0;
-		mIncrease = true;
 	}
 	
 }

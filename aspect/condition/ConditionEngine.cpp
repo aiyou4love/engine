@@ -2,12 +2,12 @@
 
 namespace cc {
 	
-	int8_t ConditionEngine::runCondition(int32_t nConditionId, EntityPtr& nEntity, ValuePtr& nValue)
+	bool ConditionEngine::runCondition(int32_t nConditionId, EntityPtr& nEntity, ValuePtr& nValue)
 	{
 		auto it = mConditions.find(nConditionId);
 		if ( it == mConditions.end() ) {
 			LOGE("[%s]%d", __METHOD__, nConditionId);
-			return 0x0;
+			return false;
 		}
 		ConditionPtr& condition_ = it->second;
 		return condition_->runCondition(nEntity, nValue);

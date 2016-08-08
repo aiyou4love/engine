@@ -5,7 +5,7 @@ namespace cc {
 	class Condition : noncopyable
 	{
 	public:
-		int8_t runCondition(EntityPtr& nEntity, ValuePtr& nValue);
+		bool runCondition(EntityPtr& nEntity, ValuePtr& nValue);
 		
 		template<class T>
 		void serialize(T * nSerialize, int8_t nCount)

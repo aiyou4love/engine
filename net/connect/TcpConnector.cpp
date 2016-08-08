@@ -55,7 +55,8 @@ namespace cc {
 			SelectEngine& selectEngine_ = SelectEngine::instance();
 			EntityPtr& entity_ = this->getEntity();
 			ValuePtr value_(new Value());
-			selectEngine_.runIfSelect(mConnectId, entity_, value_);
+			value_->pushInt32(mConnectId);
+			selectEngine_.runIfSelect(entity_, value_);
 		}
 	}
 	
@@ -67,7 +68,8 @@ namespace cc {
 			SelectEngine& selectEngine_ = SelectEngine::instance();
 			EntityPtr& entity_ = this->getEntity();
 			ValuePtr value_(new Value());
-			selectEngine_.runIfSelect(mDisconnectId, entity_, value_);
+			value_->pushInt32(mDisconnectId);
+			selectEngine_.runIfSelect(entity_, value_);
 		}
 	}
 	
@@ -79,7 +81,8 @@ namespace cc {
 			SelectEngine& selectEngine_ = SelectEngine::instance();
 			EntityPtr& entity_ = this->getEntity();
 			ValuePtr value_(new Value());
-			selectEngine_.runIfSelect(mExceptionId, entity_, value_);
+			value_->pushInt32(mExceptionId);
+			selectEngine_.runIfSelect(entity_, value_);
 		}
 	}
 	
@@ -91,7 +94,8 @@ namespace cc {
 			SelectEngine& selectEngine_ = SelectEngine::instance();
 			EntityPtr& entity_ = this->getEntity();
 			ValuePtr value_(new Value());
-			selectEngine_.runIfSelect(mTimeoutId, entity_, value_);
+			value_->pushInt32(mTimeoutId);
+			selectEngine_.runIfSelect(entity_, value_);
 		}
 	}
 	
