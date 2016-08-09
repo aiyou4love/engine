@@ -11,13 +11,12 @@ namespace cc {
 			return;
 		}
 		IfSelectPtr& ifSelect_ = it->second;
+		int16_t appType0_ = ifSelect_->getAppType();
 		
 		WorkDirectory& workDirectory_ = WorkDirectory::instance();
-		
-		int16_t appType_ = ifSelect_->getAppType();
 		int16_t appType1_ = workDirectory_.getAppType();
 		
-		if ( (appType_ & appType1_) > 0 ) {
+		if ( appType0_ == appType1_ ) {
 			ifSelect_->runIfSelect(nEntity, nValue);
 		} else {
 			DispatchEngine& dispatchEngine_ = DispatchEngine::instance();

@@ -1,5 +1,6 @@
 #pragma once
 
+#ifdef __CLIENT__
 namespace cc {
 	
 	class DispatchEngine : noncopyable
@@ -15,3 +16,4 @@ namespace cc {
 	};
 	
 }
+#endif
