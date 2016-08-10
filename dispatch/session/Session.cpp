@@ -146,9 +146,9 @@ namespace cc {
 	{
 		this->runClose();
 		
-		if (mExceptionId > 0) {
+		if (mDisconnectId > 0) {
 			ValuePtr value_(new Value());
-			value_->pushInt32(mExceptionId);
+			value_->pushInt32(mDisconnectId);
 			(*mEntity)->pushValue(value_);
 		}
 	}
@@ -157,9 +157,9 @@ namespace cc {
 	{
 		this->runClose();
 		
-		if (mDisconnectId > 0) {
+		if (mExceptionId > 0) {
 			ValuePtr value_(new Value());
-			value_->pushInt32(mDisconnectId);
+			value_->pushInt32(mExceptionId);
 			(*mEntity)->pushValue(value_);
 		}
 	}
