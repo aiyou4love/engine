@@ -25,9 +25,14 @@ namespace cc {
 		
 		void runDisconnect();
 		void runException();
+		void runClear();
 		void runClose();
 		
-		Session(asio::io_service& nIoService, EntityPtr& nEntity);
+		void setDisconnect(int32_t nDisconnectId);
+		void setException(int32_t nExceptionId);
+		void setEntity(EntityPtr& nEntity);
+		
+		Session(asio::io_service& nIoService);
 		~Session();
 		
 	protected:
@@ -39,11 +44,13 @@ namespace cc {
 		boost::array<int8_t, PACKETSIZE> mReadBuffer;
 		BufReader mBufReader;
 		
-		mutex mMutex;
 		deque<ValuePtr> mValues;
 		atomic<bool> mWriting;
 		BufWriter mBufWriter;
+		mutex mMutex;
 		
+		int32_t mDisconnectId;
+		int32_t mExceptionId;
 		EntityPtr * mEntity;
 		
 		bool mClosed;

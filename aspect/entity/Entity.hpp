@@ -11,11 +11,17 @@ namespace cc {
 		virtual bool runCondition(DoingPtr& nDoing, ValuePtr& nValue) = 0;
 		virtual void runReward(DoingPtr& nDoing, ValuePtr& nValue) = 0;
 		
+		void pushValue(ValuePtr& nValue);
+		ValuePtr popValue();
+		
 		Entity();
 		virtual ~Entity();
 		
 	private:
 		map<int32_t, PropertyPtr> mPropertys;
+		
+		deque<ValuePtr> mValues;
+		mutex mMutex;
 	};
 	
 }

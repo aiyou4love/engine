@@ -11,7 +11,7 @@ namespace cc {
 		~Dispatch();
 		
 	private:
-		map<int16_t, SessionPt> mSessions;
+		map<int16_t, SessionPt *> mSessions;
 	};
 	typedef std::shared_ptr<Dispatch> DispatchPtr;
 	

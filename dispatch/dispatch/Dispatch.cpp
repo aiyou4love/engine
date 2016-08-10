@@ -9,8 +9,8 @@ namespace cc {
 			LOGE("[%s]%d", __METHOD__, nAppType);
 			return;
 		}
-		SessionPt& session_ = it->second;
-		session_->runSend(nValue);
+		SessionPt * session_ = it->second;
+		(*session_)->runSend(nValue);
 	}
 	
 	Dispatch::Dispatch()
