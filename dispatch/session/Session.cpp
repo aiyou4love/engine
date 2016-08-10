@@ -62,6 +62,7 @@ namespace cc {
 		this->pushValue(nValue);
 		if (false == mWriting) {
 			this->internalWrite();
+			this->runWrite();
 		}
 	}
 	
@@ -70,7 +71,7 @@ namespace cc {
 		std::lock_guard<mutex> lock_(mMutex);
 		mValues.push_back(nValue);
 	}
-
+	
 	ValuePtr Session::popValue()
 	{
 		std::lock_guard<mutex> lock_(mMutex);
@@ -106,7 +107,9 @@ namespace cc {
 	
 	void Session::internalRead(size_t nBytes)
 	{
-		EpushBuf pushBuf_ = mBufReader.pushBuf((char *)(mReadBuffer.data()), (int16_t)nBytes);
+		char * buf_ = (char *)(mReadBuffer.data());
+		int16_t size_ = (int16_t)nBytes;
+		EpushBuf pushBuf_ = mBufReader.pushBuf(buf_, size_);
 		if (EpushBuf::mError == pushBuf_) {
 			LOGE("[%s]pushBuf:%d", __METHOD__, (int8_t)pushBuf_);
 			this->runException();

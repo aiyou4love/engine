@@ -2,9 +2,12 @@
 
 namespace cc {
 	
-	class Session : public std::enable_shared_from_this<Session>, public Property
+	class Session : public std::enable_shared_from_this<Session>, noncopyable
 	{
 	public:
+		enum { write_timeout = 300 };
+		enum { read_timeout = 300 };
+		
 		void handleWriteTimeout(const boost::system::error_code& nError);
 		void handleWrite(const boost::system::error_code& nError);
 		void internalWrite();
@@ -20,15 +23,11 @@ namespace cc {
 		void internalRead(size_t nBytes);
 		void runRead();
 		
-		virtual void runDisconnect();
-		virtual void runException();
-		virtual void runClose();
+		void runDisconnect();
+		void runException();
+		void runClose();
 		
-	public:
-		enum { write_timeout = 150 };
-		enum { read_timeout = 300 };
-		
-		Session(asio::io_service& nIoService);
+		Session(asio::io_service& nIoService, EntityPtr& nEntity);
 		~Session();
 		
 	protected:
@@ -44,6 +43,8 @@ namespace cc {
 		deque<ValuePtr> mValues;
 		atomic<bool> mWriting;
 		BufWriter mBufWriter;
+		
+		EntityPtr * mEntity;
 		
 		bool mClosed;
 	};
