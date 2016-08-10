@@ -2,14 +2,14 @@
 
 namespace cc {
 	
-	void ConnectInfo::setServerIp(const char * nServerIp)
+	void ConnectInfo::setDisconnectId(int32_t nDisconnectId)
 	{
-		mServerIp = nServerIp;
+		mDisconnectId = nDisconnectId;
 	}
 	
-	void ConnectInfo::setServerPort(const char * nServerPort)
+	void ConnectInfo::setExceptionId(int32_t nExceptionId)
 	{
-		mServerPort = nServerPort;
+		mExceptionId = nExceptionId;
 	}
 	
 	void ConnectInfo::setConnectId(int32_t nConnectId)
@@ -22,24 +22,14 @@ namespace cc {
 		mTimeoutId = nTimeoutId;
 	}
 	
-	void ConnectInfo::setDisconnectId(int32_t nDisconnectId)
+	int32_t ConnectInfo::getDisconnectId()
 	{
-		mDisconnectId = nDisconnectId;
+		return mDisconnectId;
 	}
 	
-	void ConnectInfo::setExceptionId(int32_t nExceptionId)
+	int32_t ConnectInfo::getExceptionId()
 	{
-		mExceptionId = nExceptionId;
-	}
-	
-	const char * ConnectInfo::getServerIp()
-	{
-		return mServerIp.c_str();
-	}
-	
-	const char * ConnectInfo::getServerPort()
-	{
-		return mServerPort.c_str();
+		return mExceptionId;
 	}
 	
 	int32_t ConnectInfo::getConnectId()
@@ -52,20 +42,8 @@ namespace cc {
 		return mTimeoutId;
 	}
 	
-	int32_t ConnectInfo::getDisconnectId()
-	{
-		return mDisconnectId;
-	}
-	
-	int32_t ConnectInfo::getExceptionId()
-	{
-		return mExceptionId;
-	}
-	
 	ConnectInfo::ConnectInfo()
-		: mServerIp ("")
-		, mServerPort ("")
-		, mConnectId (0)
+		: mConnectId (0)
 		, mTimeoutId (0)
 		, mDisconnectId (0)
 		, mExceptionId (0)
@@ -75,8 +53,6 @@ namespace cc {
 	
 	ConnectInfo::~ConnectInfo()
 	{
-		mServerIp = "";
-		mServerPort = "";
 		mConnectId = 0;
 		mTimeoutId = 0;
 		mDisconnectId = 0;
