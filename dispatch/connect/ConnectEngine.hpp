@@ -5,6 +5,7 @@ namespace cc {
 	class ConnectEngine : noncopyable
 	{
 	public:
+		void run
 		template<class T>
 		void headSerialize(T& nSerialize, const char * nName)
 		{
