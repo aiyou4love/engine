@@ -2,126 +2,39 @@
 
 namespace cc {
 	
-	void TcpConnector::runConnector(asio::ip::tcp::resolver::iterator& nIterator, ConnectInfo& nConnectInfo)
+	const char * ConnectEngine::streamName()
 	{
-		mDisconnectId = nConnectInfo.getDisconnectId();
-		mTimeoutId = nConnectInfo.getTimeoutId();
-		mConnectId = nConnectInfo.getConnectId();
-		mExceptionId = nConnectInfo.getExceptionId();
-		
-		try {
-			boost::asio::async_connect(mSocket, nIterator,
-			boost::bind(&TcpConnector::handleConnect, this, boost::asio::placeholders::error));
-			
-			mConnectTimer.expires_from_now(boost::posix_time::seconds(TcpConnector::connect_timeout));
-			mConnectTimer.async_wait(boost::bind(&TcpConnector::handleConnectTimeout, 
-				this, boost::asio::placeholders::error));
-		} catch (boost::system::system_error& e) {
-			LOGE("[%s]%s", __METHOD__, e.what());
-			this->runException();
-		}
+		return "connectIp";
 	}
 	
-	void TcpConnector::handleConnectTimeout(const boost::system::error_code& nError)
+	const char * ConnectEngine::streamUrl()
 	{
-		if (nError) {
-			LOGE("[%s]%s", __METHOD__, nError.message());
-			this->runException();
-			return;
-		}
-		if (mConnectTimer.expires_at() <= asio::deadline_timer::traits_type::now()) {
-			mConnectTimer.expires_at(boost::posix_time::pos_infin);
-			
-			this->runTimeout();
-		}
+		return "connectIp.json";
 	}
 	
-	void TcpConnector::handleConnect(const boost::system::error_code& nError)
+	const char * ConnectEngine::infoName()
 	{
-		if (nError) {
-			LOGE("[%s]%s", __METHOD__, nError.message());
-			this->runException();
-			return;
-		}
-		mConnectTimer.cancel();
-		mClosed = false;
-		this->runRead();
-		this->runConnect();
+		return "connectInfo";
 	}
 	
-	void TcpConnector::runConnect()
+	const char * ConnectEngine::infoUrl()
 	{
-		if (mConnectId > 0) {
-			SelectEngine& selectEngine_ = SelectEngine::instance();
-			EntityPtr& entity_ = this->getEntity();
-			ValuePtr value_(new Value());
-			value_->pushInt32(mConnectId);
-			selectEngine_.runIfSelect(entity_, value_);
-		}
+		return "connectInfo.json";
 	}
 	
-	void TcpConnector::runDisconnect()
+	ConnectEngine& ConnectEngine::instance()
 	{
-		Session::runDisconnect();
-		
-		if (mDisconnectId > 0) {
-			SelectEngine& selectEngine_ = SelectEngine::instance();
-			EntityPtr& entity_ = this->getEntity();
-			ValuePtr value_(new Value());
-			value_->pushInt32(mDisconnectId);
-			selectEngine_.runIfSelect(entity_, value_);
-		}
+		return mConnectEngine;
 	}
 	
-	void TcpConnector::runException()
-	{
-		Session::runException();
-		
-		if (mExceptionId > 0) {
-			SelectEngine& selectEngine_ = SelectEngine::instance();
-			EntityPtr& entity_ = this->getEntity();
-			ValuePtr value_(new Value());
-			value_->pushInt32(mExceptionId);
-			selectEngine_.runIfSelect(entity_, value_);
-		}
-	}
-	
-	void TcpConnector::runTimeout()
-	{
-		this->runClose();
-		
-		if (mTimeoutId > 0) {
-			SelectEngine& selectEngine_ = SelectEngine::instance();
-			EntityPtr& entity_ = this->getEntity();
-			ValuePtr value_(new Value());
-			value_->pushInt32(mTimeoutId);
-			selectEngine_.runIfSelect(entity_, value_);
-		}
-	}
-	
-	void TcpConnector::runClose()
-	{
-		Session::runClose();
-		
-		mConnectTimer.cancel();
-	}
-	
-	TcpConnector::TcpConnector(asio::io_service& nIoService)
-		: mConnectTimer (nIoService)
-		, Session (nIoService)
-		, mDisconnectId (0)
-		, mConnectId (0)
-		, mExceptionId (0)
-		, mTimeoutId (0)
+	ConnectEngine::ConnectEngine()
 	{
 	}
 	
-	TcpConnector::~TcpConnector()
+	ConnectEngine::~ConnectEngine()
 	{
-		mDisconnectId = 0;
-		mConnectId = 0;
-		mTimeoutId = 0;
-		mExceptionId = 0;
 	}
+	
+	ConnectEngine ConnectEngine::mConnectEngine;
 	
 }

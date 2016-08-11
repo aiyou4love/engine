@@ -5,11 +5,18 @@ namespace cc {
 	class ConnectIp : noncopyable
 	{
 	public:
-		void setServerPort(const char * nServerPort);
-		void setServerIp(const char * nServerIp);
-		
 		const char * getServerPort();
 		const char * getServerIp();
+		
+		template<class T>
+		void serialize(T * nSerialize, int8_t nCount)
+		{
+			nSerialize->runNumber(mConnectIpId, "connectIpId");
+			nSerialize->runNumber(mServerPort, "serverPort");
+			nSerialize->runNumber(mServerIp, "serverIp");
+		}
+		bool isDefault();
+		int32_t getKey();
 		
 		ConnectIp();
 		~ConnectIp();
