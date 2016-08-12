@@ -32,7 +32,9 @@ namespace cc {
 		void setException(int32_t nExceptionId);
 		void setEntity(EntityPtr& nEntity);
 		
-		Session(asio::io_service& nIoService);
+		asio::ip::tcp::socket& getSocket();
+		
+		Session(int32_t nSessionId, asio::io_service& nHandle);
 		~Session();
 		
 	protected:
@@ -52,6 +54,8 @@ namespace cc {
 		int32_t mDisconnectId;
 		int32_t mExceptionId;
 		EntityPtr * mEntity;
+		
+		int32_t mSessionId;
 		
 		bool mClosed;
 	};

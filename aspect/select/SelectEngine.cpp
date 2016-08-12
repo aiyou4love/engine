@@ -25,11 +25,26 @@ namespace cc {
 		dispatch_->runValue(appType0_, nValue);
 	}
 	
+	void SelectEngine::runStart()
+	{
+		ApplicationEngine& applicationEngine_ = ApplicationEngine::instance();
+		EntityPtr& entity_ = applicationEngine_->getEntity();
+		
+		auto it = mStartIds.begin();
+		for ( ; it != mStartIds.end(); ++it ) {
+			int32_t startId_ = (*it);
+			ValuePtr value_(new Value());
+			value_->pushInt32(startId_);
+			this->runIfSelect(entity_, value_);
+		}
+	}
+	
 	void SelectEngine::runPreinit()
 	{
 		LifeCycle& lifeCycle_ = LifeCycle::instance();
 		lifeCycle_.m_tRunLuaApi.connect(bind(&SelectEngine::runLuaApi, this));
 		lifeCycle_.m_tLoadBegin.connect(bind(&SelectEngine::runLoad, this));
+		lifeCycle_.m_tIniting.connect(bind(&SelectEngine::runInit, this));
 	}
 	
 	void SelectEngine::runLuaApi()
@@ -44,6 +59,15 @@ namespace cc {
 	{
 		TableEngine& tableEngine_ = TableEngine::instance();
 		tableEngine_.runTable<SelectEngine *>(this, streamUrl(), streamName());
+		tableEngine_.runTable<SelectEngine *>(this, startUrl(), startName());
+	}
+	
+	void SelectEngine::runInit()
+	{
+		ContextPtr selectStart_(new SelectStart());
+		
+		HandleEngine& handleEngine_ = HandleEngine::instance();
+		handleEngine_.addContext(selectStart_);
 	}
 	
 	const char * SelectEngine::streamName()
@@ -56,6 +80,16 @@ namespace cc {
 		return "selectEngine.json";
 	}
 	
+	const char * SelectEngine::startName()
+	{
+		return "selectStart";
+	}
+	
+	const char * SelectEngine::startUrl()
+	{
+		return "selectStart.json";
+	}
+		
 	SelectEngine& SelectEngine::instance()
 	{
 		return mSelectEngine;
@@ -64,11 +98,13 @@ namespace cc {
 	SelectEngine::SelectEngine()
 	{
 		mIfSelects.clear();
+		mStartIds.clear();
 	}
 	
 	SelectEngine::~SelectEngine()
 	{
 		mIfSelects.clear();
+		mStartIds.clear();
 	}
 	
 	SelectEngine SelectEngine::mSelectEngine;

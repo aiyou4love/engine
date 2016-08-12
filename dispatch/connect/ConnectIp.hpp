@@ -16,12 +16,13 @@ namespace cc {
 			nSerialize->runNumber(mServerIp, "serverIp");
 		}
 		bool isDefault();
-		int32_t getKey();
+		int16_t getKey();
 		
 		ConnectIp();
 		~ConnectIp();
 		
 	private:
+		int16_t mConnectIpId;
 		string mServerPort;
 		string mServerIp;
 	};

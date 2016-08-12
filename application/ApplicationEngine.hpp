@@ -2,14 +2,20 @@
 
 namespace cc {
 	
-	class ApplicationEngine : noncopyable
+	class ApplicationEngine : public AspectEngine
 	{
 	public:
-		bool runCondition(DoingPtr& nDoing, ValuePtr& nValue);
-		void runReward(DoingPtr& nDoing, ValuePtr& nValue);
+		EntityPtr& getEntity();
+		
+		ApplicationEngine& instance();
 		
 		ApplicationEngine();
 		~ApplicationEngine();
+		
+	private:
+		static ApplicationEngine mApplicationEngine;
+		
+		EntityPtr mEntity;
 	};
 	
 }

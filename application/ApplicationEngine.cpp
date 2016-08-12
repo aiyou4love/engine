@@ -1,25 +1,26 @@
-#include "../../Engine.hpp"
+#include "../Engine.hpp"
 
 namespace cc {
 	
-	bool Application::runCondition(DoingPtr& nDoing, ValuePtr& nValue)
+	EntityPtr& ApplicationEngine::getEntity()
 	{
-		ApplicationEngine& applicationEngine_ = ApplicationEngine::instance();
-		return applicationEngine_.runCondition(nDoing, nValue);
+		return mEntity;
 	}
 	
-	void Application::runReward(DoingPtr& nDoing, ValuePtr& nValue)
+	ApplicationEngine& ApplicationEngine::instance()
 	{
-		ApplicationEngine& applicationEngine_ = ApplicationEngine::instance();
-		applicationEngine_.runReward(nDoing, nValue);
+		return mApplicationEngine;
 	}
 	
-	Application::Application()
+	ApplicationEngine::ApplicationEngine()
+		: mEntity (new Application())
 	{
 	}
 	
-	Application::~Application()
+	ApplicationEngine::~ApplicationEngine()
 	{
 	}
+	
+	ApplicationEngine ApplicationEngine::mApplicationEngine;
 	
 }

@@ -174,6 +174,7 @@ namespace cc {
 		mDisconnectId = 0;
 		mExceptionId = 0;
 		mEntity = nullptr;
+		mSessionId = 0;
 	}
 	
 	void Session::runClose()
@@ -187,6 +188,11 @@ namespace cc {
 		mReadTimer.cancel();
 		mClosed = true;
 		mWriting = false;
+	}
+	
+	asio::ip::tcp::socket& Session::getSocket()
+	{
+		return mSocket;
 	}
 	
 	void Session::setDisconnect(int32_t nDisconnectId)
@@ -204,13 +210,14 @@ namespace cc {
 		mEntity = &nEntity;
 	}
 	
-	Session::Session(asio::io_service& nIoService)
-		: mSocket (nIoService)
-		, mWriteTimer (nIoService)
-		, mReadTimer (nIoService)
+	Session::Session(int32_t nSessionId, asio::io_service& nHandle)
+		: mSocket (nHandle)
+		, mWriteTimer (nHandle)
+		, mReadTimer (nHandle)
 		, mClosed (true)
 		, mWriting(false)
 		, mEntity (nullptr)
+		, mSessionId (nSessionId)
 	{
 		mReadBuffer.fill(0);
 		mValues.clear();

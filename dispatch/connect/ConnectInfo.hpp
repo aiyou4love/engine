@@ -20,13 +20,13 @@ namespace cc {
 			nSerialize->runNumber(mTimeoutId, "timeoutId");
 		}
 		bool isDefault();
-		int32_t getKey();
+		int16_t getKey();
 		
 		ConnectInfo();
 		~ConnectInfo();
 		
 	private:
-		int32_t mConnectInfoId;
+		int16_t mConnectInfoId;
 		int32_t mDisconnectId;
 		int32_t mExceptionId;
 		int32_t mConnectId;

@@ -28,7 +28,7 @@ namespace cc {
 			|| (0 == mExceptionId) || (0 == mConnectInfoId) );
 	}
 	
-	int32_t ConnectInfo::getKey()
+	int16_t ConnectInfo::getKey()
 	{
 		return mConnectInfoId;
 	}

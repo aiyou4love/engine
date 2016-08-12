@@ -17,7 +17,7 @@ namespace cc {
 		return ( ("" == mServerIp) || ("" == mServerPort) || (0 == mConnectIpId) );
 	}
 	
-	int32_t ConnectIp::getKey()
+	int16_t ConnectIp::getKey()
 	{
 		return mConnectIpId;
 	}
