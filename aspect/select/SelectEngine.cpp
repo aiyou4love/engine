@@ -18,11 +18,14 @@ namespace cc {
 		
 		if ( appType0_ == appType1_ ) {
 			ifSelect_->runIfSelect(nEntity, nValue);
-			return;
+		} else if (appType0_ > appType1_) {
+			ConnectEngine& connectEngine_ = ConnectEngine::instance();
+			connectEngine_.sendValue(appType0_, nValue);
+		} else {
+			PropertyPtr& property_ = nEntity->getProperty(1);
+			DispatchPtr dispatch_ = std::dynamic_pointer_cast<DispatchPtr>(property_);
+			dispatch_->runValue(ifSelect_, nEntity, nValue);	
 		}
-		PropertyPtr& property_ = nEntity->getProperty(1);
-		DispatchPtr dispatch_ = std::dynamic_pointer_cast<DispatchPtr>(property_);
-		dispatch_->runValue(appType0_, nValue);
 	}
 	
 	void SelectEngine::runStart()

@@ -14,6 +14,7 @@ namespace cc {
 			nSerialize->runMapStreamPtrsCount<int8_t, SelectorPtr>(mSelectors, "selectors", "selector", 10);
 			
 			nSerialize->runNumber(mAppType, "appType");
+			
 			nSerialize->runNumber(mIfSelectId, "ifSelectorId");
 		}
 		bool isDefault();

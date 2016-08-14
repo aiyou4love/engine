@@ -20,7 +20,8 @@ namespace cc {
 	
 	bool IfSelect::isDefault()
 	{
-		return ( (0 == mIfSelectId) || (mSelectors.size() <= 0) );
+		return ( (0 == mIfSelectId) || (mSelectors.size() <= 0) 
+			 || (0 == mAppType) );
 	}
 	
 	int32_t IfSelect::getKey()
@@ -31,6 +32,7 @@ namespace cc {
 	IfSelect::IfSelect()
 	{
 		mAppType = EappType::mGameClient;
+		
 		mSelectors.clear();
 		mIfSelectId = 0;
 	}
@@ -38,6 +40,7 @@ namespace cc {
 	IfSelect::~IfSelect()
 	{
 		mAppType = EappType::mGameClient;
+		
 		mSelectors.clear();
 		mIfSelectId = 0;
 	}
