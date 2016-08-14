@@ -30,7 +30,7 @@ namespace cc {
 		
 		void setDisconnect(int32_t nDisconnectId);
 		void setException(int32_t nExceptionId);
-		void setEntity(EntityPtr& nEntity);
+		void setDispatchPtr(DispatchPtr& nDispatch);
 		
 		asio::ip::tcp::socket& getSocket();
 		
@@ -53,7 +53,7 @@ namespace cc {
 		
 		int32_t mDisconnectId;
 		int32_t mExceptionId;
-		EntityPtr * mEntity;
+		DispatchPtr mDispatch;
 		
 		int32_t mSessionId;
 		

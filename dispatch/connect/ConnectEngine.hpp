@@ -5,10 +5,12 @@ namespace cc {
 	class ConnectEngine : noncopyable
 	{
 	public:
-		void initConnect(EntityPtr& nEntity, const char * nIp, const char * nPort, const char * nInfoId);
-		void initConnect(EntityPtr& nEntity, ConnectIpPtr& nConnectIp, ConnectInfoPtr& nConnectInfo);
-		void initConnect(EntityPtr& nEntity, const char * nIpId, const char * nInfoId);
-				
+		void initConnect(int16_t nAppId, const char * nIp, const char * nPort, const char * nInfoId);
+		void initConnect(int16_t nAppId, ConnectIpPtr& nConnectIp, ConnectInfoPtr& nConnectInfo);
+		void initConnect(int16_t nAppId, const char * nIpId, const char * nInfoId);
+		
+		void sendValue(int16_t nAppId, ValuePtr& nValue);
+		
 		template<class T>
 		void headSerialize(T& nSerialize, const char * nName)
 		{

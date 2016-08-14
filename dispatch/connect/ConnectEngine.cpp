@@ -2,7 +2,7 @@
 
 namespace cc {
 	
-	void ConnectEngine::initConnect(EntityPtr& nEntity, const char * nIp, const char * nPort, const char * nInfoId)
+	void ConnectEngine::initConnect(int16_t nAppId, const char * nIp, const char * nPort, const char * nInfoId)
 	{
 		int32_t connectInfoId_ = stringCrc(nInfoId);
 		auto it = mConnectInfos.find(connectInfoId_);
@@ -16,7 +16,7 @@ namespace cc {
 		this->initConnect(nEntity, connectIp_, connectInfo_);
 	}
 	
-	void ConnectEngine::initConnect(EntityPtr& nEntity, const char * nIpId, const char * nInfoId)
+	void ConnectEngine::initConnect(int16_t nAppId, const char * nIpId, const char * nInfoId)
 	{
 		int32_t connectInfoId_ = stringCrc(nInfoId);
 		auto it0 = mConnectInfos.find(connectInfoId_);
@@ -34,10 +34,10 @@ namespace cc {
 		}
 		ConnectIpPtr& connectIp_ = it1->second;
 		
-		this->initConnect(nEntity, connectIp_, connectInfo_);
+		this->initConnect(nAppId, connectIp_, connectInfo_);
 	}
 	
-	void ConnectEngine::initConnect(EntityPtr& nEntity, ConnectIpPtr& nConnectIp, ConnectInfoPtr& nConnectInfo)
+	void ConnectEngine::initConnect(int16_t nAppId, ConnectIpPtr& nConnectIp, ConnectInfoPtr& nConnectInfo)
 	{
 		PropertyPtr& property_ = nEntity->getProperty(1);
 		if (!property_) {

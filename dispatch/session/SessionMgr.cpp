@@ -2,46 +2,32 @@
 
 namespace cc {
 	
-	void SessionMgr::removeSession(int32_t nSessionId)
+	SessionPtr SessionMgr::createSession()
 	{
-		lock_guard<mutex> lock_(mMutex);
-		auto it = mSessions.find(nSessionId);
-		if (it == mSessions.end()) {
-			LOGE("[%s]%d", __METHOD__, nSessionId);
-			return;
+		int32_t sessionId_ = 0;
+		{
+			lock_guard<mutex> lock_(mMutex);
+			++mSessionId;
+			sessionId_ = mSessionId;
 		}
-		mSessions.erase(it);
-	}
-	
-	SessionPtr& SessionMgr::createSession()
-	{
 		IoService& ioService_ = IoService::instance();
 		asio::io_service& ioHandle_ = ioService_.getIoService();
-		SessionPtr session_(new Session(++mSessionId, ioHandle_));
-		lock_guard<mutex> lock_(mMutex);
-		mSessions[mSessionId] = session_;
-		return mSessions[mSessionId];
+		return session_( new Session(sessionId_, ioHandle_) );
 	}
 	
-	void SessionMgr::runPreinit()
+	SessionMgr& SessionMgr::instance()
 	{
-		LifeCycle& lifeCycle_ = LifeCycle::instance();
-		lifeCycle_.m_tStopEnd.connect(bind(&SessionMgr::runClear, this));
-	}
-	
-	void SessionMgr::runClear()
-	{
-		mSessions.clear();
-		mSessionId = 0;
+		return mSessionMgr;
 	}
 	
 	SessionMgr::SessionMgr()
+		: mSessionId (0)
 	{
-		this->runClear();
 	}
 	
 	SessionMgr::~SessionMgr()
 	{
+		mSessionId = 0;
 	}
 	
 	static SessionMgr mSessionMgr;

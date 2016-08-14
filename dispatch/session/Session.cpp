@@ -121,7 +121,7 @@ namespace cc {
 		ValuePtr value_(new Value());
 		IoReader<BufReader> ioReader_(mBufReader);
 		value_->headSerialize(ioReader_, "");
-		(*mEntity)->pushValue(value_);
+		mDispatch->pushValue(value_);
 		mBufReader.finishBuf();
 		mReadBuffer.assign(0);
 	}
@@ -149,7 +149,7 @@ namespace cc {
 		if (mDisconnectId > 0) {
 			ValuePtr value_(new Value());
 			value_->pushInt32(mDisconnectId);
-			(*mEntity)->pushValue(value_);
+			mDispatch->pushValue(value_);
 		}
 	}
 	
@@ -160,7 +160,7 @@ namespace cc {
 		if (mExceptionId > 0) {
 			ValuePtr value_(new Value());
 			value_->pushInt32(mExceptionId);
-			(*mEntity)->pushValue(value_);
+			mDispatch->pushValue(value_);
 		}
 	}
 	
@@ -168,12 +168,13 @@ namespace cc {
 	{
 		this->runClose();
 		
+		mDispatch.reset();
+		
 		mReadBuffer.fill(0);
 		mValues.clear();
 		
 		mDisconnectId = 0;
 		mExceptionId = 0;
-		mEntity = nullptr;
 		mSessionId = 0;
 	}
 	
@@ -205,9 +206,9 @@ namespace cc {
 		mExceptionId = nExceptionId;
 	}
 	
-	void Session::setEntity(EntityPtr& nEntity)
+	void Session::setDispatchPtr(DispatchPtr& nDispatch)
 	{
-		mEntity = &nEntity;
+		mDispatch = nDispatch;
 	}
 	
 	Session::Session(int32_t nSessionId, asio::io_service& nHandle)
@@ -216,7 +217,6 @@ namespace cc {
 		, mReadTimer (nHandle)
 		, mClosed (true)
 		, mWriting(false)
-		, mEntity (nullptr)
 		, mSessionId (nSessionId)
 	{
 		mReadBuffer.fill(0);

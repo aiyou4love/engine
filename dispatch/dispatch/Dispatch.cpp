@@ -1,26 +1,14 @@
-#include "../../../Engine.hpp"
+#pragma once
 
 namespace cc {
 	
-	void Dispatch::runValue(int16_t nAppType, ValuePtr& nValue);
+	class Dispatch : public IDispatch
 	{
-		auto it = mSessions.find(nAppType);
-		if ( it == mSessions.end() ) {
-			LOGE("[%s]%d", __METHOD__, nAppType);
-			return;
-		}
-		SessionPt * session_ = it->second;
-		(*session_)->runSend(nValue);
-	}
-	
-	Dispatch::Dispatch()
-	{
-		mSessions.clear();
-	}
-	
-	Dispatch::~Dispatch()
-	{
-		mSessions.clear();
-	}
+	public:
+		void runValue(IfSelectPtr& nIfSelect, EntityPtr& nEntity, ValuePtr& nValue) = 0;
+		
+		void pushValue(ValuePtr& nValue) = 0;
+	};
+	typedef std::shared_ptr<IDispatch> DispatchPtr;
 	
 }
