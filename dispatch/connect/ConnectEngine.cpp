@@ -13,7 +13,7 @@ namespace cc {
 		ConnectInfoPtr& connectInfo_ = it->second;
 		ConnectIpPtr connectIp_(new ConnectIp(nIp, nPort));
 		
-		this->initConnect(nEntity, connectIp_, connectInfo_);
+		this->initConnect(nAppId, connectIp_, connectInfo_);
 	}
 	
 	void ConnectEngine::initConnect(int16_t nAppId, const char * nIpId, const char * nInfoId)
@@ -39,20 +39,22 @@ namespace cc {
 	
 	void ConnectEngine::initConnect(int16_t nAppId, ConnectIpPtr& nConnectIp, ConnectInfoPtr& nConnectInfo)
 	{
-		PropertyPtr& property_ = nEntity->getProperty(1);
-		if (!property_) {
-			PropertyPtr tempProperty_(new Dispatch());
-			nEntity->insertProperty(1, tempProperty_);
-			property_ = tempProperty_;
-		}
-		DispatchPtr dispatch_ = std::dynamic_pointer_cast<Dispatch>(property_);
-		
 		IoService& ioService_ = IoService::instance();
 		asio::io_service& ioHandle_ = ioService_.getIoService();
 		
-		ConnectorPtr connector_(new Connector(++mConnectId, ioHandle_));
+		ConnectorPtr connector_(new Connector(++nAppId, ioHandle_));
 		connector_->runConnect(nConnectIp, nConnectInfo);
-		mConnectors[mConnectId] = connector_;
+		mConnectors[nAppId] = connector_;
+	}
+	
+	void ConnectEngine::removeConnector(int16_t nAppId)
+	{
+		auto it = mConnectors.find(nAppId);
+		if ( it == mConnectors.end() ) {
+			LOGE("[%s]%d", __METHOD__, nAppId);
+			return;
+		}
+		mConnectors.erase(it);
 	}
 	
 	const char * ConnectEngine::streamName()
@@ -94,7 +96,6 @@ namespace cc {
 	}
 	
 	ConnectEngine::ConnectEngine()
-		: mConnectId (0)
 	{
 		mConnectInfos.clear();
 		mConnectIps.clear();
@@ -106,8 +107,6 @@ namespace cc {
 		mConnectInfos.clear();
 		mConnectIps.clear();
 		mConnectors.clear();
-		
-		mConnectId = 0;
 	}
 	
 	ConnectEngine ConnectEngine::mConnectEngine;

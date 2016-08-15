@@ -4,6 +4,9 @@ namespace cc {
 	
 	void Connector::runConnect(ConnectIpPtr& nConnectIp, ConnectInfoPtr& nConnectInfo)
 	{
+		ConnectSession& connectSession_ = ConnectSession::instance();
+		mSession = &(connectSession_.createSession(nConnectId));
+		
 		IoService& ioService_ = IoService::instance();
 		asio::io_service& ioHandle_ = ioService_.getIoService();
 		
@@ -41,7 +44,7 @@ namespace cc {
 		}
 	}
 	
-	void TcpConnector::handleConnect(const boost::system::error_code& nError)
+	void Connector::handleConnect(const boost::system::error_code& nError)
 	{
 		if (nError) {
 			LOGE("[%s]%s", __METHOD__, nError.message());
@@ -49,21 +52,25 @@ namespace cc {
 			return;
 		}
 		mConnectTimer.cancel();
-		mClosed = false;
-		this->runRead();
-		this->runConnect();
+		(*mSession)->runRead();
+		
+		ConnectEngine& connectEngine_ = ConnectEngine::instance();
+		connectEngine_.removeConnector(mConnectId);
 	}
 	
 	Connector::Connector(int16_t nConnectId, asio::io_service& nHandle)
 		: mConnectTimer (nHandle)
 		, mConnectId (nConnectId)
+		, mSession (nullptr)
 	{
-		SessionMgr& sessionMgr_ = SessionMgr::instance();
-		mSession = &(sessionMgr_.createSession());
 	}
 	
 	Connector::~Connector()
 	{
+		mConnectTimer.cancel();
+		mSession = nullptr;
+		mConnectId = 0;
 	}
 	
 }
+

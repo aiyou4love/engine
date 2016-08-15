@@ -22,10 +22,15 @@ namespace cc {
 		return mTimeoutId;
 	}
 	
+	int16_t ConnectInfo::getDispatchId()
+	{
+		return mDispatchId;
+	}
+	
 	bool ConnectInfo::isDefault()
 	{
 		return ((0 == mConnectId) || (0 == mTimeoutId) || (0 == mDisconnectId)
-			|| (0 == mExceptionId) || (0 == mConnectInfoId) );
+			|| (0 == mExceptionId) || (0 == mConnectInfoId) || (0 == mDispatchId) );
 	}
 	
 	int16_t ConnectInfo::getKey()
@@ -39,6 +44,7 @@ namespace cc {
 		, mDisconnectId (0)
 		, mExceptionId (0)
 		, mConnectInfoId (0)
+		, mDispatchId (0)
 	{
 		
 	}
@@ -51,6 +57,7 @@ namespace cc {
 		mTimeoutId = 0;
 		mDisconnectId = 0;
 		mExceptionId = 0;
+		mDispatchId = 0;
 	}
 	
 }

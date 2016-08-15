@@ -5,7 +5,8 @@ namespace cc {
 	class SessionMgr: noncopyable
 	{
 	public:
-		SessionPtr createSession();
+		void removeSession(int32_t nSessionId);
+		SessionPtr& createSession();
 		
 		static SessionMgr& instance();
 		
@@ -13,10 +14,12 @@ namespace cc {
 		~SessionMgr();
 		
 	private:
-		static SessionMgr mSessionMgr;
+		map<int32_t, SessionPtr> mSessions;
 		
 		int32_t mSessionId;
 		mutex mMutex;
+		
+		static SessionMgr mSessionMgr;
 	};
 	
 }

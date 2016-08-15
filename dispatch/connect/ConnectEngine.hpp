@@ -9,6 +9,8 @@ namespace cc {
 		void initConnect(int16_t nAppId, ConnectIpPtr& nConnectIp, ConnectInfoPtr& nConnectInfo);
 		void initConnect(int16_t nAppId, const char * nIpId, const char * nInfoId);
 		
+		void removeConnector(int16_t nAppId);
+		
 		void sendValue(int16_t nAppId, ValuePtr& nValue);
 		
 		template<class T>
@@ -40,8 +42,6 @@ namespace cc {
 		map<int16_t, ConnectInfoPtr> mConnectInfos;
 		map<int16_t, ConnectIpPtr> mConnectIps;
 		map<int16_t, ConnectorPtr> mConnectors;
-		
-		int32_t mConnectId;
 		
 		static ConnectEngine mConnectEngine;
 	};
