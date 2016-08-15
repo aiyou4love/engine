@@ -26,10 +26,17 @@ namespace cc {
 	void SessionMgr::runPreinit()
 	{
 		LifeCycle& lifeCycle_ = LifeCycle::instance();
-		lifeCycle_.m_tRunClear.connect(bind(&SessionMgr::runClear, this));
+		lifeCycle_.m_tLoadBegin.connect(bind(&SessionMgr::runLoad, this));
+		lifeCycle_.m_tStopBegin.connect(bind(&SessionMgr::runClear, this));
 	}
 	
-	void SessionMgr::runClear()
+	void SessionMgr::runLoad()
+	{
+		TableEngine& tableEngine_ = TableEngine::instance();
+		tableEngine_.runTable<SessionMgr *>(this, streamUrl(), streamName());
+	}
+	
+	void SessionMgr::runStop()
 	{
 		mSessions.clear();
 	}

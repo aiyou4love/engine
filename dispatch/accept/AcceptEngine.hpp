@@ -6,30 +6,22 @@ namespace cc {
 	{
 	private:
 		void handleAccept(const boost::system::error_code& nError);
-		void startAccept(const char * nIp, char * nPort);
 		void startAccept();
+		
+		void initAccept(const char * nIp, const char * nPort);
+		void initAccept(const char * nIpId);
 		
 	public:
 		template<class T>
 		void headSerialize(T& nSerialize, const char * nName)
 		{
-			if ( 0 == strcmp(streamName(), nName) ) {
-				nSerialize.runMapStreamPtrs<int16_t, ConnectInfoPtr>(mConnectInfos, "connectInfos", "connectInfo");
-			} else if ( 0 == strcmp(infoName(), nName) ) {
-				nSerialize.runMapStreamPtrs<int16_t, ConnectIpPtr>(mConnectIps, "connectIps", "connectIp");
-			} else {
-				LOGE("[%s]%s", __METHOD__, nName);
-			}
+			nSerialize.runMapStreamPtrs<int16_t, AcceptIpPtr>(mAcceptIps, "acceptIps", "acceptIp");
 		}
 		const char * streamName();
 		const char * streamUrl();
 		
-		const char * infoName();
-		const char * infoUrl();
-		
 		void runPreinit();
 		void runLoad();
-		void startBegin();
 		void stopEnd();
 		
 		AcceptEngine();
@@ -37,6 +29,8 @@ namespace cc {
 		
 	private:
 		std::shared_ptr<asio::ip::tcp::acceptor> mAcceptor;
+		
+		map<int16_t, AcceptIpPtr> mAcceptIps;
 		
 		SessionPtr * mNewSession;
 	};
