@@ -5,19 +5,19 @@ namespace cc {
 	void AcceptEngine::handleAccept(const boost::system::error_code& nError)
 	{
 		if (nError) {
+			LOGE("[%s]%s", __METHOD__, nError.message());
 			this->stopEnd();
-			LogService& logService_ = Service<LogService>::instance();
-			logService_.logError(log_1(nError.message()));
 			return;
 		}
-		(*mNewSession)->openSession();
+		(*mSession)->runRead();
 		startAccept();
 	}
 	
 	void AcceptEngine::startAccept(const char * nIp, char * nPort)
 	{
 		IoService& ioService_ = IoService::instance();
-		mAcceptor.reset(new asio::ip::tcp::acceptor(ioService_.getIoService()));
+		asio::io_service& ioHandle_ = ioService_.getIoService();
+		mAcceptor.reset(new asio::ip::tcp::acceptor(ioHandle_));
 		
 		asio::ip::tcp::resolver resolver_(mAcceptor->get_io_service());
 		asio::ip::tcp::resolver::query query_(mAddress, mPort);
@@ -34,17 +34,14 @@ namespace cc {
 		try {
 			SessionMgr& sessionMgr_ = SessionMgr::instance();
 			mNewSession = &(sessionService_.createSession());
+			
 			mAcceptor->async_accept((*mNewSession)->getSocket(),
-				boost::bind(&TcpServer::handleAccept, this,
+				boost::bind(&AcceptEngine::handleAccept, this, 
 				boost::asio::placeholders::error));
 		} catch (boost::system::system_error& e) {
-			LogService& logService_ = Service<LogService>::instance();
-			logService_.logError(log_1(e.what()));
+			LOGE("[%s]%s", __METHOD__, e.what());
+			this->stopEnd();
 		}
-	}
-	
-	void AcceptEngine::runPreinit()
-	{
 	}
 	
 	void AcceptEngine::stopEnd()
@@ -53,6 +50,10 @@ namespace cc {
 			return;
 		}
  		mAcceptor->close();
+	}
+	
+	void AcceptEngine::runPreinit()
+	{
 	}
 	
 	AcceptEngine::AcceptEngine()

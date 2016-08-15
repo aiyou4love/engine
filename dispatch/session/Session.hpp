@@ -30,7 +30,8 @@ namespace cc {
 		
 		void setDisconnect(int32_t nDisconnectId);
 		void setException(int32_t nExceptionId);
-		void setDispatchPtr(DispatchPtr& nDispatch);
+		void setDispatch(int16_t nDispatchId);
+		void setAccept(bool nAccept);
 		
 		asio::ip::tcp::socket& getSocket();
 		
@@ -54,6 +55,7 @@ namespace cc {
 		int32_t mDisconnectId;
 		int32_t mExceptionId;
 		DispatchPtr mDispatch;
+		bool mAccept;
 		
 		int32_t mSessionId;
 		

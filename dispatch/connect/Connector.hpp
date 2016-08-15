@@ -11,10 +11,9 @@ namespace cc {
 		void handleConnectTimeout(const boost::system::error_code& nError);
 		void handleConnect(const boost::system::error_code& nError);
 		
-		void runDisconnect();
-		void runConnect();
-		void runException();
+		void runConnectError();
 		void runTimeout();
+		void runConnect();
 		
 	public:
 		enum { connect_timeout = 90 };
@@ -26,8 +25,9 @@ namespace cc {
 		asio::deadline_timer mConnectTimer;
 		
 		SessionPtr * mSession;
-		int32_t mConnectId;
-		int32_t mConnectId;
+		
+		int32_t mConnectErrorId;
+		int32_t mTimeoutId;
 		int16_t mConnectId;
 	};
 	typedef std::shared_ptr<Connector> ConnectorPtr;

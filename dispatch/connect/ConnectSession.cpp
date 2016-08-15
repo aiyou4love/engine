@@ -15,20 +15,23 @@ namespace cc {
 	
 	SessionPtr& ConnectSession::createSession(int16_t nAppId)
 	{
+		lock_guard<mutex> lock_(mMutex);
 		auto it = mSessions.find(nAppId);
 		if ( it != mSessions.end() ) {
-			LOGE("[%s]%d", __METHOD__, nAppId);
+			return mSessions[nAppId];
 		}
 		IoService& ioService_ = IoService::instance();
 		asio::io_service& ioHandle_ = ioService_.getIoService();
-		SessionPtr session_(new Session(nAppId, ioHandle_));
-		lock_guard<mutex> lock_(mMutex);
+		SessionPtr session_(new Session(0, ioHandle_));
+		session_->setAccept(false);
 		mSessions[nAppId] = session_;
 		return mSessions[nAppId];
 	}
 	
 	void ConnectSession::runPreinit()
 	{
+		LifeCycle& lifeCycle_ = LifeCycle::instance();
+		lifeCycle_.m_tRunClear.connect(bind(&ConnectSession::runClear, this));
 	}
 	
 	void ConnectSession::runClear()

@@ -8,6 +8,9 @@ namespace cc {
 		void removeSession(int32_t nSessionId);
 		SessionPtr& createSession();
 		
+		void runPreinit();
+		void runClear();
+		
 		static SessionMgr& instance();
 		
 		SessionMgr();

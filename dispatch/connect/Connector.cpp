@@ -4,8 +4,20 @@ namespace cc {
 	
 	void Connector::runConnect(ConnectIpPtr& nConnectIp, ConnectInfoPtr& nConnectInfo)
 	{
+		mConnectErrorId = nConnectInfo->getConnectErrorId();
+		mTimeoutId = nConnectInfo->getConnectId();
+		mConnectId = nConnectInfo->getTimeoutId();
+		
 		ConnectSession& connectSession_ = ConnectSession::instance();
 		mSession = &(connectSession_.createSession(nConnectId));
+		
+		int32_t disconnectId_ = nConnectInfo->getDisconnectId();
+		int32_t exceptionId_ = nConnectInfo->getExceptionId();
+		int16_t dispatchId_ = nConnectInfo->getDispatchId();
+		
+		(*mSession)->setDisconnect(disconnectId_);
+		(*mSession)->setException(exceptionId_);
+		(*mSession)->setDispatch(dispatchId_);
 		
 		IoService& ioService_ = IoService::instance();
 		asio::io_service& ioHandle_ = ioService_.getIoService();
@@ -26,7 +38,7 @@ namespace cc {
 				this, boost::asio::placeholders::error));
 		} catch (boost::system::system_error& e) {
 			LOGE("[%s]%s", __METHOD__, e.what());
-			this->runException();
+			this->runConnectError();
 		}
 	}
 	
@@ -34,7 +46,7 @@ namespace cc {
 	{
 		if (nError) {
 			LOGE("[%s]%s", __METHOD__, nError.message());
-			this->runException();
+			this->runConnectError();
 			return;
 		}
 		if (mConnectTimer.expires_at() <= asio::deadline_timer::traits_type::now()) {
@@ -48,14 +60,49 @@ namespace cc {
 	{
 		if (nError) {
 			LOGE("[%s]%s", __METHOD__, nError.message());
-			this->runException();
+			this->runConnectError();
 			return;
 		}
 		mConnectTimer.cancel();
 		(*mSession)->runRead();
 		
+		this->runConnect();
+		
 		ConnectEngine& connectEngine_ = ConnectEngine::instance();
 		connectEngine_.removeConnector(mConnectId);
+	}
+	
+	void Connector::runConnectError()
+	{
+		if (mConnectErrorId > 0) {
+			ApplicationEngine& applicationEngine_ = ApplicationEngine::instance();
+			EntityPtr& entity_ = applicationEngine_.getEntity();
+			ValuePtr value_(new Value());
+			value_->pushInt32(mConnectErrorId);
+			entity_->pushValue(value_);	
+		}
+	}
+	
+	void Connector::runTimeout()
+	{
+		if (mTimeoutId > 0) {
+			ApplicationEngine& applicationEngine_ = ApplicationEngine::instance();
+			EntityPtr& entity_ = applicationEngine_.getEntity();
+			ValuePtr value_(new Value());
+			value_->pushInt32(mTimeoutId);
+			entity_->pushValue(value_);	
+		}
+	}
+	
+	void Connector::runConnect()
+	{
+		if (mConnectId > 0) {
+			ApplicationEngine& applicationEngine_ = ApplicationEngine::instance();
+			EntityPtr& entity_ = applicationEngine_.getEntity();
+			ValuePtr value_(new Value());
+			value_->pushInt32(mConnectId);
+			entity_->pushValue(value_);	
+		}
 	}
 	
 	Connector::Connector(int16_t nConnectId, asio::io_service& nHandle)

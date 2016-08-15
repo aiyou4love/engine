@@ -39,10 +39,15 @@ namespace cc {
 	
 	void ConnectEngine::initConnect(int16_t nAppId, ConnectIpPtr& nConnectIp, ConnectInfoPtr& nConnectInfo)
 	{
+		auto it = mConnectors.find(nAppId);
+		if (it == mConnectors.end()) {
+			LOGE("[%s]%d", __METHOD__, nAppId);
+			mConnectors.erase(it);
+		}
 		IoService& ioService_ = IoService::instance();
 		asio::io_service& ioHandle_ = ioService_.getIoService();
 		
-		ConnectorPtr connector_(new Connector(++nAppId, ioHandle_));
+		ConnectorPtr connector_(new Connector(nAppId, ioHandle_));
 		connector_->runConnect(nConnectIp, nConnectInfo);
 		mConnectors[nAppId] = connector_;
 	}

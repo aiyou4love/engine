@@ -2,14 +2,9 @@
 
 namespace cc {
 	
-	int32_t ConnectInfo::getDisconnectId()
+	int32_t ConnectInfo::getConnectErrorId()
 	{
-		return mDisconnectId;
-	}
-	
-	int32_t ConnectInfo::getExceptionId()
-	{
-		return mExceptionId;
+		return mConnectErrorId;
 	}
 	
 	int32_t ConnectInfo::getConnectId()
@@ -22,6 +17,16 @@ namespace cc {
 		return mTimeoutId;
 	}
 	
+	int32_t ConnectInfo::getDisconnectId()
+	{
+		return mDisconnectId;
+	}
+	
+	int32_t ConnectInfo::getExceptionId()
+	{
+		return mExceptionId;
+	}
+	
 	int16_t ConnectInfo::getDispatchId()
 	{
 		return mDispatchId;
@@ -29,7 +34,7 @@ namespace cc {
 	
 	bool ConnectInfo::isDefault()
 	{
-		return ((0 == mConnectId) || (0 == mTimeoutId) || (0 == mDisconnectId)
+		return ((0 == mConnectId) || (0 == mTimeoutId) || (0 == mConnectErrorId) || (0 == mDisconnectId)
 			|| (0 == mExceptionId) || (0 == mConnectInfoId) || (0 == mDispatchId) );
 	}
 	
@@ -39,11 +44,12 @@ namespace cc {
 	}
 	
 	ConnectInfo::ConnectInfo()
-		: mConnectId (0)
+		: mConnectInfoId (0)
+		, mConnectErrorId (0)
+		, mConnectId (0)
 		, mTimeoutId (0)
 		, mDisconnectId (0)
 		, mExceptionId (0)
-		, mConnectInfoId (0)
 		, mDispatchId (0)
 	{
 		
@@ -53,8 +59,10 @@ namespace cc {
 	{
 		mConnectInfoId = 0;
 		
+		mConnectErrorId = 0;
 		mConnectId = 0;
 		mTimeoutId = 0;
+		
 		mDisconnectId = 0;
 		mExceptionId = 0;
 		mDispatchId = 0;

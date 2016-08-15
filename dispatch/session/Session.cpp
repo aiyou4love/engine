@@ -164,6 +164,11 @@ namespace cc {
 		}
 	}
 	
+	void Session::setAccept(bool nAccept)
+	{
+		mAccept = nAccept;
+	}
+	
 	void Session::runClear()
 	{
 		this->runClose();
@@ -176,6 +181,7 @@ namespace cc {
 		mDisconnectId = 0;
 		mExceptionId = 0;
 		mSessionId = 0;
+		mAccept = true;
 	}
 	
 	void Session::runClose()
@@ -218,6 +224,7 @@ namespace cc {
 		, mClosed (true)
 		, mWriting(false)
 		, mSessionId (nSessionId)
+		, mAccept (true)
 	{
 		mReadBuffer.fill(0);
 		mValues.clear();

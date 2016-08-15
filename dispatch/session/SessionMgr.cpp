@@ -2,17 +2,36 @@
 
 namespace cc {
 	
-	SessionPtr SessionMgr::createSession()
+	void SessionMgr::removeSession(int32_t nSessionId)
 	{
-		int32_t sessionId_ = 0;
-		{
-			lock_guard<mutex> lock_(mMutex);
-			++mSessionId;
-			sessionId_ = mSessionId;
+		lock_guard<mutex> lock_(mMutex);
+		auto it = mSessions.find(nSessionId);
+		if (it == mSessions.end()) {
+			LOGE("[%s]%d", __METHOD__, nSessionId);
+			return;
 		}
+		mSessions.erase(it);
+	}
+	
+	SessionPtr& SessionMgr::createSession()
+	{
+		lock_guard<mutex> lock_(mMutex);
 		IoService& ioService_ = IoService::instance();
 		asio::io_service& ioHandle_ = ioService_.getIoService();
-		return session_( new Session(sessionId_, ioHandle_) );
+		SessionPtr session_(new Session(++mSessionId, ioHandle_));
+		mSessions[mSessionId] = session_;
+		return mSessions[mSessionId];
+	}
+	
+	void SessionMgr::runPreinit()
+	{
+		LifeCycle& lifeCycle_ = LifeCycle::instance();
+		lifeCycle_.m_tRunClear.connect(bind(&SessionMgr::runClear, this));
+	}
+	
+	void SessionMgr::runClear()
+	{
+		mSessions.clear();
 	}
 	
 	SessionMgr& SessionMgr::instance()
