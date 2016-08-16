@@ -224,6 +224,8 @@ namespace cc {
 		, mWriting(false)
 		, mSessionId (nSessionId)
 		, mAccept (true)
+		, mDisconnectId (0)
+		, mExceptionId (0)
 	{
 		mReadBuffer.fill(0);
 		mValues.clear();
