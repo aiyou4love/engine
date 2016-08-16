@@ -5,9 +5,9 @@ namespace cc {
 	class ConnectEngine : noncopyable
 	{
 	public:
-		void initConnect(int16_t nAppId, const char * nIp, const char * nPort, const char * nInfoId);
+		void initConnect(int16_t nAppId, const char * nIp, const char * nPort, int16_t nInfoId);
 		void initConnect(int16_t nAppId, ConnectIpPtr& nConnectIp, ConnectInfoPtr& nConnectInfo);
-		void initConnect(int16_t nAppId, const char * nIpId, const char * nInfoId);
+		void initConnect(int16_t nAppId, int16_t nIpId, int16_t nInfoId);
 		
 		void removeConnector(int16_t nAppId);
 		

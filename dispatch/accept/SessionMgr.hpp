@@ -8,16 +8,7 @@ namespace cc {
 		void removeSession(int32_t nSessionId);
 		SessionPtr& createSession();
 		
-		template<class T>
-		void headSerialize(T& nSerialize, const char * nName)
-		{
-			nSerialize.runMapStreamPtrs<int16_t, AcceptInfoPtr>(mAcceptInfos, "acceptInfos", "acceptInfo");
-		}
-		const char * streamName();
-		const char * streamUrl();
-		
 		void runPreinit();
-		void runLoad();
 		void runStop();
 		
 		static SessionMgr& instance();

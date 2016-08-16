@@ -26,7 +26,6 @@ namespace cc {
 	void SessionMgr::runPreinit()
 	{
 		LifeCycle& lifeCycle_ = LifeCycle::instance();
-		lifeCycle_.m_tLoadBegin.connect(bind(&SessionMgr::runLoad, this));
 		lifeCycle_.m_tStopBegin.connect(bind(&SessionMgr::runClear, this));
 	}
 	

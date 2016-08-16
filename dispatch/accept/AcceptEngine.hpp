@@ -9,7 +9,7 @@ namespace cc {
 		void startAccept();
 		
 		void initAccept(const char * nIp, const char * nPort);
-		void initAccept(const char * nIpId);
+		void initAccept(int16_t nIpId);
 		
 	public:
 		template<class T>

@@ -2,10 +2,9 @@
 
 namespace cc {
 	
-	void ConnectEngine::initConnect(int16_t nAppId, const char * nIp, const char * nPort, const char * nInfoId)
+	void ConnectEngine::initConnect(int16_t nAppId, const char * nIp, const char * nPort, int16_t nInfoId)
 	{
-		int32_t connectInfoId_ = stringCrc(nInfoId);
-		auto it = mConnectInfos.find(connectInfoId_);
+		auto it = mConnectInfos.find(nInfoId);
 		if ( it == mConnectInfos.end() ) {
 			LOGE("[%s]%s", __METHOD__, nInfoId);
 			return;
@@ -16,10 +15,9 @@ namespace cc {
 		this->initConnect(nAppId, connectIp_, connectInfo_);
 	}
 	
-	void ConnectEngine::initConnect(int16_t nAppId, const char * nIpId, const char * nInfoId)
+	void ConnectEngine::initConnect(int16_t nAppId, int16_t nIpId, int16_t nInfoId)
 	{
-		int32_t connectInfoId_ = stringCrc(nInfoId);
-		auto it0 = mConnectInfos.find(connectInfoId_);
+		auto it0 = mConnectInfos.find(nInfoId);
 		if ( it0 == mConnectInfos.end() ) {
 			LOGE("[%s]%s", __METHOD__, nInfoId);
 			return;

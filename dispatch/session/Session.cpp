@@ -212,9 +212,8 @@ namespace cc {
 		mExceptionId = nExceptionId;
 	}
 	
-	void Session::setDispatchPtr(DispatchPtr& nDispatch)
+	void Session::setDispatch(int16_t nDispatchId)
 	{
-		mDispatch = nDispatch;
 	}
 	
 	Session::Session(int32_t nSessionId, asio::io_service& nHandle)
