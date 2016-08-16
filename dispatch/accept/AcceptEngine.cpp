@@ -51,7 +51,7 @@ namespace cc {
 			mNewSession = &(sessionService_.createSession());
 			
 			mAcceptor->async_accept((*mNewSession)->getSocket(),
-				boost::bind(&AcceptEngine::handleAccept, this, 
+				boost::bind(&AcceptEngine::handleAccept, this,
 				boost::asio::placeholders::error));
 		} catch (boost::system::system_error& e) {
 			LOGE("[%s]%s", __METHOD__, e.what());
@@ -74,6 +74,7 @@ namespace cc {
 		LifeCycle& lifeCycle_ = LifeCycle::instance();
 		lifeCycle_.m_tLoadBegin.connect(bind(&AcceptEngine::runLoad, this));
 		lifeCycle_.m_tStopEnd.connect(bind(&AcceptEngine::stopEnd, this));
+		lifeCycle_.m_tRunClear.connect(bind(&AcceptEngine::runClear, this));
 	}
 	
 	void AcceptEngine::runLoad()
@@ -90,14 +91,22 @@ namespace cc {
  		mAcceptor->close();
 	}
 	
+	void AcceptEngine::runClear()
+	{
+		mNewSession = nullptr;
+		mAcceptIps.clear();
+	}
+	
 	AcceptEngine::AcceptEngine()
 		: mNewSession(nullptr)
 	{
+		mAcceptIps.clear();
 	}
 	
 	AcceptEngine::~AcceptEngine()
 	{
 		mNewSession = nullptr;
+		mAcceptIps.clear();
 	}
 	
 	static AcceptEngine AcceptEngine::mAcceptEngine;

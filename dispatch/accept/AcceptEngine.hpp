@@ -23,6 +23,7 @@ namespace cc {
 		void runPreinit();
 		void runLoad();
 		void stopEnd();
+		void runClear();
 		
 		AcceptEngine();
 		~AcceptEngine();

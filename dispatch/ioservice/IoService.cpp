@@ -9,6 +9,7 @@ namespace cc {
 		lifeCycle_.m_tStartBegin.connect(bind(&IoService::runStart, this));
 		lifeCycle_.m_tRunning.connect(bind(&IoService::runRun, this));
 		lifeCycle_.m_tStopBegin.connect(bind(&IoService::runStop, this));
+		lifeCycle_.m_tRunClear.connect(bind(&IoService::runClear, this));
 	}
 	
 	void IoService::runInit()

@@ -84,6 +84,7 @@ namespace cc {
 	{
 		LifeCycle& lifeCycle_ = LifeCycle::instance();
 		lifeCycle_.m_tLoadBegin.connect(bind(&ConnectEngine::runLoad, this));
+		lifeCycle_.m_tStopEnd.connect(bind(&ConnectEngine::runStop, this));
 	}
 	
 	void ConnectEngine::runLoad()
@@ -91,6 +92,13 @@ namespace cc {
 		TableEngine& tableEngine_ = TableEngine::instance();
 		tableEngine_.runTable<ConnectEngine *>(this, streamUrl(), streamName());
 		tableEngine_.runTable<ConnectEngine *>(this, infoUrl(), infoName());
+	}
+	
+	void ConnectEngine::runStop()
+	{
+		mConnectInfos.clear();
+		mConnectIps.clear();
+		mConnectors.clear();
 	}
 	
 	ConnectEngine& ConnectEngine::instance()

@@ -10,7 +10,7 @@ namespace cc {
 		SessionPtr& createSession(int16_t nAppId);
 		
 		void runPreinit();
-		void runClear();
+		void runStop();
 		
 		static ConnectSession& instance();
 		

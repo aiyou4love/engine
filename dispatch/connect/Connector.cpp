@@ -33,8 +33,8 @@ namespace cc {
 			boost::asio::async_connect((*mSession)->getSocket(), iterator_,
 			boost::bind(&Connector::handleConnect, this, boost::asio::placeholders::error));
 			
-			mConnectTimer.expires_from_now(boost::posix_time::seconds(TcpConnector::connect_timeout));
-			mConnectTimer.async_wait(boost::bind(&TcpConnector::handleConnectTimeout, 
+			mConnectTimer.expires_from_now(boost::posix_time::seconds(Connector::connect_timeout));
+			mConnectTimer.async_wait(boost::bind(&Connector::handleConnectTimeout, 
 				this, boost::asio::placeholders::error));
 		} catch (boost::system::system_error& e) {
 			LOGE("[%s]%s", __METHOD__, e.what());
@@ -65,11 +65,7 @@ namespace cc {
 		}
 		mConnectTimer.cancel();
 		(*mSession)->runRead();
-		
 		this->runConnect();
-		
-		ConnectEngine& connectEngine_ = ConnectEngine::instance();
-		connectEngine_.removeConnector(mConnectId);
 	}
 	
 	void Connector::runConnectError()
@@ -81,6 +77,8 @@ namespace cc {
 			value_->pushInt32(mConnectErrorId);
 			entity_->pushValue(value_);	
 		}
+		ConnectEngine& connectEngine_ = ConnectEngine::instance();
+		connectEngine_.removeConnector(mConnectId);
 	}
 	
 	void Connector::runTimeout()
@@ -92,6 +90,8 @@ namespace cc {
 			value_->pushInt32(mTimeoutId);
 			entity_->pushValue(value_);	
 		}
+		ConnectEngine& connectEngine_ = ConnectEngine::instance();
+		connectEngine_.removeConnector(mConnectId);
 	}
 	
 	void Connector::runConnect()
@@ -103,11 +103,15 @@ namespace cc {
 			value_->pushInt32(mConnectId);
 			entity_->pushValue(value_);	
 		}
+		ConnectEngine& connectEngine_ = ConnectEngine::instance();
+		connectEngine_.removeConnector(mConnectId);
 	}
 	
 	Connector::Connector(int16_t nConnectId, asio::io_service& nHandle)
 		: mConnectTimer (nHandle)
 		, mConnectId (nConnectId)
+		, mConnectErrorId (0)
+		, mTimeoutId (0)
 		, mSession (nullptr)
 	{
 	}
@@ -116,7 +120,9 @@ namespace cc {
 	{
 		mConnectTimer.cancel();
 		mSession = nullptr;
+		mConnectErrorId = 0;
 		mConnectId = 0;
+		mTimeoutId = 0;
 	}
 	
 }

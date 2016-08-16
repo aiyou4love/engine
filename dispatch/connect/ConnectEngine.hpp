@@ -32,6 +32,7 @@ namespace cc {
 		
 		void runPreinit();
 		void runLoad();
+		void runStop();
 		
 		static ConnectEngine& instance();
 		

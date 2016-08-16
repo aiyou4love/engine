@@ -15,9 +15,10 @@ namespace cc {
 	
 	SessionPtr& SessionMgr::createSession()
 	{
-		lock_guard<mutex> lock_(mMutex);
 		IoService& ioService_ = IoService::instance();
 		asio::io_service& ioHandle_ = ioService_.getIoService();
+		
+		lock_guard<mutex> lock_(mMutex);
 		SessionPtr session_(new Session(++mSessionId, ioHandle_));
 		mSessions[mSessionId] = session_;
 		return mSessions[mSessionId];
@@ -26,13 +27,7 @@ namespace cc {
 	void SessionMgr::runPreinit()
 	{
 		LifeCycle& lifeCycle_ = LifeCycle::instance();
-		lifeCycle_.m_tStopBegin.connect(bind(&SessionMgr::runClear, this));
-	}
-	
-	void SessionMgr::runLoad()
-	{
-		TableEngine& tableEngine_ = TableEngine::instance();
-		tableEngine_.runTable<SessionMgr *>(this, streamUrl(), streamName());
+		lifeCycle_.m_tStopEnd.connect(bind(&SessionMgr::runStop, this));
 	}
 	
 	void SessionMgr::runStop()
@@ -48,10 +43,12 @@ namespace cc {
 	SessionMgr::SessionMgr()
 		: mSessionId (0)
 	{
+		mSessions.clear();
 	}
 	
 	SessionMgr::~SessionMgr()
 	{
+		mSessions.clear();
 		mSessionId = 0;
 	}
 	

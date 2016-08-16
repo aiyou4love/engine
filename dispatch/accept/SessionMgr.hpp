@@ -17,8 +17,6 @@ namespace cc {
 		~SessionMgr();
 		
 	private:
-		map<int16_t, AcceptInfoPtr> mAcceptInfos;
-		
 		map<int32_t, SessionPtr> mSessions;
 		
 		int32_t mSessionId;

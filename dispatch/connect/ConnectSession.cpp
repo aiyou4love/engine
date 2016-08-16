@@ -15,7 +15,6 @@ namespace cc {
 	
 	SessionPtr& ConnectSession::createSession(int16_t nAppId)
 	{
-		lock_guard<mutex> lock_(mMutex);
 		auto it = mSessions.find(nAppId);
 		if ( it != mSessions.end() ) {
 			return mSessions[nAppId];
@@ -31,10 +30,10 @@ namespace cc {
 	void ConnectSession::runPreinit()
 	{
 		LifeCycle& lifeCycle_ = LifeCycle::instance();
-		lifeCycle_.m_tRunClear.connect(bind(&ConnectSession::runClear, this));
+		lifeCycle_.m_tStopEnd.connect(bind(&ConnectSession::runStop, this));
 	}
 	
-	void ConnectSession::runClear()
+	void ConnectSession::runStop()
 	{
 		mSessions.clear();
 	}
