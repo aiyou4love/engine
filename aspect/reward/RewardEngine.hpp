@@ -21,6 +21,7 @@ namespace cc {
 		void runPreinit();
 		void runLuaApi();
 		void runLoad();
+		void runClear();
 		
 		RewardEngine();
 		~RewardEngine();

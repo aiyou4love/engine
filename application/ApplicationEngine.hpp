@@ -7,6 +7,9 @@ namespace cc {
 	public:
 		EntityPtr& getEntity();
 		
+		void runPreinit();
+		void runClear();
+		
 		ApplicationEngine& instance();
 		
 		ApplicationEngine();

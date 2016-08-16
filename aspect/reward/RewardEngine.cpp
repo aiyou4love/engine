@@ -18,6 +18,7 @@ namespace cc {
 		LifeCycle& lifeCycle_ = LifeCycle::instance();
 		lifeCycle_.m_tRunLuaApi.connect(bind(&RewardEngine::runLuaApi, this));
 		lifeCycle_.m_tLoadBegin.connect(bind(&RewardEngine::runLoad, this));
+		lifeCycle_.m_tRunClear.connect(bind(&RewardEngine::runClear, this));
 	}
 	
 	void RewardEngine::runLuaApi()
@@ -32,6 +33,11 @@ namespace cc {
 	{
 		TableEngine& tableEngine_ = TableEngine::instance();
 		tableEngine_.runTable<RewardEngine *>(this, streamUrl(), streamName());
+	}
+	
+	void RewardEngine::runClear()
+	{
+		mRewards.clear();
 	}
 	
 	const char * RewardEngine::streamName()
@@ -56,7 +62,6 @@ namespace cc {
 	
 	RewardEngine::~RewardEngine()
 	{
-		mRewards.clear();
 	}
 	
 	RewardEngine RewardEngine::mRewardEngine;

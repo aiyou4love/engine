@@ -32,6 +32,7 @@ namespace cc {
 		void runLuaApi();
 		void runLoad();
 		void runInit();
+		void runClear();
 		
 		SelectEngine();
 		~SelectEngine();

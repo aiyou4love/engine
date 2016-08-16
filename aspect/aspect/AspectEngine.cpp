@@ -38,14 +38,17 @@ namespace cc {
 		mAspects[nAspectId] = nAspect;
 	}
 	
-	AspectEngine::AspectEngine()
+	void AspectEngine::runClear()
 	{
 		mAspects.clear();
 	}
 	
+	AspectEngine::AspectEngine()
+	{
+	}
+	
 	AspectEngine::~AspectEngine()
 	{
-		mAspects.clear();
 	}
 	
 }
