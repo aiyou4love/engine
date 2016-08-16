@@ -6,7 +6,7 @@ namespace cc {
 	{
 		LifeCycle& lifeCycle_ = LifeCycle::instance();
 		lifeCycle_.m_tInitBegin.connect(bind(&IoService::runInit, this));
-		lifeCycle_.m_tStartEnd.connect(bind(&IoService::runStart, this));
+		lifeCycle_.m_tStartBegin.connect(bind(&IoService::runStart, this));
 		lifeCycle_.m_tRunning.connect(bind(&IoService::runRun, this));
 		lifeCycle_.m_tStopBegin.connect(bind(&IoService::runStop, this));
 	}
