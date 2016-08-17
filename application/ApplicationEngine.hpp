@@ -5,6 +5,7 @@ namespace cc {
 	class ApplicationEngine : public AspectEngine
 	{
 	public:
+		DispatchPtr& getDispatch();
 		EntityPtr& getEntity();
 		
 		void runPreinit();
@@ -18,6 +19,7 @@ namespace cc {
 	private:
 		static ApplicationEngine mApplicationEngine;
 		
+		DispatchPtr mDispatch;
 		EntityPtr mEntity;
 	};
 	

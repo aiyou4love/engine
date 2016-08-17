@@ -2,6 +2,11 @@
 
 namespace cc {
 	
+	DispatchPtr& ApplicationEngine::getDispatch()
+	{
+		return mDispatch;
+	}
+	
 	EntityPtr& ApplicationEngine::getEntity()
 	{
 		return mEntity;
@@ -10,6 +15,7 @@ namespace cc {
 	void ApplicationEngine::runPreinit()
 	{
 		mEntity.reset(new Application());
+		mDispatch.reset(new ApplicationDispatch());
 		
 		LifeCycle& lifeCycle_ = LifeCycle::instance();
 		lifeCycle_.m_tRunClear.connect(bind(&ApplicationEngine::runClear, this));
@@ -19,6 +25,7 @@ namespace cc {
 	{
 		AspectEngine::runClear();
 		
+		mDispatch.reset();
 		mEntity.reset();
 	}
 	
@@ -29,11 +36,12 @@ namespace cc {
 	
 	ApplicationEngine::ApplicationEngine()
 	{
-		mEntity.reset();
+		this->runClear();
 	}
 	
 	ApplicationEngine::~ApplicationEngine()
 	{
+		this->runClear();
 	}
 	
 	ApplicationEngine ApplicationEngine::mApplicationEngine;
