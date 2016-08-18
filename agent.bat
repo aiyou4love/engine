@@ -5,7 +5,7 @@ if not exist client (
 cd client
 ::cmake .. -D__GAMEEXE__=client -G"Visual Studio 14 Win64"
 ::pause
-cmake .. -D__GAMEEXE__=client -G"NMake Makefiles"
+cmake .. -D__GAMEEXE__=agent -G"NMake Makefiles"
 nmake
 nmake install
 cd ..

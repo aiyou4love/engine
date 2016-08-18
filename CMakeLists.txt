@@ -13,8 +13,6 @@ endif()
 string(TOUPPER ${__GAMEEXE__} __PROJNAME__)
 add_definitions(-D__${__PROJNAME__}__)
 
-add_definitions(-D__RUNING__)
-
 include_directories($ENV{MARIADB_ROOT}/include)
 include_directories($ENV{UNSEEN_ROOT}/include)
 link_directories($ENV{UNSEEN_ROOT}/lib)
