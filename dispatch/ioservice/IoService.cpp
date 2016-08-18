@@ -37,11 +37,13 @@ namespace cc {
 			ThreadPtr thread_(new std::thread(boost::bind(&asio::io_service::run, mIoServices[i])));
 			threads_.push_back(thread_);
 		}
-	#ifdef __RUNING__
-		for (size_t i = 0; i < threads_.size(); ++i) {
-			threads_[i]->join();
+		WorkDirectory& workDirectory_ = WorkDirectory::instance();
+		bool running_ = workDirectory_.isRunning();
+		if (!running_) {
+			for (size_t i = 0; i < threads_.size(); ++i) {
+				threads_[i]->join();
+			}
 		}
-	#endif
 	}
 	
 	void IoService::runStop()
