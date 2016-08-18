@@ -22,8 +22,6 @@ link_directories($ENV{UNSEEN_ROOT}/lib)
 set(Boost_USE_STATIC_LIBS TRUE)
 find_package(Boost COMPONENTS system exception date_time regex chrono thread filesystem log log_setup REQUIRED)
 
-set( RANDOMS random/RandomEngine.cpp random/RandomEngine.hpp )
-
 set( ASPECTS aspect/condition/Condition.cpp aspect/condition/Condition.hpp 
 	aspect/condition/ConditionEngine.cpp aspect/condition/ConditionEngine.hpp 
 	aspect/doing/Doing.cpp aspect/doing/Doing.hpp aspect/doing/EdoingState.hpp 
@@ -34,12 +32,11 @@ set( ASPECTS aspect/condition/Condition.cpp aspect/condition/Condition.hpp
 	aspect/select/IfSelect.cpp aspect/select/IfSelect.hpp 
 	aspect/select/SelectEngine.cpp aspect/select/SelectEngine.hpp 
 	aspect/select/Selector.cpp aspect/select/Selector.hpp 
-	aspect/select/SelectState.cpp aspect/select/SelectState.hpp
+	aspect/select/SelectStart.cpp aspect/select/SelectStart.hpp
+	aspect/aspect/AspectEngine.cpp aspect/aspect/AspectEngine.hpp 
 	aspect/aspect/IAspect.hpp )
 
 set( ENGINES Engine.cpp Engine.hpp )
-
-set( UIS ui/UiEngine.cpp ui/UiEngine.hpp )
 
 set( NETS net/net/NetEngine.cpp net/net/NetEngine.hpp 
 	net/ioservice/IoService.cpp net/ioservice/IoService.hpp 
@@ -47,37 +44,14 @@ set( NETS net/net/NetEngine.cpp net/net/NetEngine.hpp
 	net/connect/ConnectInfo.cpp net/connect/ConnectInfo.hpp 
 	net/connect/TcpConnector.cpp net/connect/TcpConnector.hpp )
 	
-set( CONSOLES console/ConsoleItem.cpp console/ConsoleItem.hpp 
-	console/ConsoleUi.cpp console/ConsoleUi.hpp 
-	console/CommandArgs.cpp console/CommandArgs.hpp 
-	console/CommandBat.cpp console/CommandBat.hpp 
-	console/ConsoleInput.cpp console/ConsoleInput.hpp 
-	console/ConsoleUpdate.cpp console/ConsoleUpdate.hpp 
-	console/ConsoleEngine.cpp console/ConsoleEngine.hpp )
-	
-set( ACCOUNTS account/account/Account.cpp account/account/Account.hpp 
-	account/account/AccountEngine.cpp account/account/AccountEngine.hpp 
-	account/account/RoleItem.cpp account/account/RoleItem.hpp 
-	account/account/ServerItem.cpp account/account/ServerItem.hpp 
-	account/account/ServerList.cpp account/account/ServerList.hpp )
-	
-set( ACCOUNTC account/client/UrlValue.cpp account/client/UrlValue.hpp 
-	account/client/cAccount.cpp account/client/cAccount.hpp 
-	account/client/cAccountEngine.cpp account/client/cAccountEngine.hpp 
-	account/client/AgentResult.cpp account/client/AgentResult.hpp 
-	account/client/LoginResult.cpp account/client/LoginResult.hpp 
-	account/client/RoleResult.cpp account/client/RoleResult.hpp 
-	account/client/ServerInfo.cpp account/client/ServerInfo.hpp 
-	account/client/cRoleList.cpp account/client/cRoleList.hpp )
-
 if(${__GAMEEXE__} MATCHES "client")
-add_library( libclient STATIC ${RANDOMS} ${ASPECTS} ${ACCOUNTS} ${ACCOUNTC}
+add_library( libclient STATIC ${ASPECTS} ${ACCOUNTS} ${ACCOUNTC}
 	${ENGINES} ${UIS} ${CONSOLES} ${NETS} )
 install (TARGETS libclient DESTINATION $ENV{UNSEEN_ROOT}/lib)
 endif()
 
 if(${__GAMEEXE__} MATCHES "agent")
-add_library( libagent STATIC ${RANDOMS} ${ASPECTS} ${ACCOUNTS} ${ACCOUNTC}
+add_library( libagent STATIC ${ASPECTS} ${ACCOUNTS} ${ACCOUNTC}
 	${ENGINES} ${UIS} ${CONSOLES} ${NETS} )
 install (TARGETS libagent DESTINATION $ENV{UNSEEN_ROOT}/lib)
 endif()
