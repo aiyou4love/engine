@@ -25,6 +25,8 @@ namespace cc {
 		void stopEnd();
 		void runClear();
 		
+		static AcceptEngine& instance();
+		
 		AcceptEngine();
 		~AcceptEngine();
 		
@@ -34,6 +36,8 @@ namespace cc {
 		map<int16_t, AcceptIpPtr> mAcceptIps;
 		
 		SessionPtr * mNewSession;
+		
+		static AcceptEngine mAcceptEngine;
 	};
 	
 }

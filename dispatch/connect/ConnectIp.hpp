@@ -19,6 +19,7 @@ namespace cc {
 		int16_t getKey();
 		
 		ConnectIp();
+		ConnectIp(const char * nIp, const char * nPort);
 		~ConnectIp();
 		
 	private:

@@ -4,7 +4,7 @@ namespace cc {
 	
 	void SessionMgr::removeSession(int32_t nSessionId)
 	{
-		lock_guard<mutex> lock_(mMutex);
+		std::lock_guard<mutex> lock_(mMutex);
 		auto it = mSessions.find(nSessionId);
 		if (it == mSessions.end()) {
 			LOGE("[%s]%d", __METHOD__, nSessionId);
@@ -18,7 +18,7 @@ namespace cc {
 		IoService& ioService_ = IoService::instance();
 		asio::io_service& ioHandle_ = ioService_.getIoService();
 		
-		lock_guard<mutex> lock_(mMutex);
+		std::lock_guard<mutex> lock_(mMutex);
 		SessionPtr session_(new Session(++mSessionId, ioHandle_));
 		mSessions[mSessionId] = session_;
 		return mSessions[mSessionId];

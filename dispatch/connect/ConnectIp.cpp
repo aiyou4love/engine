@@ -30,6 +30,14 @@ namespace cc {
 		
 	}
 	
+	ConnectIp::ConnectIp(const char * nIp, const char * nPort)
+		: mServerIp (nIp)
+		, mServerPort (nPort)
+		, mConnectIpId (0)
+	{
+		
+	}
+	
 	ConnectIp::~ConnectIp()
 	{
 		mConnectIpId = 0;

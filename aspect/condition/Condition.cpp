@@ -7,7 +7,7 @@ namespace cc {
 		auto it = mDoings.begin();
 		for ( ; it != mDoings.end(); ++it ) {
 			DoingPtr& doing_ = it->second;
-			if ( !nEntity->runCondition(doing_, nValue) ) {
+			if ( !nEntity->runCondition(nEntity, doing_, nValue) ) {
 				return false;
 			}
 		}

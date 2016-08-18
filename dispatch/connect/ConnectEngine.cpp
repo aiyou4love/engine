@@ -24,8 +24,7 @@ namespace cc {
 		}
 		ConnectInfoPtr& connectInfo_ = it0->second;
 		
-		int32_t connectIpId_ = stringCrc(nIpId);
-		auto it1 = mConnectIps.find(connectIpId_);
+		auto it1 = mConnectIps.find(nIpId);
 		if ( it1 == mConnectIps.end() ) {
 			LOGE("[%s]%s", __METHOD__, nIpId);
 			return;

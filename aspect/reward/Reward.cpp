@@ -7,7 +7,7 @@ namespace cc {
 		auto it = mDoings.begin();
 		for ( ; it != mDoings.end(); ++it ) {
 			DoingPtr& doing_ = it->second;
-			nEntity->runReward(doing_, nValue);
+			nEntity->runReward(nEntity, doing_, nValue);
 		}
 	}
 	

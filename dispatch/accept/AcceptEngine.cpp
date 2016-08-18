@@ -9,7 +9,7 @@ namespace cc {
 			this->stopEnd();
 			return;
 		}
-		(*mSession)->runRead();
+		(*mNewSession)->runRead();
 		startAccept();
 	}
 	
@@ -31,7 +31,7 @@ namespace cc {
 	
 	void AcceptEngine::initAccept(int16_t nIpId)
 	{
-		auto it = mAcceptIps.find(int16_t);
+		auto it = mAcceptIps.find(nIpId);
 		if ( it == mAcceptIps.end() ) {
 			LOGE("[%s]%s", __METHOD__, nIpId);
 			return;
@@ -48,7 +48,7 @@ namespace cc {
 	{
 		try {
 			SessionMgr& sessionMgr_ = SessionMgr::instance();
-			mNewSession = &(sessionService_.createSession());
+			mNewSession = &(sessionMgr_.createSession());
 			
 			mAcceptor->async_accept((*mNewSession)->getSocket(),
 				boost::bind(&AcceptEngine::handleAccept, this,
@@ -97,6 +97,11 @@ namespace cc {
 		mAcceptIps.clear();
 	}
 	
+	AcceptEngine& AcceptEngine::instance()
+	{
+		return mAcceptEngine;
+	}
+	
 	AcceptEngine::AcceptEngine()
 		: mNewSession(nullptr)
 	{
@@ -109,6 +114,6 @@ namespace cc {
 		mAcceptIps.clear();
 	}
 	
-	static AcceptEngine AcceptEngine::mAcceptEngine;
+	AcceptEngine AcceptEngine::mAcceptEngine;
 	
 }

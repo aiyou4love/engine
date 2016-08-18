@@ -7,8 +7,8 @@ namespace cc {
 	public:
 		void registerAspect(int32_t nAspectId, IAspect * nAspect);
 		
-		bool runCondition(DoingPtr& nDoing, ValuePtr& nValue);
-		void runReward(DoingPtr& nDoing, ValuePtr& nValue);
+		bool runCondition(EntityPtr& nEntity, DoingPtr& nDoing, ValuePtr& nValue);
+		void runReward(EntityPtr& nEntity, DoingPtr& nDoing, ValuePtr& nValue);
 		
 		virtual void runClear();
 		

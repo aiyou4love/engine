@@ -8,8 +8,8 @@ namespace cc {
 		void insertProperty(int32_t nPropertyId, PropertyPtr& nProperty);
 		PropertyPtr& getProperty(int32_t nPropertyId);
 		
-		virtual bool runCondition(DoingPtr& nDoing, ValuePtr& nValue) = 0;
-		virtual void runReward(DoingPtr& nDoing, ValuePtr& nValue) = 0;
+		virtual bool runCondition(EntityPtr& nEntity, DoingPtr& nDoing, ValuePtr& nValue) = 0;
+		virtual void runReward(EntityPtr& nEntity, DoingPtr& nDoing, ValuePtr& nValue) = 0;
 		
 		void pushValue(ValuePtr& nValue);
 		ValuePtr popValue();

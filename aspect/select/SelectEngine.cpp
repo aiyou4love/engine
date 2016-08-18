@@ -23,7 +23,7 @@ namespace cc {
 			connectSession_.sendValue(appType0_, nValue);
 		} else {
 			PropertyPtr& property_ = nEntity->getProperty(1);
-			SendPtr send_ = std::dynamic_pointer_cast<SendPtr>(property_);
+			SendPtr send_ = std::dynamic_pointer_cast<ISend>(property_);
 			send_->sendValue(nValue);
 		}
 	}
@@ -31,7 +31,7 @@ namespace cc {
 	void SelectEngine::runStart()
 	{
 		ApplicationEngine& applicationEngine_ = ApplicationEngine::instance();
-		EntityPtr& entity_ = applicationEngine_->getEntity();
+		EntityPtr& entity_ = applicationEngine_.getEntity();
 		
 		auto it = mStartIds.begin();
 		for ( ; it != mStartIds.end(); ++it ) {

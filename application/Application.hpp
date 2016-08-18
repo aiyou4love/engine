@@ -5,8 +5,8 @@ namespace cc {
 	class Application : public Entity
 	{
 	public:
-		bool runCondition(DoingPtr& nDoing, ValuePtr& nValue);
-		void runReward(DoingPtr& nDoing, ValuePtr& nValue);
+		bool runCondition(EntityPtr& nEntity, DoingPtr& nDoing, ValuePtr& nValue);
+		void runReward(EntityPtr& nEntity, DoingPtr& nDoing, ValuePtr& nValue);
 		
 		Application();
 		~Application();

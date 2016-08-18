@@ -24,7 +24,7 @@ find_package(Boost COMPONENTS system exception date_time regex chrono thread fil
 
 set( ASPECTS aspect/condition/Condition.cpp aspect/condition/Condition.hpp 
 	aspect/condition/ConditionEngine.cpp aspect/condition/ConditionEngine.hpp 
-	aspect/doing/Doing.cpp aspect/doing/Doing.hpp aspect/doing/EdoingState.hpp 
+	aspect/doing/Doing.cpp aspect/doing/Doing.hpp 
 	aspect/entity/Property.cpp aspect/entity/Property.hpp 
 	aspect/entity/Entity.cpp aspect/entity/Entity.hpp 
 	aspect/reward/Reward.cpp aspect/reward/Reward.hpp 
@@ -38,21 +38,25 @@ set( ASPECTS aspect/condition/Condition.cpp aspect/condition/Condition.hpp
 
 set( ENGINES Engine.cpp Engine.hpp )
 
-set( NETS net/net/NetEngine.cpp net/net/NetEngine.hpp 
-	net/ioservice/IoService.cpp net/ioservice/IoService.hpp 
-	net/session/Session.cpp net/session/Session.hpp 
-	net/connect/ConnectInfo.cpp net/connect/ConnectInfo.hpp 
-	net/connect/TcpConnector.cpp net/connect/TcpConnector.hpp )
+set( DISPATCH dispatch/accept/AcceptEngine.cpp dispatch/accept/AcceptEngine.hpp 
+	dispatch/accept/AcceptIp.cpp dispatch/accept/AcceptIp.hpp 
+	dispatch/accept/SessionMgr.cpp dispatch/accept/SessionMgr.hpp 
+	dispatch/connect/ConnectEngine.cpp dispatch/connect/ConnectEngine.hpp 
+	dispatch/connect/ConnectInfo.cpp dispatch/connect/ConnectInfo.hpp 
+	dispatch/connect/ConnectIp.cpp dispatch/connect/ConnectIp.hpp 
+	dispatch/connect/Connector.cpp dispatch/connect/Connector.hpp 
+	dispatch/connect/ConnectSession.cpp dispatch/connect/ConnectSession.hpp 
+	dispatch/send/ISend.hpp dispatch/dispatch/IDispatch.hpp 
+	dispatch/ioservice/IoService.cpp dispatch/ioservice/IoService.hpp 
+	dispatch/session/Session.cpp dispatch/session/Session.hpp )
 	
 if(${__GAMEEXE__} MATCHES "client")
-add_library( libclient STATIC ${ASPECTS} ${ACCOUNTS} ${ACCOUNTC}
-	${ENGINES} ${UIS} ${CONSOLES} ${NETS} )
+add_library( libclient STATIC ${ASPECTS} ${ENGINES} ${DISPATCH} )
 install (TARGETS libclient DESTINATION $ENV{UNSEEN_ROOT}/lib)
 endif()
 
 if(${__GAMEEXE__} MATCHES "agent")
-add_library( libagent STATIC ${ASPECTS} ${ACCOUNTS} ${ACCOUNTC}
-	${ENGINES} ${UIS} ${CONSOLES} ${NETS} )
+add_library( libagent STATIC ${ASPECTS} ${ENGINES} ${DISPATCH} )
 install (TARGETS libagent DESTINATION $ENV{UNSEEN_ROOT}/lib)
 endif()
 

@@ -11,7 +11,7 @@ namespace cc {
 		void runPreinit();
 		void runClear();
 		
-		ApplicationEngine& instance();
+		static ApplicationEngine& instance();
 		
 		ApplicationEngine();
 		~ApplicationEngine();

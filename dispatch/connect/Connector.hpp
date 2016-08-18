@@ -29,6 +29,8 @@ namespace cc {
 		int32_t mConnectErrorId;
 		int32_t mTimeoutId;
 		int16_t mConnectId;
+		
+		int16_t mAppId;
 	};
 	typedef std::shared_ptr<Connector> ConnectorPtr;
 	

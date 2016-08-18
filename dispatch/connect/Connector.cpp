@@ -5,11 +5,11 @@ namespace cc {
 	void Connector::runConnect(ConnectIpPtr& nConnectIp, ConnectInfoPtr& nConnectInfo)
 	{
 		mConnectErrorId = nConnectInfo->getConnectErrorId();
-		mTimeoutId = nConnectInfo->getConnectId();
-		mConnectId = nConnectInfo->getTimeoutId();
+		mConnectId = nConnectInfo->getConnectId();
+		mTimeoutId = nConnectInfo->getTimeoutId();
 		
 		ConnectSession& connectSession_ = ConnectSession::instance();
-		mSession = &(connectSession_.createSession(nConnectId));
+		mSession = &(connectSession_.createSession(mAppId));
 		
 		int32_t disconnectId_ = nConnectInfo->getDisconnectId();
 		int32_t exceptionId_ = nConnectInfo->getExceptionId();
@@ -109,8 +109,9 @@ namespace cc {
 	
 	Connector::Connector(int16_t nConnectId, asio::io_service& nHandle)
 		: mConnectTimer (nHandle)
-		, mConnectId (nConnectId)
+		, mAppId (nConnectId)
 		, mConnectErrorId (0)
+		, mConnectId (0)
 		, mTimeoutId (0)
 		, mSession (nullptr)
 	{
@@ -123,6 +124,7 @@ namespace cc {
 		mConnectErrorId = 0;
 		mConnectId = 0;
 		mTimeoutId = 0;
+		mAppId = 0;
 	}
 	
 }

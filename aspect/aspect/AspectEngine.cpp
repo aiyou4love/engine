@@ -1,8 +1,8 @@
-#include "../Engine.hpp"
+#include "../../Engine.hpp"
 
 namespace cc {
 	
-	bool AspectEngine::runCondition(DoingPtr& nDoing, ValuePtr& nValue)
+	bool AspectEngine::runCondition(EntityPtr& nEntity, DoingPtr& nDoing, ValuePtr& nValue)
 	{
 		int32_t aspectId_= nDoing->getAspectId();
 		int32_t doingId_= nDoing->getDoingId();
@@ -12,10 +12,10 @@ namespace cc {
 			return false;
 		}
 		IAspect * aspect_ = it->second;
-		return aspect_->runCondition(doingId_, mAccount, nValue);
+		return aspect_->runCondition(doingId_, nEntity, nValue);
 	}
 	
-	void AspectEngine::runReward(DoingPtr& nDoing, ValuePtr& nValue)
+	void AspectEngine::runReward(EntityPtr& nEntity, DoingPtr& nDoing, ValuePtr& nValue)
 	{
 		int32_t aspectId_= nDoing->getAspectId();
 		int32_t doingId_= nDoing->getDoingId();
@@ -25,7 +25,7 @@ namespace cc {
 			return;
 		}
 		IAspect * aspect_ = it->second; 
-		return aspect_->runReward(doingId_, mAccount, nValue);
+		return aspect_->runReward(doingId_, nEntity, nValue);
 	}
 	
 	void AspectEngine::registerAspect(int32_t nAspectId, IAspect * nAspect)
