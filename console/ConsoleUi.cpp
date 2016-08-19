@@ -21,7 +21,7 @@ namespace cc {
 				const char * commandArgs_ = nCommandArgs->getCommandArgs(1);
 				mLuaThread->runCall<void, const char *>(method_, commandArgs_);
 			}
-		} else if (3 == type) {
+		} else if (3 == type_) {
 			return true;
 		} else {
 			LOGE("[%s]%d", __METHOD__, type_);
