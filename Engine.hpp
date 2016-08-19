@@ -39,5 +39,16 @@
 #include "dispatch/accept/SessionMgr.hpp" 
 #include "dispatch/accept/AcceptEngine.hpp"
 
+#include "ui/IUiEngine.hpp"
+#include "ui/UiManager.hpp"
+
+#include "console/CommandArgs.hpp"
+#include "console/CommandBat.hpp"
+#include "console/ConsoleInput.hpp"
+#include "console/ConsoleUpdate.hpp"
+#include "console/ConsoleItem.hpp"
+#include "console/ConsoleUi.hpp"
+#include "console/ConsoleEngine.hpp"
+
 extern void engineStart();
 extern void engineStop();

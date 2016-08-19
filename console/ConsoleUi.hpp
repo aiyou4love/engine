@@ -5,8 +5,8 @@ namespace cc {
 	class ConsoleUi : noncopyable
 	{
 	public:
-		bool isCommandArgs(CommandArgsPtr& nCommandArgs);
-		void runCommandArgs(CommandArgsPtr& nCommandArgs);
+		bool switchUi(CommandArgsPtr& nCommandArgs);
+		void switchClose(CommandArgsPtr& nCommandArgs);
 		
 		void runInit(const char * nName);
 		

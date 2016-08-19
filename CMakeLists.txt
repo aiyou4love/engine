@@ -48,13 +48,21 @@ set( DISPATCH dispatch/accept/AcceptEngine.cpp dispatch/accept/AcceptEngine.hpp
 	dispatch/ioservice/IoService.cpp dispatch/ioservice/IoService.hpp 
 	dispatch/session/Session.cpp dispatch/session/Session.hpp )
 	
+set( CONSOLES console/ConsoleItem.cpp console/ConsoleItem.hpp 
+	console/ConsoleUi.cpp console/ConsoleUi.hpp 
+	console/CommandArgs.cpp console/CommandArgs.hpp 
+	console/CommandBat.cpp console/CommandBat.hpp 
+	console/ConsoleInput.cpp console/ConsoleInput.hpp 
+	console/ConsoleUpdate.cpp console/ConsoleUpdate.hpp 
+	console/ConsoleEngine.cpp console/ConsoleEngine.hpp )
+	
 if(${__GAMEEXE__} MATCHES "client")
-add_library( libclient STATIC ${ASPECTS} ${ENGINES} ${DISPATCH} )
+add_library( libclient STATIC ${ASPECTS} ${ENGINES} ${DISPATCH} ${CONSOLES} )
 install (TARGETS libclient DESTINATION $ENV{UNSEEN_ROOT}/lib)
 endif()
 
 if(${__GAMEEXE__} MATCHES "agent")
-add_library( libagent STATIC ${ASPECTS} ${ENGINES} ${DISPATCH} )
+add_library( libagent STATIC ${ASPECTS} ${ENGINES} ${DISPATCH} ${CONSOLES} )
 install (TARGETS libagent DESTINATION $ENV{UNSEEN_ROOT}/lib)
 endif()
 

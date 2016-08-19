@@ -110,9 +110,9 @@ namespace cc {
 			return;
 		}
 		ConsoleUiPtr consoleUi_ = mConsoleUis.back();
-		if ( consoleUi_->isCommandArgs(commandArgs_) ) {
+		if ( consoleUi_->switchUi(commandArgs_) ) {
 			mConsoleUis.pop_back();
-			consoleUi_->runCommandArgs(commandArgs_);
+			consoleUi_->switchClose(commandArgs_);
 			consoleUi_->runClose();
 		}
 		this->runRefresh();
