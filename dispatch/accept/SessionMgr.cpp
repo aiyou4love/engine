@@ -52,6 +52,6 @@ namespace cc {
 		mSessionId = 0;
 	}
 	
-	static SessionMgr mSessionMgr;
+	SessionMgr SessionMgr::mSessionMgr;
 	
 }

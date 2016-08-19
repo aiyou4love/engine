@@ -7,7 +7,16 @@ namespace cc {
 	public:
 		asio::io_service& getIoService();
 		
+		template<class T>
+		void headSerialize(T& nSerialize, const char * nName)
+		{
+			nSerialize.runNumber(mIoServiceCount, "ioServiceCount");
+		}
+		const char * streamName();
+		const char * streamUrl();
+		
 		void runPreinit();
+		void runLoad();
 		void runInit();
 		void runStart();
 		void runStop();
@@ -28,7 +37,7 @@ namespace cc {
 		vector<IoServicePtr> mIoServices;
 		vector<WorkPtr> mWorks;
 		size_t mNextIoService;
-		int32_t mIoServiceCount;
+		int16_t mIoServiceCount;
 		
 		static IoService mIoService;
 	};

@@ -13,6 +13,8 @@ namespace cc {
 		void closeUi(const char * nName);
 		void clearUi();
 		
+		void registerEngine(IUiEngine * nUiEngine);
+		
 		static UiManager& instance();
 		
 		UiManager();

@@ -68,6 +68,12 @@ namespace cc {
 	
 	void ConsoleEngine::runInit()
 	{
+		WorkDirectory& workDirectory_ = WorkDirectory::instance();
+		if (!workDirectory_.isConsole()) return;
+		
+		UiManager& uiManager_ = UiManager::instance();
+		uiManager_.registerEngine(this);
+		
 		ContextPtr consoleInput_(new ConsoleInput());
 		ContextPtr consoleUpdate_(new ConsoleUpdate());
 		

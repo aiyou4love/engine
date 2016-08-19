@@ -61,12 +61,12 @@ namespace cc {
 	
 	const char * AcceptEngine::streamName()
 	{
-		return "acceptInfo";
+		return "acceptIp";
 	}
 	
 	const char * AcceptEngine::streamUrl()
 	{
-		return "acceptInfo.json";
+		return "acceptIp.json";
 	}
 	
 	void AcceptEngine::runPreinit()

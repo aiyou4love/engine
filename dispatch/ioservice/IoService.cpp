@@ -12,9 +12,15 @@ namespace cc {
 		lifeCycle_.m_tRunClear.connect(bind(&IoService::runClear, this));
 	}
 	
+	void IoService::runLoad()
+	{
+		TableEngine& tableEngine_ = TableEngine::instance();
+		tableEngine_.runTable<IoService *>(this, streamUrl(), streamName());
+	}
+	
 	void IoService::runInit()
 	{
-		for (int32_t i = 0; i < mIoServiceCount; ++i) {
+		for (int16_t i = 0; i < mIoServiceCount; ++i) {
 			IoServicePtr ioService_(new asio::io_service());
 			WorkPtr work_(new asio::io_service::work(*ioService_));
 			mIoServices.push_back(ioService_);
@@ -39,7 +45,7 @@ namespace cc {
 		}
 		WorkDirectory& workDirectory_ = WorkDirectory::instance();
 		bool running_ = workDirectory_.isRunning();
-		if (!running_) {
+		if (running_) {
 			for (size_t i = 0; i < threads_.size(); ++i) {
 				threads_[i]->join();
 			}
@@ -69,6 +75,16 @@ namespace cc {
 		//mWorks.clear();
 		mNextIoService = 0;
 		mIoServiceCount = 1;
+	}
+	
+	const char * IoService::streamName()
+	{
+		return "workDirectory";
+	}
+	
+	const char * IoService::streamUrl()
+	{
+		return "workDirectory.json";
 	}
 	
 	IoService& IoService::instance()

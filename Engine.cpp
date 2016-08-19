@@ -30,6 +30,11 @@ void engineStart()
 	
 	AcceptEngine& acceptEngine_ = AcceptEngine::instance();
 	acceptEngine_.runPreinit();
+	
+	UiManager::instance();
+	
+	ConsoleEngine& consoleEngine_ = ConsoleEngine::instance();
+	consoleEngine_.runPreinit();
 }
 
 void engineStop()

@@ -47,6 +47,11 @@ namespace cc {
 		}
 	}
 	
+	void UiManager::registerEngine(IUiEngine * nUiEngine)
+	{
+		mUiEngines.push_back(nUiEngine);
+	}
+	
 	UiManager& UiManager::instance()
 	{
 		return mUiManager;
