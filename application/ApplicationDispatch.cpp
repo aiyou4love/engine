@@ -4,7 +4,8 @@ namespace cc {
 	
 	void ApplicationDispatch::pushValue(ValuePtr& nValue)
 	{
-		EntityPtr& entity_ = ApplicationEngine::getEntity();
+		ApplicationEngine& applicationEngine_ = ApplicationEngine::instance();
+		EntityPtr& entity_ = applicationEngine_.getEntity();
 		entity_->pushValue(nValue);
 	}
 	
