@@ -49,7 +49,7 @@ set( DISPATCH dispatch/accept/AcceptEngine.cpp dispatch/accept/AcceptEngine.hpp
 	dispatch/session/Session.cpp dispatch/session/Session.hpp )
 	
 set( UIS ui/UiManager.cpp ui/UiManager.hpp 
-	console/IUiEngine.hpp )
+	ui/IUiEngine.hpp )
 	
 set( CONSOLES console/ConsoleItem.cpp console/ConsoleItem.hpp 
 	console/ConsoleUi.cpp console/ConsoleUi.hpp 
