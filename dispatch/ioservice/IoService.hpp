@@ -31,10 +31,11 @@ namespace cc {
 		void runClear();
 		
 	private:
-		typedef std::shared_ptr<asio::io_service> IoServicePtr;
-		typedef std::shared_ptr<asio::io_service::work> WorkPtr;
-		std::shared_ptr<asio::signal_set> mSignals;
+		typedef SPTR<asio::io_service> IoServicePtr;
+		typedef SPTR<asio::io_service::work> WorkPtr;
+		SPTR<asio::signal_set> mSignals;
 		vector<IoServicePtr> mIoServices;
+		vector<ThreadPtr> mThreads;
 		vector<WorkPtr> mWorks;
 		size_t mNextIoService;
 		int16_t mIoServiceCount;

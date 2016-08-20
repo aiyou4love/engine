@@ -9,6 +9,6 @@ namespace cc {
 		
 		void runContext();
 	};
-	typedef std::shared_ptr<SelectStart> SelectStartPtr;
+	typedef SPTR<SelectStart> SelectStartPtr;
 	
 }

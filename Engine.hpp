@@ -50,5 +50,16 @@
 #include "console/ConsoleUi.hpp"
 #include "console/ConsoleEngine.hpp"
 
+#include "account/account/Account.hpp"
+#include "account/account/AccountEngine.hpp"
+#include "account/client/roleList/cRoleItem.hpp"
+#include "account/client/roleList/cRoleList.hpp"
+#include "account/client/serverList/cServerItem.hpp"
+#include "account/client/serverList/cServerList.hpp"
+#include "account/client/login/cLoginResult.hpp"
+#include "account/client/account/cAccount.hpp"
+#include "account/client/account/cAccountEngine.hpp"
+	
+
 extern void engineStart();
 extern void engineStop();

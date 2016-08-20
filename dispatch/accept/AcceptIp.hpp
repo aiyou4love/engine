@@ -26,6 +26,6 @@ namespace cc {
 		string mServerPort;
 		string mServerIp;
 	};
-	typedef std::shared_ptr<AcceptIp> AcceptIpPtr;
+	typedef SPTR<AcceptIp> AcceptIpPtr;
 	
 }

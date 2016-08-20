@@ -31,7 +31,7 @@ namespace cc {
 		~AcceptEngine();
 		
 	private:
-		std::shared_ptr<asio::ip::tcp::acceptor> mAcceptor;
+		SPTR<asio::ip::tcp::acceptor> mAcceptor;
 		
 		map<int16_t, AcceptIpPtr> mAcceptIps;
 		

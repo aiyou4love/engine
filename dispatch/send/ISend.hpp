@@ -7,6 +7,6 @@ namespace cc {
 	public:
 		virtual void sendValue(ValuePtr& nValue) = 0;
 	};
-	typedef std::shared_ptr<ISend> SendPtr;
+	typedef SPTR<ISend> SendPtr;
 	
 }

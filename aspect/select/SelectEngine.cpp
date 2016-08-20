@@ -23,7 +23,7 @@ namespace cc {
 			connectSession_.sendValue(appType0_, nValue);
 		} else {
 			PropertyPtr& property_ = nEntity->getProperty(1);
-			SendPtr send_ = std::dynamic_pointer_cast<ISend>(property_);
+			SendPtr send_ = PTR_CAST<ISend>(property_);
 			send_->sendValue(nValue);
 		}
 	}

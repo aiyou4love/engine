@@ -32,6 +32,6 @@ namespace cc {
 		
 		int16_t mAppId;
 	};
-	typedef std::shared_ptr<Connector> ConnectorPtr;
+	typedef SPTR<Connector> ConnectorPtr;
 	
 }

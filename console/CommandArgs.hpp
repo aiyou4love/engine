@@ -21,6 +21,6 @@ namespace cc {
 		int32_t mSelectId;
 		int8_t mFlag;
 	};
-	typedef std::shared_ptr<CommandArgs> CommandArgsPtr;
+	typedef SPTR<CommandArgs> CommandArgsPtr;
 	
 }

@@ -30,6 +30,6 @@ namespace cc {
 		
 		int32_t mIfSelectId;
 	};
-	typedef std::shared_ptr<IfSelect> IfSelectPtr;
+	typedef SPTR<IfSelect> IfSelectPtr;
 	
 }

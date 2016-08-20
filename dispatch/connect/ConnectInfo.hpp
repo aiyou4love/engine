@@ -43,6 +43,6 @@ namespace cc {
 		int32_t mExceptionId;
 		int16_t mDispatchId;
 	};
-	typedef std::shared_ptr<ConnectInfo> ConnectInfoPtr;
+	typedef SPTR<ConnectInfo> ConnectInfoPtr;
 	
 }

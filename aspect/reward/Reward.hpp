@@ -24,6 +24,6 @@ namespace cc {
 		map<int8_t, DoingPtr> mDoings;
 		int32_t mRewardId;
 	};
-	typedef std::shared_ptr<Reward> RewardPtr;
+	typedef SPTR<Reward> RewardPtr;
 	
 }

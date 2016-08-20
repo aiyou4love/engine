@@ -7,6 +7,6 @@ namespace cc {
 	public:
 		virtual void pushValue(ValuePtr& nValue) = 0;
 	};
-	typedef std::shared_ptr<IDispatch> DispatchPtr;
+	typedef SPTR<IDispatch> DispatchPtr;
 	
 }

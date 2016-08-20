@@ -26,6 +26,6 @@ namespace cc {
 		int32_t mRewardId;
 		int8_t mSelectId;
 	};
-	typedef std::shared_ptr<Selector> SelectorPtr;
+	typedef SPTR<Selector> SelectorPtr;
 	
 }

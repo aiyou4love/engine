@@ -63,13 +63,23 @@ set( APPS application/Application.cpp application/Application.hpp
 	application/ApplicationDispatch.cpp application/ApplicationDispatch.hpp 
 	application/ApplicationEngine.cpp application/ApplicationEngine.hpp )
 	
+set( ACCOUNTS account/account/Account.cpp account/account/Account.hpp 
+	account/account/AccountEngine.cpp account/account/AccountEngine.hpp 
+	account/client/account/cAccountEngine.cpp account/client/account/cAccountEngine.hpp 
+	account/client/account/cAccount.cpp account/client/account/cAccount.hpp 
+	account/client/login/cLoginResult.cpp account/client/login/cLoginResult.hpp 
+	account/client/roleList/cRoleItem.cpp account/client/roleList/cRoleItem.hpp 
+	account/client/roleList/cRoleList.cpp account/client/roleList/cRoleList.hpp 
+	account/client/serverList/cServerItem.cpp account/client/serverList/cServerItem.hpp 
+	account/client/serverList/cServerList.cpp account/client/serverList/cServerList.hpp )
+	
 if(${__GAMEEXE__} MATCHES "client")
-add_library( libclient STATIC ${ASPECTS} ${ENGINES} ${DISPATCH} ${CONSOLES} ${APPS} ${UIS} )
+add_library( libclient STATIC ${ASPECTS} ${ENGINES} ${DISPATCH} ${CONSOLES} ${APPS} ${UIS} ${ACCOUNTS} )
 install (TARGETS libclient DESTINATION $ENV{UNSEEN_ROOT}/lib)
 endif()
 
 if(${__GAMEEXE__} MATCHES "agent")
-add_library( libagent STATIC ${ASPECTS} ${ENGINES} ${DISPATCH} ${CONSOLES} ${APPS} ${UIS} )
+add_library( libagent STATIC ${ASPECTS} ${ENGINES} ${DISPATCH} ${CONSOLES} ${APPS} ${UIS} ${ACCOUNTS} )
 install (TARGETS libagent DESTINATION $ENV{UNSEEN_ROOT}/lib)
 endif()
 

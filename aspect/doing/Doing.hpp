@@ -27,6 +27,6 @@ namespace cc {
 		int32_t mDoingId;
 		int8_t mIndex;
 	};
-	typedef std::shared_ptr<Doing> DoingPtr;
+	typedef SPTR<Doing> DoingPtr;
 	
 }

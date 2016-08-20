@@ -52,6 +52,6 @@ namespace cc {
 		set<string> mOnEvents;
 		string mName;
 	};
-	typedef std::shared_ptr<ConsoleUi> ConsoleUiPtr;
+	typedef SPTR<ConsoleUi> ConsoleUiPtr;
 	
 }

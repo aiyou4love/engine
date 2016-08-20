@@ -39,17 +39,17 @@ namespace cc {
 	
 	void IoService::runRun()
 	{
-		vector<ThreadPtr> threads_;
 		for (size_t i = 0; i < mIoServices.size(); ++i) {
 			ThreadPtr thread_(new std::thread(boost::bind(&asio::io_service::run, mIoServices[i])));
-			threads_.push_back(thread_);
+			mThreads.push_back(thread_);
 		}
 		WorkDirectory& workDirectory_ = WorkDirectory::instance();
 		bool running_ = workDirectory_.isRunning();
 		if (running_) {
-			for (size_t i = 0; i < threads_.size(); ++i) {
-				threads_[i]->join();
+			for (size_t i = 0; i < mThreads.size(); ++i) {
+				mThreads[i]->join();
 			}
+			mThreads.clear();
 		}
 	}
 	

@@ -61,7 +61,7 @@ namespace cc {
 		
 		bool mClosed;
 	};
-	typedef std::shared_ptr<Session> SessionPtr;
-	typedef std::weak_ptr<Session> SessionWtr;
+	typedef SPTR<Session> SessionPtr;
+	typedef WPTR<Session> SessionWtr;
 	
 }

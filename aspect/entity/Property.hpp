@@ -3,7 +3,7 @@
 namespace cc {
 	
 	class Entity;
-	typedef std::shared_ptr<Entity> EntityPtr;
+	typedef SPTR<Entity> EntityPtr;
 	class Property : noncopyable
 	{
 	public:
@@ -16,6 +16,6 @@ namespace cc {
 	protected:
 		EntityPtr * mEntity;
 	};
-	typedef std::shared_ptr<Property> PropertyPtr;
+	typedef SPTR<Property> PropertyPtr;
 	
 }

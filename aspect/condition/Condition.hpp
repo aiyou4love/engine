@@ -24,6 +24,6 @@ namespace cc {
 		map<int8_t, DoingPtr> mDoings;
 		int32_t mConditionId;
 	};
-	typedef std::shared_ptr<Condition> ConditionPtr;
+	typedef SPTR<Condition> ConditionPtr;
 	
 }

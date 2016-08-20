@@ -36,6 +36,6 @@ namespace cc {
 		string mText;
 		int16_t mIndex;
 	};
-	typedef std::shared_ptr<ConsoleItem> ConsoleItemPtr;
+	typedef SPTR<ConsoleItem> ConsoleItemPtr;
 	
 }
