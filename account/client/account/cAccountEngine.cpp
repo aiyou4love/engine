@@ -1,25 +1,29 @@
-#include "../../Engine.hpp"
+#include "../../../Engine.hpp"
 
 namespace cc {
 	
 #ifdef __CLIENT__
-	struct EaccountUrl
-	{
-		static const char * mAccountCheck = "accountCheck";
-		static const char * mAccountRegister = "accountRegister";
-		static const char * mAccountLogin = "accountLogin";
-	};
+
+	const char * mAccountCheck = "accountCheck";
+	const char * mAccountRegister = "accountRegister";
+	const char * mAccountLogin = "accountLogin";
 	
 	int8_t cAccountEngine::runLogin(const char * nName, const char * nPassword, int16_t nAccountType)
 	{
+		UrlMgr& urlMgr_ = UrlMgr::instance();
+		
 		WorkDirectory& workDirectory_ = WorkDirectory::instance();
 		const char * operatorName_ = workDirectory_.getOperatorName();
 		int16_t versionNo_ = workDirectory_.getVersionNo();
 		
 		cLoginResult loginResult_;
-		if ( !runUrl(loginResult_, EaccountUrl::mAccountLogin, loginResult_.streamName(), nName, nPassword, operatorName_, versionNo_, nAccountType) ) {
+		cLoginResult * loginResult1_ = &loginResult_;
+		if ( !urlMgr_.runUrl(loginResult1_, mAccountLogin, loginResult_.streamName(), nName, nPassword, operatorName_, versionNo_, nAccountType) ) {
 			return 0;
 		}
+		cServerItem& serverItem_ = loginResult_.getServerItem();
+		cRoleItem& roleItem_ = loginResult_.getRoleItem();
+		
 		cAccountPtr account_ = PTR_CAST<cAccount>(mAccount);
 		account_->setAccountName(nName);
 		account_->setAccountPassword(nPassword);
@@ -35,8 +39,10 @@ namespace cc {
 	
 	int8_t cAccountEngine::runRegister(const char * nName, const char * nPassword)
 	{
+		UrlMgr& urlMgr_ = UrlMgr::instance();
+		
 		string value_;
-		if ( !runUrl(value_, EaccountUrl::mAccountRegister, "", nName, nPassword) ) {
+		if ( !urlMgr_.runUrl(value_, mAccountRegister, "", nName, nPassword) ) {
 			return 0;
 		}
 		if ("false" == value_) {
@@ -50,8 +56,10 @@ namespace cc {
 	
 	int8_t cAccountEngine::isRegister(const char * nValue)
 	{
+		UrlMgr& urlMgr_ = UrlMgr::instance();
+		
 		string value_;
-		if ( !runUrl(value_, EaccountUrl::mAccountCheck, "", nValue) ) {
+		if ( !urlMgr_.runUrl(value_, mAccountCheck, "", nValue) ) {
 			return 0;
 		}
 		if ("false" == value_) {
@@ -77,7 +85,7 @@ namespace cc {
 	
 	const char * cAccountEngine::getServerName(int32_t nServerId)
 	{
-		ServerItemPtr& serverItem_ = mServerList->getServerItem(nServerId);
+		cServerItemPtr& serverItem_ = mServerList->getServerItem(nServerId);
 		return serverItem_->getServerName();
 	}
 	

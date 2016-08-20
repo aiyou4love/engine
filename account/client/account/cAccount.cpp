@@ -1,4 +1,4 @@
-#include "../../Engine.hpp"
+#include "../../../Engine.hpp"
 
 namespace cc {
 	
@@ -17,11 +17,11 @@ namespace cc {
 	
 	void cAccount::initAccountInfo(cLoginResult& nLoginResult)
 	{
-		RoleItem& roleItem_ = loginResult_.getRoleItem();
-		mAccountId =loginResult_.getAccountId();
-		mAuthority =loginResult_.getAuthority();
-		mServerId =roleItem_.getServerId();
-		mRoleId =roleItem_.getRoleId();
+		cRoleItem& roleItem_ = nLoginResult.getRoleItem();
+		mAccountId = nLoginResult.getAccountId();
+		mAuthority = nLoginResult.getAuthority();
+		mServerId = roleItem_.getServerId();
+		mRoleId = roleItem_.getRoleId();
 	}
 	
 	void cAccount::setAccountName(const char * nAccountName)
@@ -37,6 +37,18 @@ namespace cc {
 	void cAccount::setAccountType(int16_t nAccountType)
 	{
 		mAccountType = nAccountType;
+	}
+	
+	void cAccount::runReset()
+	{
+		mAccountId = 0;
+		mAuthority = 0;
+		mServerId = 0;
+		mRoleId = 0;
+		
+		mAccountName = "";
+		mAccountPassword = "";
+		mAccountType = 0;
 	}
 	
 	void cAccount::runLoad()

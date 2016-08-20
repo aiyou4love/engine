@@ -1,4 +1,4 @@
-#include "../../Engine.hpp"
+#include "../../../Engine.hpp"
 
 namespace cc {
 	
@@ -11,7 +11,7 @@ namespace cc {
 		auto it = mRoleItems.find(id_);
 		if ( it == mRoleItems.end() ) {
 			LOGE("[%s]", __METHOD__);
-			return defaultPtr<RoleItem>();
+			return defaultPtr<cRoleItem>();
 		}
 		return it->second;
 	}
@@ -27,7 +27,7 @@ namespace cc {
 	
 	void cRoleList::pushRoleItem(cRoleItem& nRoleItem)
 	{
-		cRoleItemPtr roleItem_(new RoleItem(nRoleItem));
+		cRoleItemPtr roleItem_(new cRoleItem(nRoleItem));
 		mRoleItems[roleItem_->getId()] = roleItem_;
 	}
 	

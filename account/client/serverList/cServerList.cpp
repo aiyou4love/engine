@@ -1,4 +1,4 @@
-#include "../../Engine.hpp"
+#include "../../../Engine.hpp"
 
 namespace cc {
 	
@@ -32,9 +32,9 @@ namespace cc {
 		}
 	}
 	
-	void cServerList::pushServerItem(ServerItem& nServerItem)
+	void cServerList::pushServerItem(cServerItem& nServerItem)
 	{
-		cServerItemPtr serverItem_(new ServerItem(nServerItem));
+		cServerItemPtr serverItem_(new cServerItem(nServerItem));
 		int32_t serverId_ = serverItem_->getServerId();
 		mServerItems[serverId_] = serverItem_;
 	}
@@ -44,7 +44,7 @@ namespace cc {
 		auto it = mServerItems.find(nServerId);
 		if ( it == mServerItems.end() ) {
 			LOGE("[%s]", __METHOD__);
-			return defaultPtr<ServerItem>();
+			return defaultPtr<cServerItem>();
 		}
 		return it->second;
 	}

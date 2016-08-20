@@ -19,6 +19,7 @@ namespace cc {
 		EntityPtr& getAccount();
 		
 		void runPreInit();
+		void runLuaApi();
 		void runLoad();
 		void runClear();
 		

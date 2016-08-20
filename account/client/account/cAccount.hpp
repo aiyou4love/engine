@@ -15,6 +15,8 @@ namespace cc {
 		void setAccountPassword(const char * nPassword);
 		void setAccountType(int16_t nAccountType);
 		
+		void runReset();
+		
 		template<class T>
 		void headSerialize(T& nSerialize, const char * nName)
 		{
