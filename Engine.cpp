@@ -35,6 +35,9 @@ void engineStart()
 	
 	ConsoleEngine& consoleEngine_ = ConsoleEngine::instance();
 	consoleEngine_.runPreinit();
+	
+	cAccountEngine& accountEngine_ = cAccountEngine::instance();
+	accountEngine_.runPreinit();
 }
 
 void engineStop()
