@@ -7,7 +7,7 @@ namespace cc {
 		auto it = mSelectors.begin();
 		for ( ; it != mSelectors.end(); ++it ) {
 			SelectorPtr& selector_ = it->second;
-			if (!selector_->runSelect(nEntity, nValue)) {
+			if (selector_->runSelect(nEntity, nValue)) {
 				break;
 			}
 		}
