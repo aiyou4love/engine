@@ -45,7 +45,6 @@ namespace cc {
 		} else if (2 == type_) {
 			LOGE("[%s]%d", __METHOD__, type_);
 		} else if (3 == type_) {
-			this->runClose();
 		} else {
 			LOGE("[%s]%d", __METHOD__, type_);
 		}
