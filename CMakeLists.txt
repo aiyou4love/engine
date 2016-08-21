@@ -69,9 +69,13 @@ set( ACCOUNTS account/account/Account.cpp account/account/Account.hpp
 	account/client/account/cAccount.cpp account/client/account/cAccount.hpp 
 	account/client/login/cLoginResult.cpp account/client/login/cLoginResult.hpp 
 	account/client/roleList/cRoleItem.cpp account/client/roleList/cRoleItem.hpp 
+	account/client/roleList/cRoleResult.cpp account/client/roleList/cRoleResult.hpp 
 	account/client/roleList/cRoleList.cpp account/client/roleList/cRoleList.hpp 
 	account/client/serverList/cServerItem.cpp account/client/serverList/cServerItem.hpp 
-	account/client/serverList/cServerList.cpp account/client/serverList/cServerList.hpp )
+	account/client/serverList/cServerList.cpp account/client/serverList/cServerList.hpp 
+	account/client/agent/cAgentInfo.cpp account/client/agent/cAgentInfo.hpp 
+	account/client/agent/cAgentResult.cpp account/client/agent/cAgentResult.hpp 
+	account/client/agent/cServerInfo.cpp account/client/agent/cServerInfo.hpp )
 	
 if(${__GAMEEXE__} MATCHES "client")
 add_library( libclient STATIC ${ASPECTS} ${ENGINES} ${DISPATCH} ${CONSOLES} ${APPS} ${UIS} ${ACCOUNTS} )

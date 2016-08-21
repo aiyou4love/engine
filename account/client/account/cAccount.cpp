@@ -3,7 +3,7 @@
 namespace cc {
 	
 #ifdef __CLIENT__
-	bool runCondition(EntityPtr& nEntity, DoingPtr& nDoing, ValuePtr& nValue)
+	bool cAccount::runCondition(EntityPtr& nEntity, DoingPtr& nDoing, ValuePtr& nValue)
 	{
 		cAccountEngine& accountEngine_ = cAccountEngine::instance();
 		return accountEngine_.runCondition(nEntity, nDoing, nValue);
@@ -37,6 +37,27 @@ namespace cc {
 	void cAccount::setAccountType(int16_t nAccountType)
 	{
 		mAccountType = nAccountType;
+	}
+	
+	const char * cAccount::getAccountName()
+	{
+		return mAccountName.c_str();
+	}
+	
+	const char * cAccount::getAccountPassword()
+	{
+		return mAccountPassword.c_str();
+	}
+	
+	int16_t cAccount::getAccountType()
+	{
+		return mAccountType;
+	}
+	
+	const char * cAccount::getRoleName()
+	{
+		cAccountEngine& accountEngine_ = cAccountEngine::instance();
+		return accountEngine_.getRoleName(mServerId, mRoleId);
 	}
 	
 	void cAccount::runReset()

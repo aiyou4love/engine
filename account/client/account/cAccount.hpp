@@ -15,6 +15,12 @@ namespace cc {
 		void setAccountPassword(const char * nPassword);
 		void setAccountType(int16_t nAccountType);
 		
+		const char * getAccountName();
+		const char * getAccountPassword();
+		int16_t getAccountType();
+		
+		const char * getRoleName();
+		
 		void runReset();
 		
 		template<class T>
