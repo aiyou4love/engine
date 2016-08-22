@@ -13,6 +13,7 @@ namespace cc {
 		
 		virtual string getServerInfo(int16_t nPageId, int16_t nPageCount);
 		virtual void setStartServer(int32_t nServerId, int32_t nRoleId);
+		virtual string getEnterValue();
 		virtual string getRoleInfos();
 		
 		virtual int8_t roleCreate(const char * nRoleName, int16_t nRoleRace);

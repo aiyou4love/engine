@@ -109,6 +109,25 @@ namespace cc {
 		account_->setRoleId(nRoleId);
 	}
 	
+	string cAccountEngine::getEnterValue()
+	{
+		cAccountPtr account_ = PTR_CAST<cAccount>(mAccount);
+		
+		int32_t serverId_ = account_->getServerId();
+		string serverName_ = this->getServerName(serverId_);
+		string accountName_ = account_->getAccountName();
+		
+		LuaWriter luaWriter_;
+		
+		luaWriter_.luaBegin("cEnterValue");
+		luaWriter_.runNumber(serverId_, "mServerId");
+		luaWriter_.runNumber(serverName_, "serverName");
+		luaWriter_.runNumber(accountName_, "accountName");
+		luaWriter_.luaEnd("cEnterValue");
+		
+		return luaWriter_.getLuaValue();
+	}
+	
 	string cAccountEngine::getRoleInfos()
 	{
 		LuaWriter luaWriter_;

@@ -14,6 +14,7 @@ namespace cc {
 		
 		string getServerInfo(int16_t nPageId, int16_t nPageCount);
 		void setStartServer(int32_t nServerId, int32_t nRoleId);
+		string getEnterValue();
 		string getRoleInfos();
 		
 		void getAgentInfo(ValuePtr& nValue);

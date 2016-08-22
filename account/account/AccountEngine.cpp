@@ -36,6 +36,11 @@ namespace cc {
 		
 	}
 	
+	string AccountEngine::getEnterValue()
+	{
+		return "";
+	}
+	
 	string AccountEngine::getRoleInfos()
 	{
 		return "";

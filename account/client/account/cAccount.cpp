@@ -22,6 +22,10 @@ namespace cc {
 		mAuthority = nLoginResult.getAuthority();
 		mServerId = roleItem_.getServerId();
 		mRoleId = roleItem_.getRoleId();
+		if (0 == mServerId) {
+			cServerItem& serverItem_ = nLoginResult.getServerItem();
+			mServerId = serverItem_.getServerId();
+		}
 	}
 	
 	void cAccount::setAccountName(const char * nAccountName)
