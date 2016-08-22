@@ -126,8 +126,6 @@ namespace cc {
 	
 	void ConsoleEngine::runPreinit()
 	{
-		std::system("chcp 65001");
-		
 		LifeCycle& lifeCycle_ = LifeCycle::instance();
 		lifeCycle_.m_tIniting.connect(bind(&ConsoleEngine::runInit, this));
 		lifeCycle_.m_tRunClear.connect(bind(&ConsoleEngine::runClear, this));

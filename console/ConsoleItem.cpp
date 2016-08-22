@@ -12,7 +12,7 @@ namespace cc {
 		return mMethod.c_str();
 	}
 	
-	const char * ConsoleItem::getText()
+	const wchar_t * ConsoleItem::getText()
 	{
 		return mText.c_str();
 	}
@@ -40,7 +40,7 @@ namespace cc {
 	ConsoleItem::ConsoleItem()
 		: mMethod ("")
 		, mSwitch ("")
-		, mText ("")
+		, mText (L"")
 		, mType (0)
 		, mIndex (0)
 		, mName ("")
@@ -51,7 +51,7 @@ namespace cc {
 	{
 		mSwitch = "";
 		mMethod = "";
-		mText = "";
+		mText = L"";
 		mType = 0;
 		mIndex = 0;
 		mName = "";
