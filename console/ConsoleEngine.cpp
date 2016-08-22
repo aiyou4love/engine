@@ -2,6 +2,11 @@
 
 namespace cc {
 	
+	static void consoleWrite(const char * nValue)
+	{
+		wcout << UTF8ToUTF16(nValue);
+	}
+	
 	void ConsoleEngine::showUi(const char * nName)
 	{
 		this->loadUi(nName);
@@ -126,9 +131,18 @@ namespace cc {
 	
 	void ConsoleEngine::runPreinit()
 	{
+		std::wcout.imbue(std::locale(""));
+		
 		LifeCycle& lifeCycle_ = LifeCycle::instance();
+		lifeCycle_.m_tRunLuaApi.connect(bind(&ConsoleEngine::runLuaApi, this));
 		lifeCycle_.m_tIniting.connect(bind(&ConsoleEngine::runInit, this));
 		lifeCycle_.m_tRunClear.connect(bind(&ConsoleEngine::runClear, this));
+	}
+	
+	void ConsoleEngine::runLuaApi()
+	{
+		LuaEngine& luaEngine_ = LuaEngine::instance();
+		luaEngine_.runFun(consoleWrite, "consoleWrite");
 	}
 	
 	ConsoleEngine& ConsoleEngine::instance()

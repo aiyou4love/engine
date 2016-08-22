@@ -25,6 +25,7 @@ namespace cc {
 		
 	public:
 		void runPreinit();
+		void runLuaApi();
 		void runInit();
 		
 		static ConsoleEngine& instance();
