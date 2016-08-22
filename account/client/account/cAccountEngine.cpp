@@ -36,7 +36,7 @@ namespace cc {
 		mServerList->runSave();
 		mRoleList->pushRoleItem(roleItem_);
 		mRoleList->runSave();
-		return 0;
+		return 1;
 	}
 	
 	int8_t cAccountEngine::runRegister(const char * nName, const char * nPassword)
