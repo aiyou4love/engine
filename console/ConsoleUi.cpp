@@ -81,6 +81,7 @@ namespace cc {
 	void ConsoleUi::runShow()
 	{
 		mLuaThread->runCall<void>("runShow");
+		cout << endl;
 		
 		auto it = mConsoleItems.begin();
 		for ( ; it != mConsoleItems.end(); ++it ) {

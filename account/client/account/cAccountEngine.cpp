@@ -114,15 +114,17 @@ namespace cc {
 		cAccountPtr account_ = PTR_CAST<cAccount>(mAccount);
 		
 		int32_t serverId_ = account_->getServerId();
+		int32_t roleId_ = account_->getRoleId();
 		string serverName_ = this->getServerName(serverId_);
 		string accountName_ = account_->getAccountName();
 		
 		LuaWriter luaWriter_;
 		
 		luaWriter_.luaBegin("cEnterValue");
+		luaWriter_.runNumber(roleId_, "mRoleId");
 		luaWriter_.runNumber(serverId_, "mServerId");
-		luaWriter_.runNumber(serverName_, "serverName");
-		luaWriter_.runNumber(accountName_, "accountName");
+		luaWriter_.runNumber(serverName_, "mServerName");
+		luaWriter_.runNumber(accountName_, "mAccountName");
 		luaWriter_.luaEnd("cEnterValue");
 		
 		return luaWriter_.getLuaValue();
