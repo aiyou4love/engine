@@ -186,10 +186,12 @@ namespace cc {
 		int32_t serverId_ = account_->getServerId();
 		bool update_ = !(account_->isStartRole());
 		
+		string roleName_ = GBKToUTF8(nRoleName);
+		
 		cRoleResult roleResult_;
 		cRoleResult * roleResult1_ = &roleResult_;
 		if ( !urlMgr_.runUrl(roleResult1_, mRoleCreate, roleResult_.streamName(), accountName_, password_, accountType_,
-			operatorName_, versionNo_, accountId_, serverId_, nRoleName, nRoleRace, update_) ) {
+			operatorName_, versionNo_, accountId_, serverId_, roleName_.c_str(), nRoleRace, update_) ) {
 			return 0;
 		}
 		cServerItem& serverItem_ = roleResult_.getServerItem();
