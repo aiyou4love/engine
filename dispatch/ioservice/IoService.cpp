@@ -33,7 +33,9 @@ namespace cc {
 	{
 		LifeCycle& lifeCycle_ = LifeCycle::instance();
 		mSignals.reset(new asio::signal_set(this->getIoService()));
-		mSignals->add(SIGINT); mSignals->add(SIGTERM);
+		mSignals->add(SIGINT);
+		mSignals->add(SIGTERM);
+		mSignals->add(SIGBREAK);
 		mSignals->async_wait(boost::bind(&LifeCycle::stopBegin, &lifeCycle_));
 	}
 	
