@@ -5,8 +5,15 @@ namespace cc {
 	class ConnectIp : noncopyable
 	{
 	public:
-		const char * getServerPort();
-		const char * getServerIp();
+		const char * getServerUrl();
+		
+		int32_t getConnectErrorId();
+		int32_t getConnectId();
+		int32_t getTimeoutId();
+		
+		int32_t getDisconnectId();
+		int32_t getExceptionId();
+		int16_t getDispatchId();
 		
 		template<class T>
 		void serialize(T * nSerialize, int8_t nCount)

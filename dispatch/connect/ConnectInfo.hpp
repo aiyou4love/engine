@@ -16,7 +16,7 @@ namespace cc {
 		template<class T>
 		void serialize(T * nSerialize, int8_t nCount)
 		{
-			nSerialize->runNumber(mConnectInfoId, "connectInfoId");
+			nSerialize->runCrc32(mConnectInfoId, "connectInfoId");
 			
 			nSerialize->runNumber(mConnectErrorId, "connectErrorId");
 			nSerialize->runNumber(mConnectId, "connectId");
@@ -27,13 +27,13 @@ namespace cc {
 			nSerialize->runNumber(mDispatchId, "dispatchId");
 		}
 		bool isDefault();
-		int16_t getKey();
+		int32_t getKey();
 		
 		ConnectInfo();
 		~ConnectInfo();
 		
 	private:
-		int16_t mConnectInfoId;
+		int32_t mConnectInfoId;
 		
 		int32_t mConnectErrorId;
 		int32_t mConnectId;

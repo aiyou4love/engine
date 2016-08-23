@@ -11,21 +11,7 @@ namespace cc {
 			return;
 		}
 		IfSelectPtr& ifSelect_ = it->second;
-		int16_t appType0_ = ifSelect_->getAppType();
-		
-		WorkDirectory& workDirectory_ = WorkDirectory::instance();
-		int16_t appType1_ = workDirectory_.getAppType();
-		
-		if ( appType0_ == appType1_ ) {
-			ifSelect_->runIfSelect(nEntity, nValue);
-		} else if (appType0_ > appType1_) {
-			ConnectSession& connectSession_ = ConnectSession::instance();
-			connectSession_.sendValue(appType0_, nValue);
-		} else {
-			PropertyPtr& property_ = nEntity->getProperty(1);
-			SendPtr send_ = PTR_CAST<ISend>(property_);
-			send_->sendValue(nValue);
-		}
+		ifSelect_->runIfSelect(nEntity, nValue);
 	}
 	
 	void SelectEngine::runStart()
