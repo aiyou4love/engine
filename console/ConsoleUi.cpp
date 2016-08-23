@@ -88,7 +88,7 @@ namespace cc {
 			ConsoleItemPtr& consoleItem_ = it->second;
 			cout << it->first;
 			cout << ":) ";
-			wcout << consoleItem_->getText() << endl;
+			cout << consoleItem_->getText() << endl;
 		}
 	}
 	

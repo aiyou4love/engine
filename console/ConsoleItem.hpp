@@ -7,7 +7,7 @@ namespace cc {
 	public:
 		const char * getMethod();
 		const char * getSwitch();
-		const wchar_t * getText();
+		const char * getText();
 		const char * getName();
 		int8_t getType();
 		
@@ -33,7 +33,7 @@ namespace cc {
 		string mSwitch;
 		int8_t mType;
 		string mName;
-		wstring mText;
+		string mText;
 		int16_t mIndex;
 	};
 	typedef SPTR<ConsoleItem> ConsoleItemPtr;

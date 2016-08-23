@@ -4,7 +4,7 @@ namespace cc {
 	
 	static void consoleWrite(const char * nValue)
 	{
-		wcout << UTF8ToUTF16(nValue);
+		cout << UTF8ToGBK(nValue);
 	}
 	
 	void ConsoleEngine::showUi(const char * nName)
@@ -131,7 +131,7 @@ namespace cc {
 	
 	void ConsoleEngine::runPreinit()
 	{
-		std::wcout.imbue(std::locale(""));
+		cout.imbue(locale(""));
 		
 		LifeCycle& lifeCycle_ = LifeCycle::instance();
 		lifeCycle_.m_tRunLuaApi.connect(bind(&ConsoleEngine::runLuaApi, this));
