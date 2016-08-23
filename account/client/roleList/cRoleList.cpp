@@ -27,6 +27,9 @@ namespace cc {
 	
 	void cRoleList::pushRoleItem(cRoleItem& nRoleItem)
 	{
+		if ( nRoleItem.isDefault() ) {
+			return;
+		}
 		cRoleItemPtr roleItem_(new cRoleItem(nRoleItem));
 		mRoleItems[roleItem_->getId()] = roleItem_;
 	}
