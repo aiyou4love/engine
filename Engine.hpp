@@ -65,7 +65,5 @@
 #include "account/client/login/cLoginResult.hpp"
 #include "account/client/account/cAccount.hpp"
 #include "account/client/account/cAccountEngine.hpp"
-	
 
 extern void engineStart();
-extern void engineStop();

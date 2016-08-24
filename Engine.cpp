@@ -39,7 +39,3 @@ void engineStart()
 	cAccountEngine& accountEngine_ = cAccountEngine::instance();
 	accountEngine_.runPreinit();
 }
-
-void engineStop()
-{
-}

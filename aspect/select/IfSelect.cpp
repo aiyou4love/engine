@@ -13,15 +13,9 @@ namespace cc {
 		}
 	}
 	
-	int16_t IfSelect::getAppType()
-	{
-		return mAppType;
-	}
-	
 	bool IfSelect::isDefault()
 	{
-		return ( (0 == mIfSelectId) || (mSelectors.size() <= 0) 
-			 || (0 == mAppType) );
+		return ( (0 == mIfSelectId) || (mSelectors.size() <= 0) );
 	}
 	
 	int32_t IfSelect::getKey()
@@ -31,16 +25,12 @@ namespace cc {
 	
 	IfSelect::IfSelect()
 	{
-		mAppType = EappType::mGameClient;
-		
 		mSelectors.clear();
 		mIfSelectId = 0;
 	}
 	
 	IfSelect::~IfSelect()
 	{
-		mAppType = EappType::mGameClient;
-		
 		mSelectors.clear();
 		mIfSelectId = 0;
 	}
