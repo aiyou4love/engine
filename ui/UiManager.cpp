@@ -20,12 +20,12 @@ namespace cc {
 		}
 	}
 	
-	void UiManager::refreshUi(const char * nName, IndexValue& nIndexValue)
+	void UiManager::refreshUi(const char * nName, IndexValue& nIndexValue, ValuePtr& nValue)
 	{
 		auto it = mUiEngines.begin();
 		for ( ; it != mUiEngines.end(); ++it ) {
 			IUiEngine * uiEngine_ = (*it);
-			uiEngine_->refreshUi(nName, nIndexValue);
+			uiEngine_->refreshUi(nName, nIndexValue, nValue);
 		}
 	}
 	
@@ -50,6 +50,17 @@ namespace cc {
 	void UiManager::registerEngine(IUiEngine * nUiEngine)
 	{
 		mUiEngines.push_back(nUiEngine);
+	}
+	
+	void UiManager::runPreinit()
+	{
+		LifeCycle& lifeCycle_ = LifeCycle::instance();
+		lifeCycle_.m_tClearEnd.connect(bind(&UiManager::runClear, this));
+	}
+	
+	void UiManager::runClear()
+	{
+		mUiEngines.clear();
 	}
 	
 	UiManager& UiManager::instance()

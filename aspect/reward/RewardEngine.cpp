@@ -18,7 +18,7 @@ namespace cc {
 		LifeCycle& lifeCycle_ = LifeCycle::instance();
 		lifeCycle_.m_tRunLuaApi.connect(bind(&RewardEngine::runLuaApi, this));
 		lifeCycle_.m_tLoadBegin.connect(bind(&RewardEngine::runLoad, this));
-		lifeCycle_.m_tRunClear.connect(bind(&RewardEngine::runClear, this));
+		lifeCycle_.m_tClearEnd.connect(bind(&RewardEngine::runClear, this));
 	}
 	
 	void RewardEngine::runLuaApi()

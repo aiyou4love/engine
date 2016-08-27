@@ -5,12 +5,12 @@ namespace cc {
 	class ConsoleUi : noncopyable
 	{
 	public:
-		bool switchUi(CommandArgsPtr& nCommandArgs);
 		void switchClose(CommandArgsPtr& nCommandArgs);
+		bool switchUi(CommandArgsPtr& nCommandArgs);
 		
 		void runInit(const char * nName);
 		
-		void runRefresh(const char * nName, IndexValue& nIndexValue);
+		void runRefresh(const char * nName, IndexValue& nIndexValue, ValuePtr& nValue);
 		
 		void runText();
 		void runShow();

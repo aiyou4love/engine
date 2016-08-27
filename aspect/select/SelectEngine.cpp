@@ -34,7 +34,7 @@ namespace cc {
 		lifeCycle_.m_tRunLuaApi.connect(bind(&SelectEngine::runLuaApi, this));
 		lifeCycle_.m_tLoadBegin.connect(bind(&SelectEngine::runLoad, this));
 		lifeCycle_.m_tIniting.connect(bind(&SelectEngine::runInit, this));
-		lifeCycle_.m_tRunClear.connect(bind(&SelectEngine::runClear, this));
+		lifeCycle_.m_tClearEnd.connect(bind(&SelectEngine::runClear, this));
 	}
 	
 	void SelectEngine::runLuaApi()

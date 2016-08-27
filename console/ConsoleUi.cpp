@@ -42,8 +42,6 @@ namespace cc {
 		int8_t type_ = consoleItem_->getType();
 		if (1 == type_) {
 			mLuaThread->runCall<void>(switch_);
-		} else if (2 == type_) {
-			LOGE("[%s]%d", __METHOD__, type_);
 		} else if (3 == type_) {
 		} else {
 			LOGE("[%s]%d", __METHOD__, type_);
@@ -64,13 +62,14 @@ namespace cc {
 		this->initLua(uiLuaPath_.c_str());
 	}
 	
-	void ConsoleUi::runRefresh(const char * nName, IndexValue& nIndexValue)
+	void ConsoleUi::runRefresh(const char * nName, IndexValue& nIndexValue, ValuePtr& nValue)
 	{
 		auto it = mOnEvents.find(nName);
 		if ( it == mOnEvents.end() ) {
+			LOGE("[%s]%s", __METHOD__, nName);
 			return;
 		}
-		mLuaThread->runCall<void, IndexValue *>(nName, &nIndexValue);
+		mLuaThread->runCall<void, IndexValue *, ValuePtr&>(nName, &nIndexValue, nValue);
 	}
 	
 	void ConsoleUi::runText()
@@ -102,6 +101,8 @@ namespace cc {
 		mConsoleItems.clear();
 		
 		mOnEvents.clear();
+		
+		mName = "";
 	}
 	
 	void ConsoleUi::initEvent(const char * nPath)

@@ -18,7 +18,7 @@ namespace cc {
 		mDispatch.reset(new ApplicationDispatch());
 		
 		LifeCycle& lifeCycle_ = LifeCycle::instance();
-		lifeCycle_.m_tRunClear.connect(bind(&ApplicationEngine::runClear, this));
+		lifeCycle_.m_tClearEnd.connect(bind(&ApplicationEngine::runClear, this));
 	}
 	
 	void ApplicationEngine::runClear()

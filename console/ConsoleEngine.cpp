@@ -20,12 +20,12 @@ namespace cc {
 		mConsoleUis.push_back(consoleUi_);
 	}
 	
-	void ConsoleEngine::refreshUi(const char * nName, IndexValue& nIndexValue)
+	void ConsoleEngine::refreshUi(const char * nName, IndexValue& nIndexValue, ValuePtr& nValue)
 	{
 		auto it = mConsoleUis.begin();
 		for ( ; it != mConsoleUis.end(); ++it ) {
 			ConsoleUiPtr& consoleUi_ = (*it);
-			consoleUi_->runRefresh(nName, nIndexValue);
+			consoleUi_->runRefresh(nName, nIndexValue, nValue);
 		}
 		this->runRefresh();
 	}
@@ -136,7 +136,7 @@ namespace cc {
 		LifeCycle& lifeCycle_ = LifeCycle::instance();
 		lifeCycle_.m_tRunLuaApi.connect(bind(&ConsoleEngine::runLuaApi, this));
 		lifeCycle_.m_tIniting.connect(bind(&ConsoleEngine::runInit, this));
-		lifeCycle_.m_tRunClear.connect(bind(&ConsoleEngine::runClear, this));
+		lifeCycle_.m_tClearBegin.connect(bind(&ConsoleEngine::runClear, this));
 	}
 	
 	void ConsoleEngine::runLuaApi()

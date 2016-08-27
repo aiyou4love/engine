@@ -5,10 +5,10 @@ namespace cc {
 	class AspectEngine : noncopyable
 	{
 	public:
-		void registerAspect(int32_t nAspectId, IAspect * nAspect);
-		
 		bool runCondition(EntityPtr& nEntity, DoingPtr& nDoing, ValuePtr& nValue);
 		void runReward(EntityPtr& nEntity, DoingPtr& nDoing, ValuePtr& nValue);
+		
+		void registerAspect(int32_t nAspectId, IAspect * nAspect);
 		
 		virtual void runClear();
 		

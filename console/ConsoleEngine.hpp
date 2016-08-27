@@ -8,7 +8,7 @@ namespace cc {
 		void showUi(const char * nName);
 		void loadUi(const char * nName);
 		
-		void refreshUi(const char * nName, IndexValue& nIndexValue);
+		void refreshUi(const char * nName, IndexValue& nIndexValue, ValuePtr& nValue);
 		
 		void closeUi(const char * nName);
 		void clearUi();
