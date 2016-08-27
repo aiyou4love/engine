@@ -38,12 +38,12 @@ namespace cc {
 		}
 	}
 	
-	void UiManager::clearUi()
+	void UiManager::runClose()
 	{
 		auto it = mUiEngines.begin();
 		for ( ; it != mUiEngines.end(); ++it ) {
 			IUiEngine * uiEngine_ = (*it);
-			uiEngine_->clearUi();
+			uiEngine_->runClose();
 		}
 	}
 	

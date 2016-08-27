@@ -60,7 +60,7 @@ namespace cc {
 		this->runRefresh();
 	}
 	
-	void ConsoleEngine::clearUi()
+	void ConsoleEngine::runClose()
 	{
 		auto it = mConsoleUis.begin();
 		for ( ; it != mConsoleUis.end(); ++it ) {
@@ -69,6 +69,13 @@ namespace cc {
 		}
 		mConsoleUis.clear();
 		this->runRefresh();
+	}
+	
+	void ConsoleEngine::runClear()
+	{
+		this->clearUi();
+		
+		mCommandArgs.clear();
 	}
 	
 	void ConsoleEngine::runInit()
@@ -85,13 +92,6 @@ namespace cc {
 		HandleEngine& handleEngine_ = HandleEngine::instance();
 		handleEngine_.addContext(consoleUpdate_);
 		handleEngine_.addContext(consoleInput_);
-	}
-	
-	void ConsoleEngine::runClear()
-	{
-		this->clearUi();
-		
-		mCommandArgs.clear();
 	}
 	
 	void ConsoleEngine::pushCommandArgs(CommandArgsPtr& nCommandArgs)
@@ -136,6 +136,7 @@ namespace cc {
 		LifeCycle& lifeCycle_ = LifeCycle::instance();
 		lifeCycle_.m_tRunLuaApi.connect(bind(&ConsoleEngine::runLuaApi, this));
 		lifeCycle_.m_tIniting.connect(bind(&ConsoleEngine::runInit, this));
+		lifeCycle_.m_tCloseBegin.connect(bind(&ConsoleEngine::runClose, this));
 		lifeCycle_.m_tClearBegin.connect(bind(&ConsoleEngine::runClear, this));
 	}
 	

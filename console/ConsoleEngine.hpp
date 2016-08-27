@@ -11,8 +11,7 @@ namespace cc {
 		void refreshUi(const char * nName, IndexValue& nIndexValue, ValuePtr& nValue);
 		
 		void closeUi(const char * nName);
-		void clearUi();
-		
+		void runClose();
 		void runClear();
 		
 		void pushCommandArgs(CommandArgsPtr& nCommandArgs);
