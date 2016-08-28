@@ -73,8 +73,8 @@ namespace cc {
 	{
 		LifeCycle& lifeCycle_ = LifeCycle::instance();
 		lifeCycle_.m_tLoadBegin.connect(bind(&AcceptEngine::runLoad, this));
-		lifeCycle_.m_tStopEnd.connect(bind(&AcceptEngine::stopEnd, this));
-		lifeCycle_.m_tRunClear.connect(bind(&AcceptEngine::runClear, this));
+		lifeCycle_.m_tStopBegin.connect(bind(&AcceptEngine::stopEnd, this));
+		lifeCycle_.m_tClearEnd.connect(bind(&AcceptEngine::runClear, this));
 	}
 	
 	void AcceptEngine::runLoad()
