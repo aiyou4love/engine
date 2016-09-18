@@ -7,7 +7,6 @@ namespace cc {
 	{
 	public:
 		void setServerDiff(int32_t nServerDiff);
-		void setStartTime(int64_t nStartTime);
 		
 		void setServerTime(int64_t nServerTime);
 		int64_t getServerTime();

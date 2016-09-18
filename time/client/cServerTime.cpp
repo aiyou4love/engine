@@ -6,14 +6,7 @@ namespace cc {
 	void cServerTime::setServerDiff(int32_t nServerDiff)
 	{
 		int32_t timeDiff_ = mTimeDiff - nServerDiff;
-		mFirstStart += timeDiff_;
-		mStartTime += timeDiff_;
 		mServerTime += timeDiff_;
-	}
-	
-	void cServerTime::setStartTime(int64_t nStartTime)
-	{
-		mStartTime = nStartTime;
 	}
 	
 	void cServerTime::setServerTime(int64_t nServerTime)
