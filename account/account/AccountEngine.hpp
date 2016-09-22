@@ -2,7 +2,7 @@
 
 namespace cc {
 	
-	class AccountEngine : public AspectEngine
+	class AccountEngine : noncopyable
 	{
 	public:
 		AccountEngine();

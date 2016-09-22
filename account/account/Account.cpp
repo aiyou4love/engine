@@ -2,109 +2,57 @@
 
 namespace cc {
 	
-	void Account::setRoleName(const char * nRoleName)
+	void Account::setAuthority(int16_t nAuthority)
 	{
-		mRoleName = nRoleName;
+		mAuthority = nAuthority;
 	}
 	
-	void Account::setAccountId(int64_t nAccountId)
+	int16_t Account::getAuthority()
 	{
-		mAccountId = nAccountId;
+		return mAuthority;
 	}
 	
-	void Account::setServerId(int32_t nServerId)
+	void Account::setType(int16_t nType)
 	{
-		mServerId = nServerId;
+		mType = nType;
 	}
 	
-	void Account::setRoleId(int32_t nRoleId)
+	int16_t Account::getType()
 	{
-		mRoleId = nRoleId;
+		return mType;
 	}
 	
-	void Account::setRoleLevel(int16_t nRoleLevel)
+	void Account::setId(int64_t nId)
 	{
-		mRoleLevel = nRoleLevel;
+		mId = nId;
 	}
 	
-	void Account::setRoleType(int16_t nRoleType)
+	int64_t Account::getId()
 	{
-		mRoleType = nRoleType;
+		return mId;
 	}
 	
-	void Account::setRoleRace(int16_t nRoleRace)
+	void Account::runClear()
 	{
-		mRoleRace = nRoleRace;
-	}
-	
-	void Account::setRoleStep(int16_t nRoleStep)
-	{
-		mRoleStep = nRoleStep;
-	}
-	
-	const char * Account::getRoleName()
-	{
-		return "";
-	}
-	
-	int64_t Account::getAccountId()
-	{
-		return mAccountId;
-	}
-	
-	int32_t Account::getRoleId()
-	{
-		return mRoleId;
-	}
-	
-	int32_t Account::getServerId()
-	{
-		return mServerId;
-	}
-	
-	int16_t Account::getRoleLevel()
-	{
-		return mRoleLevel;
-	}
-	
-	int16_t Account::getRoleType()
-	{
-		return mRoleType;
-	}
-	
-	int16_t Account::getRoleRace()
-	{
-		return mRoleRace;
-	}
-	
-	int16_t Account::getRoleStep()
-	{
-		return mRoleStep;
+		mAuthority = 0;
+		
+		mType = 0;
+		mId = 0;
 	}
 	
 	Account::Account()
-		: mAccountId (0)
-		, mServerId (0)
-		, mRoleId (0)
-		, mRoleName ("")
-		, mRoleType (0)
-		, mRoleRace (0)
-		, mRoleStep (0)
-		, mRoleLevel (0)
+		: mAuthority (0)
+		, mType (0)
+		, mId (0)
 	{
 	}
 	
 	Account::~Account()
 	{
-		mAccountId = 0;
-		mServerId = 0;
-		mRoleId = 0;
-		mRoleName = "";
+		mAuthority = 0;
 		
-		mRoleType = 0;
-		mRoleRace = 0;
-		mRoleStep = 0;
-		mRoleLevel = 0;
+		mType = 0;
+		mId = 0;
 	}
 	
 }

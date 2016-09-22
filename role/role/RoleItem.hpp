@@ -2,12 +2,9 @@
 
 namespace cc {
 	
-#ifdef __CLIENT__
-	class cRoleItem : noncopyable
+	class RoleItem : public Property
 	{
 	public:
-		void luaValue(LuaWriter * nLuaWriter, const char * nName);
-		
 		template<class T>
 		void serialize(T * nSerialize, int8_t nCount)
 		{
@@ -33,9 +30,9 @@ namespace cc {
 		int64_t getKey();
 		bool isDefault();
 		
-		cRoleItem();
-		cRoleItem(cRoleItem& nRoleItem);
-		~cRoleItem();
+		RoleItem();
+		RoleItem(RoleItem& nRoleItem);
+		~RoleItem();
 		
 	private:
 		int32_t mServerId;
@@ -46,7 +43,6 @@ namespace cc {
         int16_t mRoleStep;
         int32_t mRoleLevel;
 	};
-	typedef SPTR<cRoleItem> cRoleItemPtr;
-#endif
+	typedef SPTR<RoleItem> RoleItemPtr;
 	
 }
