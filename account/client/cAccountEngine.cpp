@@ -19,6 +19,20 @@ namespace cc {
 		if ( !urlMgr_.runStream(loginResult_, mLoginUrl, loginResult_.streamName(), nName, nPassword, operatorName_, versionNo_, nType) ) {
 			return 0;
 		}
+		RoleItemPtr& roleItem_ = loginResult_.getRoleItem();
+		RoleEngine& roleEngine_ = RoleEngine::instance();
+		roleEngine_.pushRoleItem(roleItem_);
+		roleEngine_.runSave();
+		
+		int64_t accountId_ = loginResult_.getAccountId();
+		int16_t authority_ = loginResult_.getAuthority();
+		cAccountPtr account_ = PTR_CAST<cAccount>(mAccount);
+		account_->setName(nName);
+		account_->setPassword(nPassword);
+		account_->setType(nType);
+		account_->setAuthority(authority_);
+		account_->setId(accountId_);
+		account_->runSave();
 		return 1;
 	}
 	
