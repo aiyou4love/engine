@@ -11,6 +11,8 @@ namespace cc {
 		int8_t isRegister(const char * nName);
 		void runCancel();
 		
+		int8_t roleCreate(const char * nRoleName, int16_t nRoleRace);
+		
 		EntityPtr& getAccount();
 		
 		void runPreinit();

@@ -78,6 +78,41 @@ namespace cc {
 		account_->runSave();
 	}
 	
+	int8_t cAccountEngine::roleCreate(const char * nRoleName, int16_t nRoleRace)
+	{
+		UrlMgr& urlMgr_ = UrlMgr::instance();
+		
+		WorkDirectory& workDirectory_ = WorkDirectory::instance();
+		const char * operatorName_ = workDirectory_.getOperatorName();
+		int16_t versionNo_ = workDirectory_.getVersionNo();
+		
+		cAccountPtr account_ = PTR_CAST<cAccount>(mAccount);
+		
+		const char * accountName_ = account_->getAccountName();
+		const char * password_ = account_->getAccountPassword();
+		int16_t accountType_ = account_->getAccountType();
+		int64_t accountId_ = account_->getAccountId();
+		int32_t serverId_ = account_->getServerId();
+		bool update_ = !(account_->isStartRole());
+		
+		cRoleResult roleResult_;
+		cRoleResult * roleResult1_ = &roleResult_;
+		if ( !urlMgr_.runUrl(roleResult1_, mRoleCreate, roleResult_.streamName(), accountName_, password_, accountType_,
+			operatorName_, versionNo_, accountId_, serverId_, nRoleName, nRoleRace, update_) ) {
+			return 0;
+		}
+		cServerItem& serverItem_ = roleResult_.getServerItem();
+		cRoleItem& roleItem_ = roleResult_.getRoleItem();
+		account_->setServerId(roleItem_.getServerId());
+		account_->setRoleId(roleItem_.getRoleId());
+		account_->runSave();
+		mServerList->pushServerItem(serverItem_);
+		mServerList->runSave();
+		mRoleList->pushRoleItem(roleItem_);
+		mRoleList->runSave();
+		return 1;
+	}
+	
 	EntityPtr& cAccountEngine::getAccount()
 	{
 		return mAccount;

@@ -6,6 +6,8 @@ namespace cc {
 	class RoleEngine : noncopyable
 	{
 	public:
+		int8_t runRoleList(int64_t nAccountId);
+		
 		void pushRoleItem(RoleItemPtr& nRoleItem);
 		
 		template<class T>
