@@ -9,15 +9,15 @@ namespace cc {
 		template<class T>
 		void headSerialize(T& nSerialize, const char * nName)
 		{
+			nSerialize.runStreamPtr(mRoleItem, "mRoleItem");
 			nSerialize.runNumber(mErrorCode, "mErrorCode");
 			nSerialize.runNumber(mAccountId, "mAccountId");
-			nSerialize.runStream(mRoleItem, "mRoleItem");
 		}
 		
 		const char * streamName();
 		const char * streamUrl();
 		
-		RoleItem& getRoleItem();
+		RoleItemPtr& getRoleItem();
 		int64_t getAccountId();
 		int32_t getErrorCode();
 		
@@ -25,7 +25,7 @@ namespace cc {
 		~cRoleResult();
 		
 	private:
-		cRoleItemPtr mRoleItem;
+		RoleItemPtr mRoleItem;
 		
 		int64_t mAccountId;
 		int32_t mErrorCode;

@@ -7,6 +7,13 @@ namespace cc {
 	
 	int8_t RoleEngine::runRoleList(int64_t nAccountId)
 	{
+		cServerTime& serverTime_ = cServerTime::instance();
+		int64_t nowTime_ = serverTime_.getServerTime();
+		int64_t seconds_ = nowTime_ - mUpdateTime;
+		if (seconds_ < 43200) {
+			return 1;
+		}
+		
 		UrlMgr& urlMgr_ = UrlMgr::instance();
 		
 		WorkDirectory& workDirectory_ = WorkDirectory::instance();
@@ -14,27 +21,33 @@ namespace cc {
 		int16_t versionNo_ = workDirectory_.getVersionNo();
 		
 		cRoleListResult roleListResult_;
-		if ( !urlMgr_.runStream(roleListResult_, mRoleListUrl, roleListResult_.streamName(), operatorName_, versionNo_, nAccountId) ) {
+		if ( !urlMgr_.runStream(roleListResult_, mRoleListUrl, roleListResult_.streamName(),
+			operatorName_, versionNo_, nAccountId) ) {
 			return 0;
 		}
 		list<RoleItemPtr>& roleItems_ = roleListResult_.getRoleItems();
 		auto it = roleItems_.begin();
 		for ( ; it != roleItems_.end(); ++it ) {
 			RoleItemPtr& roleItem_ = (*it);
-			this->pushRoleItem(roleItem_);
+			if ( roleItem_->isDefault() ) {
+				return;
+			}
+			int64_t id_ = roleItem_->getId();
+			mRoleItems[id_] = roleItem_;
 		}
 		this->runSave();
 		
 		return 1;
 	}
 	
-	void RoleEngine::pushRoleItem(RoleItemPtr& nRoleItem)
+	const char * RoleEngine::saveName()
 	{
-		if ( nRoleItem->isDefault() ) {
-			return;
-		}
-		int64_t id_ = nRoleItem->getId();
-		mRoleItems[id_] = nRoleItem;
+		return "roleList";
+	}
+	
+	const char * RoleEngine::saveUrl()
+	{
+		return "roleList.json";
 	}
 	
 	const char * RoleEngine::streamName()
@@ -57,28 +70,31 @@ namespace cc {
 	void RoleEngine::runLoad()
 	{
 		UserDefault& userDefault_ = UserDefault::instance();
-		userDefault_.runReader<RoleEngine *>(this, streamUrl(), streamName());
+		userDefault_.runReader<RoleEngine *>(this, saveUrl(), saveName());
 	}
 	
 	void RoleEngine::runSave()
 	{
 		UserDefault& userDefault_ = UserDefault::instance();
-		userDefault_.runSave<RoleEngine *>(this, streamUrl(), streamName());
+		userDefault_.runSave<RoleEngine *>(this, saveUrl(), saveName());
 	}
 	
 	void RoleEngine::runClear()
 	{
 		mRoleItems.clear();
+		mUpdateTime = 0;
 	}
 	
 	RoleEngine::RoleEngine()
 	{
 		mRoleItems.clear();
+		mUpdateTime = 0;
 	}
 	
 	RoleEngine::~RoleEngine()
 	{
 		mRoleItems.clear();
+		mUpdateTime = 0;
 	}
 #endif
 	

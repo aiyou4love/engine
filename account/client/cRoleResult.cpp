@@ -13,7 +13,7 @@ namespace cc {
 		return "roleResult.json";
 	}
 	
-	cRoleItem& cRoleResult::getRoleItem()
+	RoleItemPtr& cRoleResult::getRoleItem()
 	{
 		return mRoleItem;
 	}

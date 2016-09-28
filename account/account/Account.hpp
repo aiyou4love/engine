@@ -5,6 +5,9 @@ namespace cc {
 	class Account : public Entity
 	{
 	public:
+		void setRoleItem(RoleItemPtr& nRoleItem);
+		RoleItemPtr& getRoleItem();
+		
 		void setAuthority(int16_t nAuthority);
 		int16_t getAuthority();
 		
@@ -20,6 +23,8 @@ namespace cc {
 		virtual ~Account();
 		
 	protected:
+		RoleItemPtr mRoleItem;
+		
 		int16_t mAuthority;
 		
 		int16_t mType;

@@ -2,6 +2,16 @@
 
 namespace cc {
 	
+	void Account::setRoleItem(RoleItemPtr& nRoleItem)
+	{
+		mRoleItem = nRoleItem;
+	}
+	
+	RoleItemPtr& Account::getRoleItem()
+	{
+		return mRoleItem;
+	}
+	
 	void Account::setAuthority(int16_t nAuthority)
 	{
 		mAuthority = nAuthority;

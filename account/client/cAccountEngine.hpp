@@ -7,6 +7,7 @@ namespace cc {
 	{
 	public:
 		int8_t runLogin(const char * nName, const char * nPassword, int16_t nType);
+		bool isLogin();
 		int8_t runRegister(const char * nName, const char * nPassword);
 		int8_t isRegister(const char * nName);
 		void runCancel();

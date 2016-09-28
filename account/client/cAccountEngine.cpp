@@ -6,6 +6,7 @@ namespace cc {
 	const char * mRegisterUrl = "accountRegister";
 	const char * mLoginUrl = "accountLogin";
 	const char * mCheckUrl = "accountCheck";
+	const char * mRoleCreate = "roleCreate";
 	
 	int8_t cAccountEngine::runLogin(const char * nName, const char * nPassword, int16_t nType)
 	{
@@ -16,17 +17,15 @@ namespace cc {
 		int16_t versionNo_ = workDirectory_.getVersionNo();
 		
 		cLoginResult loginResult_;
-		if ( !urlMgr_.runStream(loginResult_, mLoginUrl, loginResult_.streamName(), nName, nPassword, operatorName_, versionNo_, nType) ) {
+		if ( !urlMgr_.runStream(loginResult_, mLoginUrl, loginResult_.streamName(),
+			nName, nPassword, operatorName_, versionNo_, nType) ) {
 			return 0;
 		}
 		RoleItemPtr& roleItem_ = loginResult_.getRoleItem();
-		RoleEngine& roleEngine_ = RoleEngine::instance();
-		roleEngine_.pushRoleItem(roleItem_);
-		roleEngine_.runSave();
-		
 		int64_t accountId_ = loginResult_.getAccountId();
 		int16_t authority_ = loginResult_.getAuthority();
 		cAccountPtr account_ = PTR_CAST<cAccount>(mAccount);
+		account_->setRoleItem(roleItem_);
 		account_->setName(nName);
 		account_->setPassword(nPassword);
 		account_->setType(nType);
@@ -34,6 +33,12 @@ namespace cc {
 		account_->setId(accountId_);
 		account_->runSave();
 		return 1;
+	}
+	
+	bool cAccountEngine::isLogin()
+	{
+		cAccountPtr account_ = PTR_CAST<cAccount>(mAccount);
+		return (account_->getId() > 0);
 	}
 	
 	int8_t cAccountEngine::runRegister(const char * nName, const char * nPassword)
@@ -88,28 +93,26 @@ namespace cc {
 		
 		cAccountPtr account_ = PTR_CAST<cAccount>(mAccount);
 		
-		const char * accountName_ = account_->getAccountName();
-		const char * password_ = account_->getAccountPassword();
-		int16_t accountType_ = account_->getAccountType();
-		int64_t accountId_ = account_->getAccountId();
-		int32_t serverId_ = account_->getServerId();
-		bool update_ = !(account_->isStartRole());
+		const char * accountName_ = account_->getName();
+		const char * password_ = account_->getPassword();
+		int16_t accountType_ = account_->getType();
+		int64_t accountId_ = account_->getId();
+		RoleItemPtr& roleItem0_ = account_->getRoleItem();
+		int32_t serverId_ = roleItem0_->getServerId();
+		int32_t roleId_ = roleItem0_->getRoleId());
 		
 		cRoleResult roleResult_;
-		cRoleResult * roleResult1_ = &roleResult_;
-		if ( !urlMgr_.runUrl(roleResult1_, mRoleCreate, roleResult_.streamName(), accountName_, password_, accountType_,
-			operatorName_, versionNo_, accountId_, serverId_, nRoleName, nRoleRace, update_) ) {
+		if ( !urlMgr_.runUrl(roleResult_, mRoleCreate, roleResult_.streamName(), accountName_, password_, accountType_,
+			operatorName_, versionNo_, accountId_, serverId_, nRoleName, nRoleRace, (roleId_ > 0)) ) {
 			return 0;
 		}
-		cServerItem& serverItem_ = roleResult_.getServerItem();
-		cRoleItem& roleItem_ = roleResult_.getRoleItem();
-		account_->setServerId(roleItem_.getServerId());
-		account_->setRoleId(roleItem_.getRoleId());
+		int32_t errorCode_ = roleResult_.getErrorCode();
+		if (1 != errorCode_) {
+			return 2;
+		}
+		RoleItemPtr& roleItem1_ = roleResult_.getRoleItem();
+		account_->setRoleItem(roleItem1_);
 		account_->runSave();
-		mServerList->pushServerItem(serverItem_);
-		mServerList->runSave();
-		mRoleList->pushRoleItem(roleItem_);
-		mRoleList->runSave();
 		return 1;
 	}
 	

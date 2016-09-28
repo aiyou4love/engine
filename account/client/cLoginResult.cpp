@@ -29,14 +29,17 @@ namespace cc {
 	}
 	
 	cLoginResult::cLoginResult()
-		: mAccountId (0)
+		: mRoleItem (new RoleItem())
+		, mAccountId (0)
 		, mAuthority (0)
-		, mRoleItem (new RoleItem())
 	{
+		mServerItems.clear();
 	}
 	
 	cLoginResult::~cLoginResult()
 	{
+		mServerItems.clear();
+		
 		mAccountId = 0;
 		mAuthority = 0;
 	}
