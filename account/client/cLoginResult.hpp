@@ -9,7 +9,7 @@ namespace cc {
 		template<class T>
 		void headSerialize(T& nSerialize, const char * nName)
 		{
-			nSerialize.runStreamPtrs<List<ServerItemPtr>, ServerItemPtr>(mServerItems, "mServerItems", "mServerItem");
+			nSerialize.runStreamPtrs<list<ServerItemPtr>, ServerItemPtr>(mServerItems, "mServerItems", "mServerItem");
 			
 			nSerialize.runStreamPtr(mRoleItem, "mRoleItem");
 			
@@ -24,7 +24,7 @@ namespace cc {
 			auto it = mServerItems.begin();
 			for ( ; it != mServerItems.end(); ++it ) {
 				ServerItemPtr& serverItem_ = (*it);
-				serverEngine_.pushServerItem(mServerItems);
+				serverEngine_.pushServerItem(serverItem_);
 			}
 			serverEngine_.runSave();
 		}
@@ -42,7 +42,7 @@ namespace cc {
 		~cLoginResult();
 		
 	private:
-		List<ServerItemPtr> mServerItems;
+		list<ServerItemPtr> mServerItems;
 		RoleItemPtr mRoleItem;
 		
 		int64_t mAccountId;

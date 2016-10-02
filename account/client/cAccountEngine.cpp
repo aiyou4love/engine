@@ -24,7 +24,7 @@ namespace cc {
 		RoleItemPtr& roleItem_ = loginResult_.getRoleItem();
 		int64_t accountId_ = loginResult_.getAccountId();
 		int16_t authority_ = loginResult_.getAuthority();
-		cAccountPtr account_ = PTR_CAST<cAccount>(mAccount);
+		cAccountPtr account_ = PTR_DCST<cAccount>(mAccount);
 		account_->setRoleItem(roleItem_);
 		account_->setName(nName);
 		account_->setPassword(nPassword);
@@ -37,7 +37,7 @@ namespace cc {
 	
 	bool cAccountEngine::isLogin()
 	{
-		cAccountPtr account_ = PTR_CAST<cAccount>(mAccount);
+		cAccountPtr account_ = PTR_DCST<cAccount>(mAccount);
 		return (account_->getId() > 0);
 	}
 	
@@ -63,7 +63,7 @@ namespace cc {
 		UrlMgr& urlMgr_ = UrlMgr::instance();
 		
 		string value_;
-		if ( !urlMgr_.runNumber(value_, mCheckUrl, nValue) ) {
+		if ( !urlMgr_.runNumber(value_, mCheckUrl, nName) ) {
 			return 0;
 		}
 		if ("false" == value_) {
@@ -77,7 +77,7 @@ namespace cc {
 	
 	void cAccountEngine::runCancel()
 	{
-		cAccountPtr account_ = PTR_CAST<cAccount>(mAccount);
+		cAccountPtr account_ = PTR_DCST<cAccount>(mAccount);
 		
 		account_->runClear();
 		account_->runSave();
@@ -91,7 +91,7 @@ namespace cc {
 		const char * operatorName_ = workDirectory_.getOperatorName();
 		int16_t versionNo_ = workDirectory_.getVersionNo();
 		
-		cAccountPtr account_ = PTR_CAST<cAccount>(mAccount);
+		cAccountPtr account_ = PTR_DCST<cAccount>(mAccount);
 		
 		const char * accountName_ = account_->getName();
 		const char * password_ = account_->getPassword();
@@ -99,10 +99,10 @@ namespace cc {
 		int64_t accountId_ = account_->getId();
 		RoleItemPtr& roleItem0_ = account_->getRoleItem();
 		int32_t serverId_ = roleItem0_->getServerId();
-		int32_t roleId_ = roleItem0_->getRoleId());
+		int32_t roleId_ = roleItem0_->getRoleId();
 		
 		cRoleResult roleResult_;
-		if ( !urlMgr_.runUrl(roleResult_, mRoleCreate, roleResult_.streamName(), accountName_, password_, accountType_,
+		if ( !urlMgr_.runStream(roleResult_, mRoleCreate, roleResult_.streamName(), accountName_, password_, accountType_,
 			operatorName_, versionNo_, accountId_, serverId_, nRoleName, nRoleRace, (roleId_ > 0)) ) {
 			return 0;
 		}
@@ -147,7 +147,7 @@ namespace cc {
 		
 		lifeCycle_.m_tRunLuaApi.connect(bind(&cAccountEngine::runLuaApi, this));
 		lifeCycle_.m_tLoadBegin.connect(bind(&cAccountEngine::runLoad, this));
-		lifeCycle_.m_tRunClear.connect(bind(&cAccountEngine::runClear, this));
+		lifeCycle_.m_tClearEnd.connect(bind(&cAccountEngine::runClear, this));
 		
 		mAccount.reset(new cAccount());
 	}
