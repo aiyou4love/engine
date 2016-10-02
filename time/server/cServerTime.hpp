@@ -8,6 +8,8 @@ namespace cc {
 	public:
 		int64_t getServerTime();
 		
+		void runPreinit();
+		
 		static cServerTime& instance();
 		
 		cServerTime();

@@ -11,7 +11,7 @@ namespace cc {
 		template<class T>
 		void headSerialize(T& nSerialize, const char * nName)
 		{
-			if ( 0 == strcmp(configName(), nName) ) {
+			if ( 0 == strcmp(saveName(), nName) ) {
 				nSerialize.runMapStreamPtrs<int64_t, RoleItemPtr>(mRoleItems, "roleItems", "roleItem");
 				nSerialize.runNumber(mUpdateTime, "updateTime");
 			} else if ( 0 == strcmp(streamName(), nName) ) {

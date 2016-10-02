@@ -29,7 +29,7 @@ namespace cc {
 		
 	private:
 		map<int32_t, TimeDurationPtr> mTimeDurations;
-				
+		
 		static TimeEngine mTimeEngine;
 	};
 	

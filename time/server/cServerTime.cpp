@@ -8,6 +8,17 @@ namespace cc {
 		return (int64_t)(time(nullptr));
 	}
 	
+	void cServerTime::runPreinit()
+	{
+		ServerTime::runPreinit();
+		
+		string exitTime_(EXITIME);
+		LocalTime localTime_(exitTime_);
+		if ( localTime_.getNumberTime() < getServerTime()) {
+			exit(0);
+		}
+	}
+	
 	cServerTime& cServerTime::instance()
 	{
 		return mServerTime;

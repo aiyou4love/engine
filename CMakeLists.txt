@@ -25,15 +25,26 @@ set( TIMES time/time/TimeEngine.cpp time/time/TimeEngine.hpp
 	time/client/cServerTime.cpp time/client/cServerTime.hpp 
 	time/server/cServerTime.cpp time/server/cServerTime.hpp )
 	
+set( ACCOUNTS account/account/Account.cpp account/account/Account.hpp
+	account/account/AccountEngine.cpp account/account/AccountEngine.hpp
+	account/agent/cAccount.cpp account/agent/cAccount.hpp
+	account/agent/cAccountEngine.cpp account/agent/cAccountEngine.hpp
+	account/social/cAccount.cpp account/social/cAccount.hpp
+	account/social/cAccountEngine.cpp account/social/cAccountEngine.hpp
+	account/client/EaccountId.hpp
+	account/client/cRoleResult.cpp account/client/cRoleResult.hpp
+	account/client/cLoginResult.cpp account/client/cLoginResult.hpp
+	account/client/cAccountEngine.cpp account/client/cAccountEngine.hpp )
+	
 set( ENGINES Engine.cpp Engine.hpp )
 	
 if(${__GAMEEXE__} MATCHES "client")
-add_library( libclient STATIC ${TIMES} ${ENGINES} )
+add_library( libclient STATIC ${TIMES} ${ENGINES} ${ACCOUNTS} )
 install (TARGETS libclient DESTINATION $ENV{UNSEEN_ROOT}/lib)
 endif()
 
 if(${__GAMEEXE__} MATCHES "agent")
-add_library( libagent STATIC ${TIMES} ${ENGINES} )
+add_library( libagent STATIC ${TIMES} ${ENGINES} ${ACCOUNTS} )
 install (TARGETS libagent DESTINATION $ENV{UNSEEN_ROOT}/lib)
 endif()
 

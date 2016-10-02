@@ -5,7 +5,7 @@ namespace cc {
 	class ServerTime : noncopyable
 	{
 	public:
-		void runPreinit();
+		virtual void runPreinit();
 		
 		ServerTime();
 		virtual ~ServerTime();
