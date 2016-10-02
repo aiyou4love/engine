@@ -9,4 +9,12 @@ void engineStart()
 	
 	cServerTime& serverTime_ = cServerTime::instance();
 	serverTime_.runPreinit();
+	
+#ifdef __CLIENT__
+	RoleEngine& roleEngine_ = RoleEngine::instance();
+	roleEngine_.runPreinit();
+#endif
+
+	cAccountEngine& accountEngine_ = cAccountEngine::instance();
+	accountEngine_.runPreinit();
 }
