@@ -83,6 +83,26 @@ namespace cc {
 		account_->runSave();
 	}
 	
+	bool cAccountEngine::haveRole()
+	{
+		cAccountPtr account_ = PTR_DCST<cAccount>(mAccount);
+		RoleItemPtr& roleItem_ = account_->getRoleItem();
+		if (!roleItem_) {
+			return ( roleItem_->getRoleId() > 0 );
+		}
+		return false;
+	}
+	
+	int32_t cAccountEngine::getServerId()
+	{
+		cAccountPtr account_ = PTR_DCST<cAccount>(mAccount);
+		RoleItemPtr& roleItem_ = account_->getRoleItem();
+		if (!roleItem_) {
+			return roleItem_->getServerId();
+		}
+		return 0;
+	}
+	
 	int8_t cAccountEngine::roleCreate(const char * nRoleName, int16_t nRoleRace)
 	{
 		UrlMgr& urlMgr_ = UrlMgr::instance();

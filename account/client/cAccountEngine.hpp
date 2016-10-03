@@ -11,6 +11,8 @@ namespace cc {
 		int8_t runRegister(const char * nName, const char * nPassword);
 		int8_t isRegister(const char * nName);
 		void runCancel();
+		bool haveRole();
+		int32_t getServerId();
 		
 		int8_t roleCreate(const char * nRoleName, int16_t nRoleRace);
 		
