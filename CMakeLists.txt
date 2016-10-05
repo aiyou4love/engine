@@ -25,6 +25,10 @@ set( TIMES time/time/TimeEngine.cpp time/time/TimeEngine.hpp
 	time/client/cServerTime.cpp time/client/cServerTime.hpp 
 	time/server/cServerTime.cpp time/server/cServerTime.hpp )
 	
+set( ROLES role/role/RoleItem.cpp role/role/RoleItem.hpp 
+	role/client/RoleEngine.cpp role/client/RoleEngine.hpp 
+	role/client/cRoleListResult.cpp role/client/cRoleListResult.hpp  )
+	
 set( ACCOUNTS account/account/Account.cpp account/account/Account.hpp
 	account/account/AccountEngine.cpp account/account/AccountEngine.hpp
 	account/agent/cAccount.cpp account/agent/cAccount.hpp
@@ -32,6 +36,7 @@ set( ACCOUNTS account/account/Account.cpp account/account/Account.hpp
 	account/social/cAccount.cpp account/social/cAccount.hpp
 	account/social/cAccountEngine.cpp account/social/cAccountEngine.hpp
 	account/client/EaccountId.hpp
+	account/client/cAccount.cpp account/client/cAccount.hpp
 	account/client/cRoleResult.cpp account/client/cRoleResult.hpp
 	account/client/cLoginResult.cpp account/client/cLoginResult.hpp
 	account/client/cAccountEngine.cpp account/client/cAccountEngine.hpp )
@@ -39,12 +44,12 @@ set( ACCOUNTS account/account/Account.cpp account/account/Account.hpp
 set( ENGINES Engine.cpp Engine.hpp )
 	
 if(${__GAMEEXE__} MATCHES "client")
-add_library( libclient STATIC ${TIMES} ${ENGINES} ${ACCOUNTS} )
+add_library( libclient STATIC ${TIMES} ${ENGINES} ${ACCOUNTS} ${ROLES} )
 install (TARGETS libclient DESTINATION $ENV{UNSEEN_ROOT}/lib)
 endif()
 
 if(${__GAMEEXE__} MATCHES "agent")
-add_library( libagent STATIC ${TIMES} ${ENGINES} ${ACCOUNTS} )
+add_library( libagent STATIC ${TIMES} ${ENGINES} ${ACCOUNTS} ${ROLES} )
 install (TARGETS libagent DESTINATION $ENV{UNSEEN_ROOT}/lib)
 endif()
 

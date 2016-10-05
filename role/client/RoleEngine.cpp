@@ -30,7 +30,7 @@ namespace cc {
 		for ( ; it != roleItems_.end(); ++it ) {
 			RoleItemPtr& roleItem_ = (*it);
 			if ( roleItem_->isDefault() ) {
-				return;
+				return 2;
 			}
 			int64_t id_ = roleItem_->getId();
 			mRoleItems[id_] = roleItem_;
@@ -38,6 +38,13 @@ namespace cc {
 		this->runSave();
 		
 		return 1;
+	}
+	
+	string RoleEngine::getRoleInfos()
+	{
+		LuaWriter luaWriter_;
+		luaWriter_.luaMapStreamPtrs<map<int64_t, RoleItemPtr>, RoleItemPtr>(mRoleItems, "roleItems");
+		return luaWriter_.getLuaValue();
 	}
 	
 	const char * RoleEngine::saveName()
@@ -85,6 +92,11 @@ namespace cc {
 		mUpdateTime = 0;
 	}
 	
+	RoleEngine& RoleEngine::instance()
+	{
+		return mRoleEngine;
+	}
+	
 	RoleEngine::RoleEngine()
 	{
 		mRoleItems.clear();
@@ -96,6 +108,8 @@ namespace cc {
 		mRoleItems.clear();
 		mUpdateTime = 0;
 	}
+	
+	RoleEngine RoleEngine::mRoleEngine;
 #endif
 	
 }

@@ -17,7 +17,7 @@ namespace cc {
 		template<class T>
 		void headSerialize(T& nSerialize, const char * nName)
 		{
-			nSerialize.runSreamPtr(mRoleItem, "mRoleItem");
+			nSerialize.runStreamPtr(mRoleItem, "mRoleItem");
 			
 			nSerialize.runNumber(mPassword, "mPassword");
 			nSerialize.runNumber(mName, "mName");

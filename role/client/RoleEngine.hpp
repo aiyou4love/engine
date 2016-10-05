@@ -7,6 +7,7 @@ namespace cc {
 	{
 	public:
 		int8_t runRoleList(int64_t nAccountId);
+		string getRoleInfos();
 		
 		template<class T>
 		void headSerialize(T& nSerialize, const char * nName)

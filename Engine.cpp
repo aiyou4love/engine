@@ -14,7 +14,7 @@ void engineStart()
 	RoleEngine& roleEngine_ = RoleEngine::instance();
 	roleEngine_.runPreinit();
 #endif
-
+	
 	cAccountEngine& accountEngine_ = cAccountEngine::instance();
 	accountEngine_.runPreinit();
 }
