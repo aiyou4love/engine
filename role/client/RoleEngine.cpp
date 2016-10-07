@@ -77,7 +77,7 @@ namespace cc {
 	void RoleEngine::runLoad()
 	{
 		UserDefault& userDefault_ = UserDefault::instance();
-		userDefault_.runReader<RoleEngine *>(this, saveUrl(), saveName());
+		userDefault_.runReader<RoleEngine>(this, saveUrl(), saveName());
 	}
 	
 	void RoleEngine::runSave()

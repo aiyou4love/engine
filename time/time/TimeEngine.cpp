@@ -82,7 +82,7 @@ namespace cc {
 	void TimeEngine::runLoad()
 	{
 		TableEngine& tableEngine_ = TableEngine::instance();
-		tableEngine_.runTable<TimeEngine *>(this, streamUrl(), streamName());
+		tableEngine_.runReader<TimeEngine>(this, streamUrl(), streamName());
 	}
 	
 	void TimeEngine::runClear()

@@ -34,7 +34,7 @@ namespace cc {
 	void cAccount::runLoad()
 	{
 		UserDefault& userDefault_ = UserDefault::instance();
-		userDefault_.runReader<cAccount *>(this, streamUrl(), streamName());
+		userDefault_.runReader<cAccount>(this, streamUrl(), streamName());
 	}
 	
 	void cAccount::runSave()
