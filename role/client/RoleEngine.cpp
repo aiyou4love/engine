@@ -83,7 +83,7 @@ namespace cc {
 	void RoleEngine::runSave()
 	{
 		UserDefault& userDefault_ = UserDefault::instance();
-		userDefault_.runSave<RoleEngine *>(this, saveUrl(), saveName());
+		userDefault_.runSave<RoleEngine>(this, saveUrl(), saveName());
 	}
 	
 	void RoleEngine::runClear()
