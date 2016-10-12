@@ -40,7 +40,7 @@ namespace cc {
 	void cAccount::runSave()
 	{
 		UserDefault& userDefault_ = UserDefault::instance();
-		userDefault_.runSave<cAccount *>(this, streamUrl(), streamName());
+		userDefault_.runSave<cAccount>(this, streamUrl(), streamName());
 	}
 	
 	const char * cAccount::streamName()
